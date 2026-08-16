@@ -14,23 +14,6 @@ h1,h2,h3,h4,h5,h6 { font-family:'Comfortaa',cursive; }
 a { text-decoration:none; color:inherit; }
 button { cursor:pointer; border:none; outline:none; }
 
-.view-toggle {
-    position:fixed; top:15px; right:20px; z-index:10000;
-    display:flex; gap:8px;
-}
-.view-toggle button {
-    padding:8px 18px; border-radius:20px; font-size:13px; font-weight:600;
-    font-family:'Muli',sans-serif; transition:all .3s;
-    box-shadow:0 2px 8px rgba(0,0,0,0.15);
-}
-.view-toggle .btn-login {
-    background:linear-gradient(to right,#995193,#ba426d,#9a5192); color:#fff;
-}
-.view-toggle .btn-dashboard {
-    background:linear-gradient(to right,#9f78ff,#32cafe); color:#fff;
-}
-.view-toggle button.active { transform:scale(1.05); box-shadow:0 4px 15px rgba(0,0,0,0.25); }
-
 /* ===== LOGIN ===== */
 #login-view {
     min-height:100vh; display:flex; align-items:center; justify-content:center;
@@ -48,6 +31,10 @@ button { cursor:pointer; border:none; outline:none; }
 @keyframes fadeInDown {
     0% { opacity:0; transform:translateY(-30px); }
     100% { opacity:1; transform:translateY(0); }
+}
+@keyframes toastIn {
+    0% { opacity:0; transform:translateX(60px); }
+    100% { opacity:1; transform:translateX(0); }
 }
 .login-box {
     background:#fff; border-radius:12px; padding:40px 35px;
@@ -349,11 +336,6 @@ button { cursor:pointer; border:none; outline:none; }
 </head>
 <body>
 
-<div class="view-toggle">
-    <button class="btn-login active" onclick="showView('login')">&#x1F510; Login</button>
-    <button class="btn-dashboard" onclick="showView('dashboard')">&#x1F4CA; Painel CS</button>
-</div>
-
 <!-- ===== LOGIN ===== -->
 <div id="login-view">
     <div class="login-container">
@@ -369,7 +351,7 @@ button { cursor:pointer; border:none; outline:none; }
             </div>
             <div class="login-form-group">
                 <label><i class="fas fa-lock" style="margin-right:5px;color:#6967CE"></i> Senha</label>
-                <input type="password" placeholder="Digite sua senha" value="******">
+                <input type="text" placeholder="admin123" value="admin123">
             </div>
             <div class="login-remember">
                 <input type="checkbox" id="remember" checked>
@@ -549,7 +531,7 @@ button { cursor:pointer; border:none; outline:none; }
         <div class="form-row"><label>Usuário</label><input type="text" placeholder="admin"></div>
         <div class="form-row"><label>Senha</label><input type="password" placeholder="********"></div>
         <div class="form-row"><label>Max. Usuários</label><input type="number" placeholder="100" value="100"></div>
-        <button class="login-btn" style="max-width:300px;margin-top:10px">Criar Servidor CCCam</button>
+        <button class="login-btn" style="max-width:300px;margin-top:10px" onclick="showSave(&#39;✓ Servidor CCCam criado com sucesso!&#39;)">Criar Servidor CCCam</button>
     </div></div>
         </div>
 
@@ -557,7 +539,7 @@ button { cursor:pointer; border:none; outline:none; }
             <div class="section-title"><i class="fas fa-list"></i> Listar Servidores CCCam</div>
             
     <div class="panel"><div class="panel-header"><i class="fas fa-list"></i> Servidores CCCam</div><div class="panel-body" style="padding:0">
-        <table class="data-table"><thead><tr><th>Servidor</th><th>Host</th><th>Porta</th><th>Usuários</th><th>Status</th><th>Ações</th></tr></thead><tbody><tr><td>CCCam-01</td><td>cs1.homerfull.net</td><td>12000</td><td>87/100</td><td><span class="badge-status badge-active">Online</span></td><td><span class="copy-btn" style="padding:4px 10px;font-size:10px">Editar</span> <span class="copy-btn" style="padding:4px 10px;font-size:10px;background:#dc3545">Deletar</span></td></tr><tr><td>CCCam-02</td><td>cs2.homerfull.net</td><td>12000</td><td>63/100</td><td><span class="badge-status badge-active">Online</span></td><td><span class="copy-btn" style="padding:4px 10px;font-size:10px">Editar</span> <span class="copy-btn" style="padding:4px 10px;font-size:10px;background:#dc3545">Deletar</span></td></tr><tr><td>CCCam-BK</td><td>cs-bk.homerfull.net</td><td>12000</td><td>0/50</td><td><span class="badge-status badge-expired">Offline</span></td><td><span class="copy-btn" style="padding:4px 10px;font-size:10px">Editar</span> <span class="copy-btn" style="padding:4px 10px;font-size:10px;background:#dc3545">Deletar</span></td></tr></tbody></table></div></div>
+        <table class="data-table"><thead><tr><th>Servidor</th><th>Host</th><th>Porta</th><th>Usuários</th><th>Status</th><th>Ações</th></tr></thead><tbody><tr><td>CCCam-01</td><td>cs1.homerfull.net</td><td>12000</td><td>87/100</td><td><span class="badge-status badge-active">Online</span></td><td><span class="copy-btn" style="padding:4px 10px;font-size:10px" onclick="showSave(&#39;✓ Editar servidor - dados carregados!&#39;)">Editar</span> <span class="copy-btn" style="padding:4px 10px;font-size:10px;background:#dc3545" onclick="if(confirm(&#39;Tem certeza que deseja deletar?&#39;))showSave(&#39;✓ Servidor deletado com sucesso!&#39;)">Deletar</span></td></tr><tr><td>CCCam-02</td><td>cs2.homerfull.net</td><td>12000</td><td>63/100</td><td><span class="badge-status badge-active">Online</span></td><td><span class="copy-btn" style="padding:4px 10px;font-size:10px" onclick="showSave(&#39;✓ Editar servidor - dados carregados!&#39;)">Editar</span> <span class="copy-btn" style="padding:4px 10px;font-size:10px;background:#dc3545" onclick="if(confirm(&#39;Tem certeza que deseja deletar?&#39;))showSave(&#39;✓ Servidor deletado com sucesso!&#39;)">Deletar</span></td></tr><tr><td>CCCam-BK</td><td>cs-bk.homerfull.net</td><td>12000</td><td>0/50</td><td><span class="badge-status badge-expired">Offline</span></td><td><span class="copy-btn" style="padding:4px 10px;font-size:10px" onclick="showSave(&#39;✓ Editar servidor - dados carregados!&#39;)">Editar</span> <span class="copy-btn" style="padding:4px 10px;font-size:10px;background:#dc3545" onclick="if(confirm(&#39;Tem certeza que deseja deletar?&#39;))showSave(&#39;✓ Servidor deletado com sucesso!&#39;)">Deletar</span></td></tr></tbody></table></div></div>
         </div>
 
         <div class="section-page" id="sec-cccam-clines" style="display:none">
@@ -569,7 +551,7 @@ button { cursor:pointer; border:none; outline:none; }
         <div class="form-row"><label>Senha</label><input type="text" placeholder="senha_aleatoria"></div>
         <div class="form-row"><label>Validade</label><select><option>30 dias</option><option>90 dias</option><option>180 dias</option><option>365 dias</option></select></div>
         <div class="form-row"><label>Max. Conexões</label><input type="number" value="1"></div>
-        <button class="login-btn" style="max-width:300px;margin-top:10px">Gerar C-Line</button>
+        <button class="login-btn" style="max-width:300px;margin-top:10px" onclick="showSave(&#39;✓ C-Line gerada com sucesso!&#39;)">Gerar C-Line</button>
         <div style="margin-top:20px">
             <div class="cline-box"><span class="cline-label">C-Line</span><span class="cline-value">C: cs1.homerfull.net 12000 user_new passX8k</span><span class="copy-btn" onclick="copyLine(this)">Copiar</span></div>
         </div>
@@ -582,7 +564,7 @@ button { cursor:pointer; border:none; outline:none; }
     <div class="panel"><div class="panel-header"><i class="fas fa-sync-alt"></i> Reiniciar Serviço CCCam</div><div class="panel-body">
         <p style="margin-bottom:15px;color:#75798f">Selecione o servidor para reiniciar o serviço CCCam:</p>
         <div class="form-row"><label>Servidor</label><select><option>CCCam-01</option><option>CCCam-02</option></select></div>
-        <button class="login-btn" style="max-width:300px;margin-top:10px;background:linear-gradient(to right,#dc3545,#c82333)">⚠ Reiniciar CCCam</button>
+        <button class="login-btn" style="max-width:300px;margin-top:10px;background:linear-gradient(to right,#dc3545,#c82333)" onclick="showSave(&#39;✓ Serviço CCCam reiniciado com sucesso!&#39;)">⚠ Reiniciar CCCam</button>
         <div style="margin-top:15px;padding:15px;background:#d4edda;border-radius:8px;color:#155724;font-size:13px;display:none" id="restart-ok">✓ Serviço CCCam reiniciado com sucesso!</div>
     </div></div>
         </div>
@@ -596,7 +578,7 @@ button { cursor:pointer; border:none; outline:none; }
         <div class="form-row"><label>Porta MGcamd</label><input type="number" placeholder="15000" value="15000"></div>
         <div class="form-row"><label>Deskey</label><input type="text" placeholder="01 02 03 04 05 10 11 12 13 14" value="01 02 03 04 05 10 11 12 13 14"></div>
         <div class="form-row"><label>Max. Usuários</label><input type="number" value="80"></div>
-        <button class="login-btn" style="max-width:300px;margin-top:10px">Criar Servidor MGcamd</button>
+        <button class="login-btn" style="max-width:300px;margin-top:10px" onclick="showSave(&#39;✓ Servidor MGcamd criado com sucesso!&#39;)">Criar Servidor MGcamd</button>
     </div></div>
         </div>
 
@@ -604,7 +586,7 @@ button { cursor:pointer; border:none; outline:none; }
             <div class="section-title"><i class="fas fa-list"></i> Listar Servidores MGcamd</div>
             
     <div class="panel"><div class="panel-header"><i class="fas fa-list"></i> Servidores MGcamd</div><div class="panel-body" style="padding:0">
-        <table class="data-table"><thead><tr><th>Servidor</th><th>Host</th><th>Porta</th><th>Usuários</th><th>Status</th><th>Ações</th></tr></thead><tbody><tr><td>MGcamd-01</td><td>cs1.homerfull.net</td><td>15000</td><td>28/80</td><td><span class="badge-status badge-active">Online</span></td><td><span class="copy-btn" style="padding:4px 10px;font-size:10px">Editar</span></td></tr><tr><td>MGcamd-02</td><td>cs2.homerfull.net</td><td>15000</td><td>0/60</td><td><span class="badge-status badge-expired">Offline</span></td><td><span class="copy-btn" style="padding:4px 10px;font-size:10px">Editar</span></td></tr></tbody></table></div></div>
+        <table class="data-table"><thead><tr><th>Servidor</th><th>Host</th><th>Porta</th><th>Usuários</th><th>Status</th><th>Ações</th></tr></thead><tbody><tr><td>MGcamd-01</td><td>cs1.homerfull.net</td><td>15000</td><td>28/80</td><td><span class="badge-status badge-active">Online</span></td><td><span class="copy-btn" style="padding:4px 10px;font-size:10px" onclick="showSave(&#39;✓ Editar servidor - dados carregados!&#39;)">Editar</span></td></tr><tr><td>MGcamd-02</td><td>cs2.homerfull.net</td><td>15000</td><td>0/60</td><td><span class="badge-status badge-expired">Offline</span></td><td><span class="copy-btn" style="padding:4px 10px;font-size:10px" onclick="showSave(&#39;✓ Editar servidor - dados carregados!&#39;)">Editar</span></td></tr></tbody></table></div></div>
         </div>
 
         <div class="section-page" id="sec-mgcamd-lines" style="display:none">
@@ -615,7 +597,7 @@ button { cursor:pointer; border:none; outline:none; }
         <div class="form-row"><label>Usuário</label><input type="text" placeholder="nome_usuario"></div>
         <div class="form-row"><label>Senha</label><input type="text" placeholder="senha"></div>
         <div class="form-row"><label>Validade</label><select><option>30 dias</option><option>90 dias</option><option>180 dias</option><option>365 dias</option></select></div>
-        <button class="login-btn" style="max-width:300px;margin-top:10px">Gerar MG-Line</button>
+        <button class="login-btn" style="max-width:300px;margin-top:10px" onclick="showSave(&#39;✓ MG-Line gerada com sucesso!&#39;)">Gerar MG-Line</button>
         <div style="margin-top:20px"><div class="cline-box"><span class="cline-label">MG-Line</span><span class="cline-value">MG: cs1.homerfull.net 15000 user_mg passM3k</span><span class="copy-btn" onclick="copyLine(this)">Copiar</span></div></div>
     </div></div>
         </div>
@@ -629,7 +611,7 @@ button { cursor:pointer; border:none; outline:none; }
         <div class="form-row"><label>Porta Newcamd</label><input type="number" placeholder="16000" value="16000"></div>
         <div class="form-row"><label>Deskey</label><input type="text" placeholder="01 02 03 04 05 10 11 12 13 14" value="01 02 03 04 05 10 11 12 13 14"></div>
         <div class="form-row"><label>Max. Usuários</label><input type="number" value="60"></div>
-        <button class="login-btn" style="max-width:300px;margin-top:10px">Criar Servidor Newcamd</button>
+        <button class="login-btn" style="max-width:300px;margin-top:10px" onclick="showSave(&#39;✓ Servidor Newcamd criado com sucesso!&#39;)">Criar Servidor Newcamd</button>
     </div></div>
         </div>
 
@@ -648,7 +630,7 @@ button { cursor:pointer; border:none; outline:none; }
         <div class="form-row"><label>Usuário</label><input type="text" placeholder="nome_usuario"></div>
         <div class="form-row"><label>Senha</label><input type="text" placeholder="senha"></div>
         <div class="form-row"><label>Validade</label><select><option>30 dias</option><option>90 dias</option><option>365 dias</option></select></div>
-        <button class="login-btn" style="max-width:300px;margin-top:10px">Gerar N-LINE</button>
+        <button class="login-btn" style="max-width:300px;margin-top:10px" onclick="showSave(&#39;✓ N-LINE gerada com sucesso!&#39;)">Gerar N-LINE</button>
         <div style="margin-top:20px"><div class="cline-box"><span class="cline-label">N-LINE</span><span class="cline-value">N: cs1.homerfull.net 16000 user_nc passN7w 01 02 03 04 05 10 11 12 13 14</span><span class="copy-btn" onclick="copyLine(this)">Copiar</span></div></div>
     </div></div>
         </div>
@@ -662,7 +644,7 @@ button { cursor:pointer; border:none; outline:none; }
         <div class="cline-box"><span class="cline-label">Reader</span><span class="cline-value" style="font-family:monospace;font-size:11px">[reader]<br>label = homerfull<br>protocol = cccam<br>device = cs1.homerfull.net,12000<br>user = oscam_user<br>password = oscam_pass<br>group = 1</span></div>
         <div class="form-row"><label>Web Interface Porta</label><input type="number" value="8888"></div>
         <div class="form-row"><label>Log Level</label><select><option>Normal</option><option>Debug</option></select></div>
-        <button class="login-btn" style="max-width:300px;margin-top:10px">Salvar Config</button>
+        <button class="login-btn" style="max-width:300px;margin-top:10px" onclick="showSave(&#39;✓ Configurações salvas com sucesso!&#39;)">Salvar Config</button>
     </div></div>
         </div>
 
@@ -675,7 +657,7 @@ button { cursor:pointer; border:none; outline:none; }
         <div class="form-row"><label>CSP Proxy Host</label><input type="text" value="csp.homerfull.net"></div>
         <div class="form-row"><label>Porta CSP</label><input type="number" value="8000"></div>
         <div class="form-row"><label>Profile</label><select><option>default</option><option>backup</option></select></div>
-        <button class="login-btn" style="max-width:300px;margin-top:10px;background:linear-gradient(to right,#ffc107,#fd7e14)">Iniciar CSP</button>
+        <button class="login-btn" style="max-width:300px;margin-top:10px;background:linear-gradient(to right,#ffc107,#fd7e14)" onclick="showSave(&#39;✓ Servidor CSP iniciado com sucesso!&#39;)">Iniciar CSP</button>
     </div></div>
         </div>
 
@@ -689,7 +671,7 @@ button { cursor:pointer; border:none; outline:none; }
         <div class="form-row"><label>Email</label><input type="email" placeholder="email@exemplo.com"></div>
         <div class="form-row"><label>Senha</label><input type="password" placeholder="********"></div>
         <div class="form-row"><label>Nível</label><select><option>Admin</option><option>Moderador</option><option>Super Admin</option></select></div>
-        <button class="login-btn" style="max-width:300px;margin-top:10px">Criar Admin</button>
+        <button class="login-btn" style="max-width:300px;margin-top:10px" onclick="showSave(&#39;✓ Administrador criado com sucesso!&#39;)">Criar Admin</button>
     </div></div>
         </div>
 
@@ -703,7 +685,7 @@ button { cursor:pointer; border:none; outline:none; }
         <div class="form-row"><label>Email</label><input type="email" placeholder="email@exemplo.com"></div>
         <div class="form-row"><label>Créditos Iniciais</label><input type="number" value="500"></div>
         <div class="form-row"><label>Desconto (%)</label><input type="number" value="15"></div>
-        <button class="login-btn" style="max-width:300px;margin-top:10px">Criar Revendedor</button>
+        <button class="login-btn" style="max-width:300px;margin-top:10px" onclick="showSave(&#39;✓ Revendedor criado com sucesso!&#39;)">Criar Revendedor</button>
     </div></div>
         </div>
 
@@ -711,7 +693,7 @@ button { cursor:pointer; border:none; outline:none; }
             <div class="section-title"><i class="fas fa-users"></i> Usuários CS</div>
             
     <div class="panel"><div class="panel-header"><i class="fas fa-users"></i> Todos os Usuários CS</div><div class="panel-body" style="padding:0">
-        <table class="data-table"><thead><tr><th>#</th><th>Usuário</th><th>Protocolo</th><th>Servidor</th><th>Conexões</th><th>Validade</th><th>Status</th><th>Ações</th></tr></thead><tbody><tr><td>1</td><td>cliente01</td><td>CCCam</td><td>CCCam-01</td><td>1</td><td>15/09/2026</td><td><span class="badge-status badge-active">Ativo</span></td><td><span class="copy-btn" style="padding:3px 8px;font-size:10px">Editar</span></td></tr><tr><td>2</td><td>cliente02</td><td>CCCam</td><td>CCCam-02</td><td>2</td><td>20/09/2026</td><td><span class="badge-status badge-active">Ativo</span></td><td><span class="copy-btn" style="padding:3px 8px;font-size:10px">Editar</span></td></tr><tr><td>3</td><td>revenda_norte</td><td>MGcamd</td><td>MGcamd-01</td><td>5</td><td>01/12/2026</td><td><span class="badge-status badge-active">Ativo</span></td><td><span class="copy-btn" style="padding:3px 8px;font-size:10px">Editar</span></td></tr><tr><td>4</td><td>teste_sp</td><td>Newcamd</td><td>Newcamd-01</td><td>1</td><td>18/08/2026</td><td><span class="badge-status badge-test">Teste</span></td><td><span class="copy-btn" style="padding:3px 8px;font-size:10px">Editar</span></td></tr><tr><td>5</td><td>cliente05</td><td>CCCam</td><td>CCCam-01</td><td>1</td><td>10/08/2026</td><td><span class="badge-status badge-expired">Expirado</span></td><td><span class="copy-btn" style="padding:3px 8px;font-size:10px">Editar</span></td></tr><tr><td>6</td><td>revenda_sul</td><td>OSCam</td><td>OSCam-01</td><td>10</td><td>30/11/2026</td><td><span class="badge-status badge-active">Ativo</span></td><td><span class="copy-btn" style="padding:3px 8px;font-size:10px">Editar</span></td></tr></tbody></table></div></div>
+        <table class="data-table"><thead><tr><th>#</th><th>Usuário</th><th>Protocolo</th><th>Servidor</th><th>Conexões</th><th>Validade</th><th>Status</th><th>Ações</th></tr></thead><tbody><tr><td>1</td><td>cliente01</td><td>CCCam</td><td>CCCam-01</td><td>1</td><td>15/09/2026</td><td><span class="badge-status badge-active">Ativo</span></td><td><span class="copy-btn" style="padding:3px 8px;font-size:10px" onclick="showSave(&#39;✓ Editar usuário - dados carregados!&#39;)">Editar</span></td></tr><tr><td>2</td><td>cliente02</td><td>CCCam</td><td>CCCam-02</td><td>2</td><td>20/09/2026</td><td><span class="badge-status badge-active">Ativo</span></td><td><span class="copy-btn" style="padding:3px 8px;font-size:10px" onclick="showSave(&#39;✓ Editar usuário - dados carregados!&#39;)">Editar</span></td></tr><tr><td>3</td><td>revenda_norte</td><td>MGcamd</td><td>MGcamd-01</td><td>5</td><td>01/12/2026</td><td><span class="badge-status badge-active">Ativo</span></td><td><span class="copy-btn" style="padding:3px 8px;font-size:10px" onclick="showSave(&#39;✓ Editar usuário - dados carregados!&#39;)">Editar</span></td></tr><tr><td>4</td><td>teste_sp</td><td>Newcamd</td><td>Newcamd-01</td><td>1</td><td>18/08/2026</td><td><span class="badge-status badge-test">Teste</span></td><td><span class="copy-btn" style="padding:3px 8px;font-size:10px" onclick="showSave(&#39;✓ Editar usuário - dados carregados!&#39;)">Editar</span></td></tr><tr><td>5</td><td>cliente05</td><td>CCCam</td><td>CCCam-01</td><td>1</td><td>10/08/2026</td><td><span class="badge-status badge-expired">Expirado</span></td><td><span class="copy-btn" style="padding:3px 8px;font-size:10px" onclick="showSave(&#39;✓ Editar usuário - dados carregados!&#39;)">Editar</span></td></tr><tr><td>6</td><td>revenda_sul</td><td>OSCam</td><td>OSCam-01</td><td>10</td><td>30/11/2026</td><td><span class="badge-status badge-active">Ativo</span></td><td><span class="copy-btn" style="padding:3px 8px;font-size:10px" onclick="showSave(&#39;✓ Editar usuário - dados carregados!&#39;)">Editar</span></td></tr></tbody></table></div></div>
         </div>
 
         <div class="section-page" id="sec-testes" style="display:none">
@@ -724,7 +706,7 @@ button { cursor:pointer; border:none; outline:none; }
         <div class="form-row"><label>Servidor</label><select><option>CCCam-01</option><option>CCCam-02</option><option>MGcamd-01</option><option>Newcamd-01</option><option>OSCam-01</option></select></div>
         <div class="form-row"><label>Duração</label><select><option>24 horas</option><option>48 horas</option><option>72 horas</option></select></div>
         <div class="form-row"><label>Email/WhatsApp</label><input type="text" placeholder="contato do cliente"></div>
-        <button class="login-btn" style="max-width:300px;margin-top:10px;background:linear-gradient(to right,#ffc107,#fd7e14)">Gerar Teste</button>
+        <button class="login-btn" style="max-width:300px;margin-top:10px;background:linear-gradient(to right,#ffc107,#fd7e14)" onclick="showSave(&#39;✓ Teste CS gerado com sucesso!&#39;)">Gerar Teste</button>
     </div></div>
         </div>
 
@@ -749,7 +731,7 @@ button { cursor:pointer; border:none; outline:none; }
         <div class="form-row"><label>Validade (dias)</label><input type="number" value="30"></div>
         <div class="form-row"><label>Max. Conexões</label><input type="number" value="1"></div>
         <div class="form-row"><label>Hop</label><select><option>Hop1</option><option>Hop2</option></select></div>
-        <button class="login-btn" style="max-width:300px;margin-top:10px">Gerar C-Line</button>
+        <button class="login-btn" style="max-width:300px;margin-top:10px" onclick="showSave(&#39;✓ C-Line gerada com sucesso!&#39;)">Gerar C-Line</button>
     </div></div>
         </div>
 
@@ -764,14 +746,14 @@ button { cursor:pointer; border:none; outline:none; }
             <div class="section-title"><i class="fas fa-clock"></i> Linhas Expiradas</div>
             
     <div class="panel"><div class="panel-header"><i class="fas fa-clock"></i> Linhas Expiradas</div><div class="panel-body" style="padding:0">
-        <table class="data-table"><thead><tr><th>#</th><th>Usuário</th><th>Tipo</th><th>Linha</th><th>Expirou</th><th>Ações</th></tr></thead><tbody><tr><td>1</td><td>cliente05</td><td>CCCam</td><td>C: cs1.homerfull.net 12000 cliente05 pass5</td><td>10/08/2026</td><td><span class="copy-btn" style="padding:3px 8px;font-size:10px;background:#28a745">Renovar</span></td></tr><tr><td>2</td><td>cliente_ant</td><td>MGcamd</td><td>MG: cs1.homerfull.net 15000 cliente_ant pass6</td><td>01/07/2026</td><td><span class="copy-btn" style="padding:3px 8px;font-size:10px;background:#28a745">Renovar</span></td></tr><tr><td>3</td><td>velho_user</td><td>Newcamd</td><td>N: cs1.homerfull.net 16000 velho_user pass7</td><td>15/06/2026</td><td><span class="copy-btn" style="padding:3px 8px;font-size:10px;background:#dc3545">Deletar</span></td></tr></tbody></table></div></div>
+        <table class="data-table"><thead><tr><th>#</th><th>Usuário</th><th>Tipo</th><th>Linha</th><th>Expirou</th><th>Ações</th></tr></thead><tbody><tr><td>1</td><td>cliente05</td><td>CCCam</td><td>C: cs1.homerfull.net 12000 cliente05 pass5</td><td>10/08/2026</td><td><span class="copy-btn" style="padding:3px 8px;font-size:10px;background:#28a745" onclick="showSave(&#39;✓ Linha renovada com sucesso!&#39;)">Renovar</span></td></tr><tr><td>2</td><td>cliente_ant</td><td>MGcamd</td><td>MG: cs1.homerfull.net 15000 cliente_ant pass6</td><td>01/07/2026</td><td><span class="copy-btn" style="padding:3px 8px;font-size:10px;background:#28a745" onclick="showSave(&#39;✓ Linha renovada com sucesso!&#39;)">Renovar</span></td></tr><tr><td>3</td><td>velho_user</td><td>Newcamd</td><td>N: cs1.homerfull.net 16000 velho_user pass7</td><td>15/06/2026</td><td><span class="copy-btn" style="padding:3px 8px;font-size:10px;background:#dc3545" onclick="if(confirm(&#39;Tem certeza que deseja deletar?&#39;))showSave(&#39;✓ Linha deletada com sucesso!&#39;)">Deletar</span></td></tr></tbody></table></div></div>
         </div>
 
         <div class="section-page" id="sec-linhas-bloqueadas" style="display:none">
             <div class="section-title"><i class="fas fa-ban"></i> Linhas Bloqueadas</div>
             
     <div class="panel"><div class="panel-header"><i class="fas fa-ban"></i> Linhas Bloqueadas</div><div class="panel-body" style="padding:0">
-        <table class="data-table"><thead><tr><th>#</th><th>Usuário</th><th>Tipo</th><th>Motivo</th><th>Data</th><th>Ações</th></tr></thead><tbody><tr><td>1</td><td>fraud_user</td><td>CCCam</td><td>Compartilhamento ilegal detectado</td><td>12/08/2026</td><td><span class="copy-btn" style="padding:3px 8px;font-size:10px;background:#28a745">Desbloquear</span></td></tr><tr><td>2</td><td>spam_bot</td><td>CCCam</td><td>Múltiplas conexões simultâneas</td><td>05/08/2026</td><td><span class="copy-btn" style="padding:3px 8px;font-size:10px;background:#dc3545">Deletar</span></td></tr></tbody></table></div></div>
+        <table class="data-table"><thead><tr><th>#</th><th>Usuário</th><th>Tipo</th><th>Motivo</th><th>Data</th><th>Ações</th></tr></thead><tbody><tr><td>1</td><td>fraud_user</td><td>CCCam</td><td>Compartilhamento ilegal detectado</td><td>12/08/2026</td><td><span class="copy-btn" style="padding:3px 8px;font-size:10px;background:#28a745" onclick="showSave(&#39;✓ Linha desbloqueada com sucesso!&#39;)">Desbloquear</span></td></tr><tr><td>2</td><td>spam_bot</td><td>CCCam</td><td>Múltiplas conexões simultâneas</td><td>05/08/2026</td><td><span class="copy-btn" style="padding:3px 8px;font-size:10px;background:#dc3545" onclick="if(confirm(&#39;Tem certeza que deseja deletar?&#39;))showSave(&#39;✓ Linha deletada com sucesso!&#39;)">Deletar</span></td></tr></tbody></table></div></div>
         </div>
 
         <div class="section-page" id="sec-comprar-creditos" style="display:none">
@@ -779,9 +761,9 @@ button { cursor:pointer; border:none; outline:none; }
             
     <div class="panel"><div class="panel-header"><i class="fas fa-shopping-cart"></i> Comprar Créditos CS</div><div class="panel-body">
         <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:15px;margin-bottom:20px">
-            <div style="background:#f7f5ff;padding:20px;border-radius:10px;text-align:center;border:2px solid #e2d8ff"><div style="font-size:24px;font-weight:700;color:#6967CE;font-family:Comfortaa">R$ 50</div><div style="font-size:12px;color:#75798f;margin:5px 0">50 Créditos</div><button class="copy-btn">Comprar</button></div>
-            <div style="background:#f7f5ff;padding:20px;border-radius:10px;text-align:center;border:2px solid #6967CE"><div style="font-size:24px;font-weight:700;color:#6967CE;font-family:Comfortaa">R$ 180</div><div style="font-size:12px;color:#75798f;margin:5px 0">200 Créditos</div><div style="font-size:10px;color:#28a745;font-weight:700">10% OFF</div><button class="copy-btn" style="background:#28a745">Comprar</button></div>
-            <div style="background:#f7f5ff;padding:20px;border-radius:10px;text-align:center;border:2px solid #e2d8ff"><div style="font-size:24px;font-weight:700;color:#6967CE;font-family:Comfortaa">R$ 400</div><div style="font-size:12px;color:#75798f;margin:5px 0">500 Créditos</div><div style="font-size:10px;color:#28a745;font-weight:700">20% OFF</div><button class="copy-btn">Comprar</button></div>
+            <div style="background:#f7f5ff;padding:20px;border-radius:10px;text-align:center;border:2px solid #e2d8ff"><div style="font-size:24px;font-weight:700;color:#6967CE;font-family:Comfortaa">R$ 50</div><div style="font-size:12px;color:#75798f;margin:5px 0">50 Créditos</div><button class="copy-btn" onclick="showSave(&#39;✓ Compra realizada com sucesso!&#39;)">Comprar</button></div>
+            <div style="background:#f7f5ff;padding:20px;border-radius:10px;text-align:center;border:2px solid #6967CE"><div style="font-size:24px;font-weight:700;color:#6967CE;font-family:Comfortaa">R$ 180</div><div style="font-size:12px;color:#75798f;margin:5px 0">200 Créditos</div><div style="font-size:10px;color:#28a745;font-weight:700">10% OFF</div><button class="copy-btn" style="background:#28a745" onclick="showSave(&#39;✓ Compra realizada com sucesso!&#39;)">Comprar</button></div>
+            <div style="background:#f7f5ff;padding:20px;border-radius:10px;text-align:center;border:2px solid #e2d8ff"><div style="font-size:24px;font-weight:700;color:#6967CE;font-family:Comfortaa">R$ 400</div><div style="font-size:12px;color:#75798f;margin:5px 0">500 Créditos</div><div style="font-size:10px;color:#28a745;font-weight:700">20% OFF</div><button class="copy-btn" onclick="showSave(&#39;✓ Compra realizada com sucesso!&#39;)">Comprar</button></div>
         </div>
     </div></div>
         </div>
@@ -810,7 +792,7 @@ button { cursor:pointer; border:none; outline:none; }
         <div class="form-row"><label>Max. Conexões</label><input type="number" value="1"></div>
         <div class="form-row"><label>Preço (R$)</label><input type="text" placeholder="25.00"></div>
         <div class="form-row"><label>Créditos Necessários</label><input type="number" value="25"></div>
-        <button class="login-btn" style="max-width:300px;margin-top:10px">Criar Plano</button>
+        <button class="login-btn" style="max-width:300px;margin-top:10px" onclick="showSave(&#39;✓ Plano CS criado com sucesso!&#39;)">Criar Plano</button>
     </div></div>
         </div>
 
@@ -822,7 +804,7 @@ button { cursor:pointer; border:none; outline:none; }
         <div class="form-row"><label>Token de Produção</label><input type="text" placeholder="********"></div>
         <div class="form-row"><label>Sandbox</label><select><option>Não</option><option>Sim</option></select></div>
         <div class="form-row"><label>Notificação URL</label><input type="text" value="https://homerfull.com/pagseguro/notification"></div>
-        <button class="login-btn" style="max-width:300px;margin-top:10px">Salvar Config</button>
+        <button class="login-btn" style="max-width:300px;margin-top:10px" onclick="showSave(&#39;✓ Configurações salvas com sucesso!&#39;)">Salvar Config</button>
     </div></div>
         </div>
 
@@ -834,7 +816,7 @@ button { cursor:pointer; border:none; outline:none; }
         <div class="form-row"><label>Secret</label><input type="password" placeholder="********"></div>
         <div class="form-row"><label>Modo</label><select><option>Live</option><option>Sandbox</option></select></div>
         <div class="form-row"><label>Currency</label><select><option>BRL</option><option>USD</option><option>EUR</option></select></div>
-        <button class="login-btn" style="max-width:300px;margin-top:10px">Salvar Config PayPal</button>
+        <button class="login-btn" style="max-width:300px;margin-top:10px" onclick="showSave(&#39;✓ Configuração PayPal salva com sucesso!&#39;)">Salvar Config PayPal</button>
     </div></div>
         </div>
 
@@ -846,7 +828,7 @@ button { cursor:pointer; border:none; outline:none; }
         <div class="form-row"><label>Public Key</label><input type="text" placeholder="APP_YYYYY"></div>
         <div class="form-row"><label>Modo</label><select><option>Produção</option><option>Sandbox</option></select></div>
         <div class="form-row"><label>Webhook URL</label><input type="text" value="https://homerfull.com/mercadopago/webhook"></div>
-        <button class="login-btn" style="max-width:300px;margin-top:10px">Salvar Config MercadoPago</button>
+        <button class="login-btn" style="max-width:300px;margin-top:10px" onclick="showSave(&#39;✓ Configuração MercadoPago salva com sucesso!&#39;)">Salvar Config MercadoPago</button>
     </div></div>
         </div>
 
@@ -858,7 +840,7 @@ button { cursor:pointer; border:none; outline:none; }
         <div class="form-row"><label>API URL</label><input type="text" value="https://api.whatsapp.com/send?phone="><br></div>
         <div class="form-row"><label>Mensagem Padrão</label><textarea rows="3" style="width:100%;padding:10px;border:1px solid #e2d8ff;border-radius:8px;font-family:Muli;font-size:13px" placeholder="Olá! Bem-vindo ao HomerFull CS...">Olá! Bem-vindo ao HomerFull CS Panel. Aqui estão suas linhas:</textarea></div>
         <div class="form-row"><label>Envio Automático</label><select><option>Ativado</option><option>Desativado</option></select></div>
-        <button class="login-btn" style="max-width:300px;margin-top:10px;background:#25D366">Salvar WhatsApp</button>
+        <button class="login-btn" style="max-width:300px;margin-top:10px;background:#25D366" onclick="showSave(&#39;✓ Configuração WhatsApp salva com sucesso!&#39;)">Salvar WhatsApp</button>
     </div></div>
         </div>
 
@@ -870,7 +852,7 @@ button { cursor:pointer; border:none; outline:none; }
         <div class="form-row"><label>Chat ID</label><input type="text" placeholder="-100123456789"></div>
         <div class="form-row"><label>Mensagem Padrão</label><textarea rows="3" style="width:100%;padding:10px;border:1px solid #e2d8ff;border-radius:8px;font-family:Muli;font-size:13px">Suas linhas CS estão prontas!</textarea></div>
         <div class="form-row"><label>Envio Automático</label><select><option>Ativado</option><option>Desativado</option></select></div>
-        <button class="login-btn" style="max-width:300px;margin-top:10px;background:#0088cc">Salvar Telegram</button>
+        <button class="login-btn" style="max-width:300px;margin-top:10px;background:#0088cc" onclick="showSave(&#39;✓ Configuração Telegram salva com sucesso!&#39;)">Salvar Telegram</button>
     </div></div>
         </div>
 
@@ -925,7 +907,7 @@ button { cursor:pointer; border:none; outline:none; }
         <div class="form-row"><label>Timezone</label><select><option>America/Sao_Paulo</option><option>America/Manaus</option><option>America/Belem</option></select></div>
         <div class="form-row"><label>Modo Manutenção</label><select><option>Desativado</option><option>Ativado</option></select></div>
         <div class="form-row"><label>Logo URL</label><input type="text" value="/assets/img/logo.png"></div>
-        <button class="login-btn" style="max-width:300px;margin-top:10px">Salvar Config</button>
+        <button class="login-btn" style="max-width:300px;margin-top:10px" onclick="showSave(&#39;✓ Configurações salvas com sucesso!&#39;)">Salvar Config</button>
     </div></div>
         </div>
 
@@ -940,7 +922,7 @@ button { cursor:pointer; border:none; outline:none; }
         <div class="form-row"><label>Segurança</label><select><option>TLS</option><option>SSL</option><option>Nenhuma</option></select></div>
         <div class="form-row"><label>Email De</label><input type="text" value="noreply@homerfull.com"></div>
         <div class="form-row"><label>Nome De</label><input type="text" value="HomerFull CS"></div>
-        <button class="login-btn" style="max-width:300px;margin-top:10px">Salvar Email</button>
+        <button class="login-btn" style="max-width:300px;margin-top:10px" onclick="showSave(&#39;✓ Configuração Email salva com sucesso!&#39;)">Salvar Email</button>
     </div></div>
         </div>
 
@@ -953,7 +935,7 @@ button { cursor:pointer; border:none; outline:none; }
         <div class="form-row"><label>API Secret</label><input type="password" placeholder="********"></div>
         <div class="form-row"><label>Número Origem</label><input type="text" placeholder="+5511999999999"></div>
         <div class="form-row"><label>Envio Automático</label><select><option>Ativado</option><option>Desativado</option></select></div>
-        <button class="login-btn" style="max-width:300px;margin-top:10px">Salvar SMS</button>
+        <button class="login-btn" style="max-width:300px;margin-top:10px" onclick="showSave(&#39;✓ Configuração SMS salva com sucesso!&#39;)">Salvar SMS</button>
     </div></div>
         </div>
 
@@ -968,7 +950,7 @@ button { cursor:pointer; border:none; outline:none; }
         <div class="form-row"><label>Max Conexões/IP</label><input type="number" value="3"></div>
         <div class="form-row"><label>Anti-Sharing Detection</label><select><option>Ativado</option><option>Desativado</option></select></div>
         <div class="form-row"><label>Log de Acessos</label><select><option>Ativado</option><option>Desativado</option></select></div>
-        <button class="login-btn" style="max-width:300px;margin-top:10px">Salvar Segurança</button>
+        <button class="login-btn" style="max-width:300px;margin-top:10px" onclick="showSave(&#39;✓ Configuração de Segurança salva com sucesso!&#39;)">Salvar Segurança</button>
     </div></div>
         </div>
 
@@ -982,7 +964,7 @@ button { cursor:pointer; border:none; outline:none; }
         <div class="form-row"><label>Som de Alerta</label><select><option>Ativado</option><option>Desativado</option></select></div>
         <div class="form-row"><label>Auto-Logout (min)</label><input type="number" value="30"></div>
         <div class="form-row"><label>Mostrar Hops</label><select><option>Sim</option><option>Não</option></select></div>
-        <button class="login-btn" style="max-width:300px;margin-top:10px">Salvar Opções</button>
+        <button class="login-btn" style="max-width:300px;margin-top:10px" onclick="showSave(&#39;✓ Opções salvas com sucesso!&#39;)">Salvar Opções</button>
     </div></div>
         </div>
 
@@ -1010,22 +992,28 @@ button { cursor:pointer; border:none; outline:none; }
         <div class="form-row"><label>Favicon</label><input type="file" accept="image/*"></div>
         <div class="form-row"><label>Título do Painel</label><input type="text" value="HomerFull CS Panel"></div>
         <div class="form-row"><label>Footer Text</label><input type="text" value="HomerFull CS Panel v3.0 © 2026"></div>
-        <button class="login-btn" style="max-width:300px;margin-top:10px">Salvar Template</button>
+        <button class="login-btn" style="max-width:300px;margin-top:10px" onclick="showSave(&#39;✓ Template salvo com sucesso!&#39;)">Salvar Template</button>
     </div></div>
         </div>
     </div>
 </div>
 
 <script>
+function showSave(msg) {
+    const t = document.createElement('div');
+    t.style.cssText = 'position:fixed;top:80px;right:25px;z-index:9999;background:#28a745;color:#fff;padding:14px 28px;border-radius:10px;font-size:14px;font-family:Muli,sans-serif;box-shadow:0 6px 20px rgba(0,0,0,.25);animation:toastIn .4s ease;display:flex;align-items:center;gap:10px;max-width:400px';
+    t.innerHTML = '<i class="fas fa-check-circle" style="font-size:18px"></i> ' + msg;
+    document.body.appendChild(t);
+    setTimeout(() => { t.style.opacity = '0'; t.style.transition = 'opacity .4s'; setTimeout(() => t.remove(), 400); }, 2500);
+}
+
 function showView(view) {
     const lv = document.getElementById('login-view');
     const dv = document.getElementById('dashboard-view');
-    const btns = document.querySelectorAll('.view-toggle button');
-    btns.forEach(b => b.classList.remove('active'));
     if (view === 'login') {
-        lv.style.display = 'flex'; dv.style.display = 'none'; btns[0].classList.add('active');
+        lv.style.display = 'flex'; dv.style.display = 'none';
     } else {
-        lv.style.display = 'none'; dv.style.display = 'block'; btns[1].classList.add('active');
+        lv.style.display = 'none'; dv.style.display = 'block';
         // Show home by default
         navigateTo('inicio', 'Início');
     }

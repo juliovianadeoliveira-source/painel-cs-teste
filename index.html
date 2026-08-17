@@ -115,6 +115,46 @@ body { font-family:'Muli',sans-serif; background:#f5f6fa; }
 /* SCROLLBAR */
 .sidebar::-webkit-scrollbar { width:4px; }
 .sidebar::-webkit-scrollbar-thumb { background:#ddd; border-radius:4px; }
+
+/* DASHBOARD HOME */
+.dash-stats { display:grid; grid-template-columns:repeat(4,1fr); gap:12px; margin-bottom:16px; }
+.dash-stat-card { background:#fff; border-radius:12px; padding:18px 14px; text-align:center; box-shadow:0 2px 8px rgba(0,0,0,0.05); border:1px solid #f0f0f0; position:relative; overflow:hidden; }
+.dash-stat-card::before { content:''; position:absolute; top:0; left:0; right:0; height:4px; border-radius:12px 12px 0 0; }
+.dash-stat-card.ativos::before { background:linear-gradient(90deg,#6967CE,#2BD4DB); }
+.dash-stat-card.esgotados::before { background:linear-gradient(90deg,#dc3545,#e8636b); }
+.dash-stat-card.bloqueados::before { background:linear-gradient(90deg,#f0a030,#ffc107); }
+.dash-stat-card.teste::before { background:linear-gradient(90deg,#28a745,#48c06e); }
+.dash-stat-icon { width:44px; height:44px; border-radius:10px; margin:0 auto 10px; display:flex; align-items:center; justify-content:center; font-size:18px; color:#fff; }
+.dash-stat-icon.ativos { background:linear-gradient(135deg,#6967CE,#8b89e0); }
+.dash-stat-icon.esgotados { background:linear-gradient(135deg,#dc3545,#e8636b); }
+.dash-stat-icon.bloqueados { background:linear-gradient(135deg,#f0a030,#ffc107); }
+.dash-stat-icon.teste { background:linear-gradient(135deg,#28a745,#48c06e); }
+.dash-stat-num { font-family:'Comfortaa',cursive; font-size:28px; font-weight:700; color:#404666; }
+.dash-stat-label { font-size:11px; color:#888; margin-top:2px; text-transform:uppercase; letter-spacing:0.5px; }
+
+.dash-info-row { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:16px; }
+.dash-info-card { background:#fff; border-radius:12px; padding:18px; border:1px solid #f0f0f0; box-shadow:0 2px 8px rgba(0,0,0,0.04); }
+.dash-info-card h3 { font-family:'Comfortaa',cursive; font-size:14px; font-weight:700; color:#404666; margin-bottom:10px; display:flex; align-items:center; gap:8px; }
+.dash-info-card h3 i { color:#6967CE; }
+.dash-url-box { background:#f8f8ff; border-radius:8px; padding:10px 12px; margin-bottom:10px; display:flex; align-items:center; gap:8px; }
+.dash-url-box input { flex:1; border:1px solid #e0e0e0; border-radius:6px; padding:6px 10px; font-size:11px; font-family:'Muli',sans-serif; background:#fff; color:#555; }
+.dash-status-box { background:#f8f8ff; border-radius:8px; padding:12px; margin-bottom:10px; font-size:12px; color:#666; line-height:1.6; }
+.dash-btn { display:inline-block; padding:7px 16px; border-radius:8px; font-size:11px; font-weight:600; cursor:pointer; transition:0.2s; border:none; }
+.dash-btn.purple { background:linear-gradient(135deg,#6967CE,#8b89e0); color:#fff; }
+.dash-btn.blue { background:#2196F3; color:#fff; }
+.dash-btn.green { background:linear-gradient(135deg,#28a745,#48c06e); color:#fff; }
+.dash-btn:hover { opacity:0.85; transform:translateY(-1px); }
+.dash-table-card { background:#fff; border-radius:12px; padding:18px; border:1px solid #f0f0f0; box-shadow:0 2px 8px rgba(0,0,0,0.04); margin-bottom:12px; }
+.dash-table-card h3 { font-family:'Comfortaa',cursive; font-size:14px; font-weight:700; color:#404666; margin-bottom:10px; display:flex; align-items:center; gap:8px; }
+.dash-table-card h3 i { color:#6967CE; }
+.status-online { display:inline-block; padding:3px 10px; border-radius:20px; background:#28a745; color:#fff; font-size:10px; font-weight:600; }
+.status-offline { display:inline-block; padding:3px 10px; border-radius:20px; background:#dc3545; color:#fff; font-size:10px; font-weight:600; }
+
+@media(max-width:768px) {
+  .dash-stats { grid-template-columns:repeat(2,1fr); }
+  .dash-info-row { grid-template-columns:1fr; }
+}
+
 </style>
 </head>
 <body>
@@ -241,20 +281,94 @@ body { font-family:'Muli',sans-serif; background:#f5f6fa; }
     <!-- MAIN CONTENT -->
     <div class="main-content" id="main-content">
         
+        
         <div class="section-page" id="sec-inicio" style="display:none">
             <div class="section-title"><i class="fas fa-home"></i> Início</div>
-            
-    <div class="widgets-row">
-        <div class="widget-card"><div class="widget-icon purple"><i class="fas fa-server"></i></div><div class="widget-number">5</div><div class="widget-label">Servidores CS</div></div>
-        <div class="widget-card"><div class="widget-icon green"><i class="fas fa-users"></i></div><div class="widget-number">127</div><div class="widget-label">Usuários Ativos</div></div>
-        <div class="widget-card"><div class="widget-icon orange"><i class="fas fa-wifi"></i></div><div class="widget-number">34</div><div class="widget-label">Online Agora</div></div>
-        <div class="widget-card"><div class="widget-icon red"><i class="fas fa-key"></i></div><div class="widget-number">312</div><div class="widget-label">Linhas Ativas</div></div>
-    </div>
-    <div class="info-grid">
-        <div class="info-card"><h3><i class="fas fa-chart-line"></i> Resumo Hoje</h3><p>Vendas: R$ 1.250,00</p><p>Novos Usuários: 8</p><p>Testes: 23</p></div>
-        <div class="info-card"><h3><i class="fas fa-exclamation-triangle"></i> Alertas</h3><p>12 linhas expirando hoje</p><p>3 linhas bloqueadas</p><p>2 servidores com carga alta</p></div>
-    </div>
+
+    <!-- 4 Stat Cards -->
+    <div class="dash-stats">
+        <div class="dash-stat-card ativos">
+            <div class="dash-stat-icon ativos"><i class="fas fa-handshake"></i></div>
+            <div class="dash-stat-num">412</div>
+            <div class="dash-stat-label">Ativos</div>
         </div>
+        <div class="dash-stat-card esgotados">
+            <div class="dash-stat-icon esgotados"><i class="fas fa-ban"></i></div>
+            <div class="dash-stat-num">198</div>
+            <div class="dash-stat-label">Esgotados</div>
+        </div>
+        <div class="dash-stat-card bloqueados">
+            <div class="dash-stat-icon bloqueados"><i class="fas fa-user-lock"></i></div>
+            <div class="dash-stat-num">2</div>
+            <div class="dash-stat-label">Bloqueados</div>
+        </div>
+        <div class="dash-stat-card teste">
+            <div class="dash-stat-icon teste"><i class="fas fa-clock"></i></div>
+            <div class="dash-stat-num">0</div>
+            <div class="dash-stat-label">Teste Ativo</div>
+        </div>
+    </div>
+
+    <!-- Url de Teste + Status do Cliente -->
+    <div class="dash-info-row">
+        <div class="dash-info-card">
+            <h3><i class="fas fa-link"></i> Url de Teste</h3>
+            <div class="dash-url-box">
+                <input type="text" value="http://painelw3brtop.sytes.net/painel/cadtest.php?r=VIZaa1" readonly id="url-teste">
+                <span class="dash-btn purple" onclick="copyLine('url-teste')">Clique aqui</span>
+            </div>
+            <span class="dash-btn blue" onclick="navigateTo('sec-configurar-csp','Configurar CSP')">Configurações</span>
+        </div>
+        <div class="dash-info-card">
+            <h3><i class="fas fa-signal"></i> Status do Cliente</h3>
+            <div class="dash-status-box">
+                Insira o nome de usuário do cliente para verificar o status atual da conta, tempo restante e informações de conexão.
+            </div>
+            <div class="form-row">
+                <label>Usuário</label>
+                <input class="form-input" type="text" placeholder="Nome de usuário">
+            </div>
+            <span class="dash-btn green" onclick="showSave('Status verificado com sucesso!')">Verificar Status</span>
+        </div>
+    </div>
+
+    <!-- Informações da Operadora -->
+    <div class="dash-table-card">
+        <h3><i class="fas fa-satellite-dish"></i> Informações da Operadora</h3>
+        <table class="data-table">
+            <thead>
+                <tr><th>Operadora</th><th>URL</th><th>Porta</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>Claro TV</td><td>ATENÇÃO não passar painel para qualquer pessoa sem indicação</td><td>32005</td></tr>
+                <tr><td>Net-São Paulo</td><td>ATENÇÃO não passar painel para qualquer pessoa sem indicação</td><td>37055</td></tr>
+            </tbody>
+        </table>
+        <div style="margin-top:12px;text-align:right">
+            <span class="dash-btn purple" onclick="showSave('Operadoras atualizadas com sucesso!')">Atualizar</span>
+        </div>
+    </div>
+
+    <!-- Status do Servidor -->
+    <div class="dash-table-card">
+        <h3><i class="fas fa-server"></i> Status do Servidor</h3>
+        <table class="data-table">
+            <thead>
+                <tr><th>Servidor</th><th>Operadora</th><th>Status</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>DEDICADO</td><td>Claro TV</td><td><span class="status-online">Online</span></td></tr>
+                <tr><td>DEDICADO</td><td>Net-São Paulo</td><td><span class="status-online">Online</span></td></tr>
+            </tbody>
+        </table>
+        <div style="margin-top:12px;text-align:right;display:flex;justify-content:flex-end;gap:8px">
+            <span class="dash-btn blue" onclick="navigateTo('sec-configurar-csp','Configurar CSP')">Configurações</span>
+            <span class="dash-btn purple" onclick="showSave('Status atualizado com sucesso!')">Atualizar</span>
+        </div>
+    </div>
+
+        </div>
+
         <div class="section-page" id="sec-administrador" style="display:none">
             <div class="section-title"><i class="fas fa-user-shield"></i> Administrador</div>
             
@@ -277,7 +391,7 @@ body { font-family:'Muli',sans-serif; background:#f5f6fa; }
     <div style="margin-bottom:12px">
         <span class="copy-btn" style="padding:8px 16px;font-size:12px;background:#6967CE" onclick="navigateTo('criar-usuario','Criar Usuário')"><i class="fas fa-plus" style="margin-right:5px"></i>Novo Usuário</span>
     </div>
-    <table class="data-table"><thead><tr><th>ID</th><th>Nome</th><th>Login</th><th>Servidor</th><th>Status</th><th>Ações</th></tr></thead><tbody><tr><td>1</td><td>Ricardo User</td><td>ricardo</td><td>CCCam-1</td><td>Ativo</td><td><span class="copy-btn" style="padding:3px 8px;font-size:10px" onclick="navigateTo(&#39;edit-user-1&#39;,&#39;Editar Usuário&#39;)">Editar</span> <span class="copy-btn" style="padding:3px 8px;font-size:10px;background:#dc3545" onclick="if(confirm(&#39;Tem certeza?&#39;))showSave(&#39;Deletado com sucesso!&#39;)">Deletar</span></td></tr><tr><td>2</td><td>Fernanda User</td><td>fernanda</td><td>MGcamd-1</td><td>Ativo</td><td><span class="copy-btn" style="padding:3px 8px;font-size:10px" onclick="navigateTo(&#39;edit-user-2&#39;,&#39;Editar Usuário&#39;)">Editar</span> <span class="copy-btn" style="padding:3px 8px;font-size:10px;background:#dc3545" onclick="if(confirm(&#39;Tem certeza?&#39;))showSave(&#39;Deletado com sucesso!&#39;)">Deletar</span></td></tr><tr><td>3</td><td>Bruno User</td><td>bruno</td><td>Newcamd-1</td><td>Bloqueado</td><td><span class="copy-btn" style="padding:3px 8px;font-size:10px" onclick="navigateTo(&#39;edit-user-3&#39;,&#39;Editar Usuário&#39;)">Editar</span> <span class="copy-btn" style="padding:3px 8px;font-size:10px;background:#dc3545" onclick="if(confirm(&#39;Tem certeza?&#39;))showSave(&#39;Deletado com sucesso!&#39;)">Deletar</span></td></tr><tr><td>4</td><td>Juliana User</td><td>juliana</td><td>CCCam-2</td><td>Expirado</td><td><span class="copy-btn" style="padding:3px 8px;font-size:10px" onclick="navigateTo(&#39;edit-user-4&#39;,&#39;Editar Usuário&#39;)">Editar</span> <span class="copy-btn" style="padding:3px 8px;font-size:10px;background:#dc3545" onclick="if(confirm(&#39;Tem certeza?&#39;))showSave(&#39;Deletado com sucesso!&#39;)">Deletar</span></td></tr><tr><td>5</td><td>Marcos User</td><td>marcos</td><td>CCCam-1</td><td>Ativo</td><td><span class="copy-btn" style="padding:3px 8px;font-size:10px" onclick="navigateTo(&#39;edit-user-5&#39;,&#39;Editar Usuário&#39;)">Editar</span> <span class="copy-btn" style="padding:3px 8px;font-size:10px;background:#dc3545" onclick="if(confirm(&#39;Tem certeza?&#39;))showSave(&#39;Deletado com sucesso!&#39;)">Deletar</span></td></tr><tr><td>6</td><td>Patricia User</td><td>patricia</td><td>MGcamd-2</td><td>Ativo</td><td><span class="copy-btn" style="padding:3px 8px;font-size:10px" onclick="navigateTo(&#39;edit-user-6&#39;,&#39;Editar Usuário&#39;)">Editar</span> <span class="copy-btn" style="padding:3px 8px;font-size:10px;background:#dc3545" onclick="if(confirm(&#39;Tem certeza?&#39;))showSave(&#39;Deletado com sucesso!&#39;)">Deletar</span></td></tr></tbody></table>
+    <table class="data-table"><thead><tr><th>ID</th><th>Nome</th><th>Login</th><th>Servidor</th><th>Status</th><th>Ações</th></tr></thead><tbody><tr><td>1</td><td>Ricardo User</td><td>ricardo</td><td>CSP-1</td><td>Ativo</td><td><span class="copy-btn" style="padding:3px 8px;font-size:10px" onclick="navigateTo(&#39;edit-user-1&#39;,&#39;Editar Usuário&#39;)">Editar</span> <span class="copy-btn" style="padding:3px 8px;font-size:10px;background:#dc3545" onclick="if(confirm(&#39;Tem certeza?&#39;))showSave(&#39;Deletado com sucesso!&#39;)">Deletar</span></td></tr><tr><td>2</td><td>Fernanda User</td><td>fernanda</td><td>CSP-3</td><td>Ativo</td><td><span class="copy-btn" style="padding:3px 8px;font-size:10px" onclick="navigateTo(&#39;edit-user-2&#39;,&#39;Editar Usuário&#39;)">Editar</span> <span class="copy-btn" style="padding:3px 8px;font-size:10px;background:#dc3545" onclick="if(confirm(&#39;Tem certeza?&#39;))showSave(&#39;Deletado com sucesso!&#39;)">Deletar</span></td></tr><tr><td>3</td><td>Bruno User</td><td>bruno</td><td>CSP-5</td><td>Bloqueado</td><td><span class="copy-btn" style="padding:3px 8px;font-size:10px" onclick="navigateTo(&#39;edit-user-3&#39;,&#39;Editar Usuário&#39;)">Editar</span> <span class="copy-btn" style="padding:3px 8px;font-size:10px;background:#dc3545" onclick="if(confirm(&#39;Tem certeza?&#39;))showSave(&#39;Deletado com sucesso!&#39;)">Deletar</span></td></tr><tr><td>4</td><td>Juliana User</td><td>juliana</td><td>CSP-2</td><td>Expirado</td><td><span class="copy-btn" style="padding:3px 8px;font-size:10px" onclick="navigateTo(&#39;edit-user-4&#39;,&#39;Editar Usuário&#39;)">Editar</span> <span class="copy-btn" style="padding:3px 8px;font-size:10px;background:#dc3545" onclick="if(confirm(&#39;Tem certeza?&#39;))showSave(&#39;Deletado com sucesso!&#39;)">Deletar</span></td></tr><tr><td>5</td><td>Marcos User</td><td>marcos</td><td>CSP-1</td><td>Ativo</td><td><span class="copy-btn" style="padding:3px 8px;font-size:10px" onclick="navigateTo(&#39;edit-user-5&#39;,&#39;Editar Usuário&#39;)">Editar</span> <span class="copy-btn" style="padding:3px 8px;font-size:10px;background:#dc3545" onclick="if(confirm(&#39;Tem certeza?&#39;))showSave(&#39;Deletado com sucesso!&#39;)">Deletar</span></td></tr><tr><td>6</td><td>Patricia User</td><td>patricia</td><td>CSP-4</td><td>Ativo</td><td><span class="copy-btn" style="padding:3px 8px;font-size:10px" onclick="navigateTo(&#39;edit-user-6&#39;,&#39;Editar Usuário&#39;)">Editar</span> <span class="copy-btn" style="padding:3px 8px;font-size:10px;background:#dc3545" onclick="if(confirm(&#39;Tem certeza?&#39;))showSave(&#39;Deletado com sucesso!&#39;)">Deletar</span></td></tr></tbody></table>
         </div>
         <div class="section-page" id="sec-teste" style="display:none">
             <div class="section-title"><i class="fas fa-vial"></i> Teste</div>
@@ -285,13 +399,13 @@ body { font-family:'Muli',sans-serif; background:#f5f6fa; }
     <div class="info-grid">
         <div class="info-card">
             <h3><i class="fas fa-vial"></i> Gerar Teste</h3>
-            <div class="form-row"><label>Servidor</label><select class="form-input"><option>CCCam-1</option><option>CCCam-2</option><option>MGcamd-1</option><option>Newcamd-1</option></select></div>
+            <div class="form-row"><label>Servidor</label><select class="form-input"><option>CSP-1</option><option>CSP-2</option><option>CSP-3</option><option>CSP-5</option></select></div>
             <div class="form-row"><label>Duração</label><select class="form-input"><option>24 horas</option><option>48 horas</option><option>72 horas</option></select></div>
             <button class="login-btn" style="max-width:200px;margin-top:8px" onclick="showSave('Teste gerado com sucesso!')">Gerar Teste</button>
         </div>
     </div>
     <h3 style="margin-top:20px;font-size:14px;color:#404666">Testes Ativos</h3>
-    <table class="data-table"><thead><tr><th>ID</th><th>Usuário</th><th>Servidor</th><th>Início</th><th>Expira</th><th>Status</th><th>Ações</th></tr></thead><tbody><tr><td>1</td><td>test_user1</td><td>CCCam-1</td><td>17/08/2026</td><td>18/08/2026</td><td>Ativo</td><td><span class="copy-btn" style="padding:3px 8px;font-size:10px;background:#dc3545" onclick="showSave('Teste removido!')">Remover</span></td></tr><tr><td>2</td><td>test_user2</td><td>MGcamd-1</td><td>17/08/2026</td><td>19/08/2026</td><td>Ativo</td><td><span class="copy-btn" style="padding:3px 8px;font-size:10px;background:#dc3545" onclick="showSave('Teste removido!')">Remover</span></td></tr></tbody></table>
+    <table class="data-table"><thead><tr><th>ID</th><th>Usuário</th><th>Servidor</th><th>Início</th><th>Expira</th><th>Status</th><th>Ações</th></tr></thead><tbody><tr><td>1</td><td>test_user1</td><td>CSP-1</td><td>17/08/2026</td><td>18/08/2026</td><td>Ativo</td><td><span class="copy-btn" style="padding:3px 8px;font-size:10px;background:#dc3545" onclick="showSave('Teste removido!')">Remover</span></td></tr><tr><td>2</td><td>test_user2</td><td>CSP-3</td><td>17/08/2026</td><td>19/08/2026</td><td>Ativo</td><td><span class="copy-btn" style="padding:3px 8px;font-size:10px;background:#dc3545" onclick="showSave('Teste removido!')">Remover</span></td></tr></tbody></table>
         </div>
         <div class="section-page" id="sec-status-usuarios" style="display:none">
             <div class="section-title"><i class="fas fa-signal"></i> Status dos Usuários</div>
@@ -302,7 +416,7 @@ body { font-family:'Muli',sans-serif; background:#f5f6fa; }
         <div class="widget-card"><div class="widget-icon red"><i class="fas fa-times-circle"></i></div><div class="widget-number">7</div><div class="widget-label">Bloqueados</div></div>
         <div class="widget-card"><div class="widget-icon purple"><i class="fas fa-users"></i></div><div class="widget-number">127</div><div class="widget-label">Total</div></div>
     </div>
-    <table class="data-table"><thead><tr><th>Usuário</th><th>Servidor</th><th>IP</th><th>Conectado Desde</th><th>Status</th></tr></thead><tbody><tr><td>ricardo</td><td>CCCam-1</td><td>192.168.1.100</td><td>17/08 08:00</td><td>Online</td></tr><tr><td>fernanda</td><td>MGcamd-1</td><td>192.168.1.101</td><td>17/08 07:30</td><td>Online</td></tr><tr><td>bruno</td><td>Newcamd-1</td><td>192.168.1.102</td><td>17/08 06:00</td><td>Offline</td></tr><tr><td>juliana</td><td>CCCam-2</td><td>192.168.1.103</td><td>16/08 22:00</td><td>Expirado</td></tr></tbody></table>
+    <table class="data-table"><thead><tr><th>Usuário</th><th>Servidor</th><th>IP</th><th>Conectado Desde</th><th>Status</th></tr></thead><tbody><tr><td>ricardo</td><td>CSP-1</td><td>192.168.1.100</td><td>17/08 08:00</td><td>Online</td></tr><tr><td>fernanda</td><td>CSP-3</td><td>192.168.1.101</td><td>17/08 07:30</td><td>Online</td></tr><tr><td>bruno</td><td>CSP-5</td><td>192.168.1.102</td><td>17/08 06:00</td><td>Offline</td></tr><tr><td>juliana</td><td>CSP-2</td><td>192.168.1.103</td><td>16/08 22:00</td><td>Expirado</td></tr></tbody></table>
         </div>
         <div class="section-page" id="sec-relatorio" style="display:none">
             <div class="section-title"><i class="fas fa-chart-bar"></i> Relatório</div>
@@ -316,7 +430,7 @@ body { font-family:'Muli',sans-serif; background:#f5f6fa; }
         </div>
     </div>
     <h3 style="margin-top:20px;font-size:14px;color:#404666">Últimos Relatórios</h3>
-    <table class="data-table"><thead><tr><th>Data</th><th>Tipo</th><th>Descrição</th><th>Valor</th></tr></thead><tbody><tr><td>17/08/2026</td><td>Venda</td><td>Novo usuário CCCam-1</td><td>R$ 45,00</td></tr><tr><td>16/08/2026</td><td>Venda</td><td>Renovação MGcamd-1</td><td>R$ 35,00</td></tr><tr><td>15/08/2026</td><td>Cadastro</td><td>Novo revendedor</td><td>R$ 0,00</td></tr></tbody></table>
+    <table class="data-table"><thead><tr><th>Data</th><th>Tipo</th><th>Descrição</th><th>Valor</th></tr></thead><tbody><tr><td>17/08/2026</td><td>Venda</td><td>Novo usuário CSP-1</td><td>R$ 45,00</td></tr><tr><td>16/08/2026</td><td>Venda</td><td>Renovação CSP-3</td><td>R$ 35,00</td></tr><tr><td>15/08/2026</td><td>Cadastro</td><td>Novo revendedor</td><td>R$ 0,00</td></tr></tbody></table>
         </div>
         <div class="section-page" id="sec-minhas-vendas" style="display:none">
             <div class="section-title"><i class="fas fa-cash-register"></i> Minhas Vendas</div>
@@ -326,7 +440,7 @@ body { font-family:'Muli',sans-serif; background:#f5f6fa; }
         <div class="widget-card"><div class="widget-icon purple"><i class="fas fa-shopping-cart"></i></div><div class="widget-number">62</div><div class="widget-label">Vendas Mês</div></div>
         <div class="widget-card"><div class="widget-icon orange"><i class="fas fa-clock"></i></div><div class="widget-number">5</div><div class="widget-label">Pendentes</div></div>
     </div>
-    <table class="data-table"><thead><tr><th>ID</th><th>Comprador</th><th>Plano</th><th>Valor</th><th>Data</th><th>Status</th></tr></thead><tbody><tr><td>V001</td><td>Ricardo</td><td>CCCam 30 dias</td><td>R$ 45,00</td><td>17/08/2026</td><td>Pago</td></tr><tr><td>V002</td><td>Fernanda</td><td>MGcamd 30 dias</td><td>R$ 35,00</td><td>16/08/2026</td><td>Pago</td></tr><tr><td>V003</td><td>Bruno</td><td>Newcamd 90 dias</td><td>R$ 90,00</td><td>15/08/2026</td><td>Pendente</td></tr><tr><td>V004</td><td>Juliana</td><td>CCCam 30 dias</td><td>R$ 45,00</td><td>14/08/2026</td><td>Pago</td></tr></tbody></table>
+    <table class="data-table"><thead><tr><th>ID</th><th>Comprador</th><th>Plano</th><th>Valor</th><th>Data</th><th>Status</th></tr></thead><tbody><tr><td>V001</td><td>Ricardo</td><td>CSP 30 dias</td><td>R$ 45,00</td><td>17/08/2026</td><td>Pago</td></tr><tr><td>V002</td><td>Fernanda</td><td>CSP 30 dias</td><td>R$ 35,00</td><td>16/08/2026</td><td>Pago</td></tr><tr><td>V003</td><td>Bruno</td><td>CSP 90 dias</td><td>R$ 90,00</td><td>15/08/2026</td><td>Pendente</td></tr><tr><td>V004</td><td>Juliana</td><td>CSP 30 dias</td><td>R$ 45,00</td><td>14/08/2026</td><td>Pago</td></tr></tbody></table>
         </div>
         <div class="section-page" id="sec-formas-pagamento" style="display:none">
             <div class="section-title"><i class="fas fa-credit-card"></i> Formas de Pagamento</div>
@@ -487,7 +601,7 @@ body { font-family:'Muli',sans-serif; background:#f5f6fa; }
             
     <div class="form-row"><label>Tipo de Importação</label><select class="form-input"><option>Usuários</option><option>Linhas C</option><option>Linhas MG</option><option>Linhas N</option></select></div>
     <div class="form-row"><label>Arquivo</label><input type="file" class="form-input" accept=".csv,.txt"></div>
-    <div class="form-row"><label>Servidor Destino</label><select class="form-input"><option>CCCam-1</option><option>CCCam-2</option><option>MGcamd-1</option><option>Newcamd-1</option></select></div>
+    <div class="form-row"><label>Servidor Destino</label><select class="form-input"><option>CSP-1</option><option>CSP-2</option><option>CSP-3</option><option>CSP-5</option></select></div>
     <button class="login-btn" style="max-width:200px;margin-top:8px" onclick="showSave('Importação concluída com sucesso!')">Importar</button>
         </div>
         <div class="section-page" id="sec-exportar" style="display:none">
@@ -647,7 +761,7 @@ body { font-family:'Muli',sans-serif; background:#f5f6fa; }
     <div class="form-row"><label>Nome</label><input class="form-input" placeholder="Nome completo"></div>
     <div class="form-row"><label>Login</label><input class="form-input" placeholder="Login"></div>
     <div class="form-row"><label>Senha</label><input class="form-input" type="password" placeholder="Senha"></div>
-    <div class="form-row"><label>Servidor</label><select class="form-input"><option>CCCam-1</option><option>CCCam-2</option><option>MGcamd-1</option><option>Newcamd-1</option></select></div>
+    <div class="form-row"><label>Servidor</label><select class="form-input"><option>CSP-1</option><option>CSP-2</option><option>CSP-3</option><option>CSP-5</option></select></div>
     <div class="form-row"><label>Plano</label><select class="form-input"><option>30 dias</option><option>90 dias</option><option>180 dias</option><option>365 dias</option></select></div>
     <div class="form-row"><label>Status</label><select class="form-input"><option selected>Ativo</option><option>Bloqueado</option><option>Expirado</option></select></div>
     <button class="login-btn" style="max-width:300px;margin-top:10px" onclick="salvarEdicao(&#39;usuario&#39;,&#39;Usuário&#39;,&#39;Usuário criado com sucesso!&#39;)">Criar</button>
@@ -718,7 +832,7 @@ body { font-family:'Muli',sans-serif; background:#f5f6fa; }
     <div class="form-row"><label>Nome</label><input class="form-input" value="Ricardo User"></div>
     <div class="form-row"><label>Login</label><input class="form-input" value="ricardo"></div>
     <div class="form-row"><label>Senha</label><input class="form-input" type="password" value="****"></div>
-    <div class="form-row"><label>Servidor</label><select class="form-input"><option selected>CCCam-1</option><option>CCCam-2</option><option>MGcamd-1</option><option>Newcamd-1</option></select></div>
+    <div class="form-row"><label>Servidor</label><select class="form-input"><option selected>CSP-1</option><option>CSP-2</option><option>CSP-3</option><option>CSP-5</option></select></div>
     <div class="form-row"><label>Status</label><select class="form-input"><option selected>Ativo</option><option>Bloqueado</option><option>Expirado</option></select></div>
     <button class="login-btn" style="max-width:300px;margin-top:10px" onclick="salvarEdicao(&#39;usuario&#39;,&#39;Usuário&#39;,&#39;Usuário salvo!&#39;)">Salvar</button>
         </div>
@@ -728,7 +842,7 @@ body { font-family:'Muli',sans-serif; background:#f5f6fa; }
     <div class="form-row"><label>Nome</label><input class="form-input" value="Fernanda User"></div>
     <div class="form-row"><label>Login</label><input class="form-input" value="fernanda"></div>
     <div class="form-row"><label>Senha</label><input class="form-input" type="password" value="****"></div>
-    <div class="form-row"><label>Servidor</label><select class="form-input"><option>CCCam-1</option><option>CCCam-2</option><option selected>MGcamd-1</option><option>Newcamd-1</option></select></div>
+    <div class="form-row"><label>Servidor</label><select class="form-input"><option>CSP-1</option><option>CSP-2</option><option selected>CSP-3</option><option>CSP-5</option></select></div>
     <div class="form-row"><label>Status</label><select class="form-input"><option selected>Ativo</option><option>Bloqueado</option><option>Expirado</option></select></div>
     <button class="login-btn" style="max-width:300px;margin-top:10px" onclick="salvarEdicao(&#39;usuario&#39;,&#39;Usuário&#39;,&#39;Usuário salvo!&#39;)">Salvar</button>
         </div>
@@ -738,7 +852,7 @@ body { font-family:'Muli',sans-serif; background:#f5f6fa; }
     <div class="form-row"><label>Nome</label><input class="form-input" value="Bruno User"></div>
     <div class="form-row"><label>Login</label><input class="form-input" value="bruno"></div>
     <div class="form-row"><label>Senha</label><input class="form-input" type="password" value="****"></div>
-    <div class="form-row"><label>Servidor</label><select class="form-input"><option>CCCam-1</option><option>CCCam-2</option><option>MGcamd-1</option><option selected>Newcamd-1</option></select></div>
+    <div class="form-row"><label>Servidor</label><select class="form-input"><option>CSP-1</option><option>CSP-2</option><option>CSP-3</option><option selected>CSP-5</option></select></div>
     <div class="form-row"><label>Status</label><select class="form-input"><option>Ativo</option><option selected>Bloqueado</option><option>Expirado</option></select></div>
     <button class="login-btn" style="max-width:300px;margin-top:10px" onclick="salvarEdicao(&#39;usuario&#39;,&#39;Usuário&#39;,&#39;Usuário salvo!&#39;)">Salvar</button>
         </div>
@@ -748,7 +862,7 @@ body { font-family:'Muli',sans-serif; background:#f5f6fa; }
     <div class="form-row"><label>Nome</label><input class="form-input" value="Juliana User"></div>
     <div class="form-row"><label>Login</label><input class="form-input" value="juliana"></div>
     <div class="form-row"><label>Senha</label><input class="form-input" type="password" value="****"></div>
-    <div class="form-row"><label>Servidor</label><select class="form-input"><option>CCCam-1</option><option selected>CCCam-2</option><option>MGcamd-1</option><option>Newcamd-1</option></select></div>
+    <div class="form-row"><label>Servidor</label><select class="form-input"><option>CSP-1</option><option selected>CSP-2</option><option>CSP-3</option><option>CSP-5</option></select></div>
     <div class="form-row"><label>Status</label><select class="form-input"><option>Ativo</option><option>Bloqueado</option><option selected>Expirado</option></select></div>
     <button class="login-btn" style="max-width:300px;margin-top:10px" onclick="salvarEdicao(&#39;usuario&#39;,&#39;Usuário&#39;,&#39;Usuário salvo!&#39;)">Salvar</button>
         </div>
@@ -758,7 +872,7 @@ body { font-family:'Muli',sans-serif; background:#f5f6fa; }
     <div class="form-row"><label>Nome</label><input class="form-input" value="Marcos User"></div>
     <div class="form-row"><label>Login</label><input class="form-input" value="marcos"></div>
     <div class="form-row"><label>Senha</label><input class="form-input" type="password" value="****"></div>
-    <div class="form-row"><label>Servidor</label><select class="form-input"><option selected>CCCam-1</option><option>CCCam-2</option><option>MGcamd-1</option><option>Newcamd-1</option></select></div>
+    <div class="form-row"><label>Servidor</label><select class="form-input"><option selected>CSP-1</option><option>CSP-2</option><option>CSP-3</option><option>CSP-5</option></select></div>
     <div class="form-row"><label>Status</label><select class="form-input"><option selected>Ativo</option><option>Bloqueado</option><option>Expirado</option></select></div>
     <button class="login-btn" style="max-width:300px;margin-top:10px" onclick="salvarEdicao(&#39;usuario&#39;,&#39;Usuário&#39;,&#39;Usuário salvo!&#39;)">Salvar</button>
         </div>
@@ -768,7 +882,7 @@ body { font-family:'Muli',sans-serif; background:#f5f6fa; }
     <div class="form-row"><label>Nome</label><input class="form-input" value="Patricia User"></div>
     <div class="form-row"><label>Login</label><input class="form-input" value="patricia"></div>
     <div class="form-row"><label>Senha</label><input class="form-input" type="password" value="****"></div>
-    <div class="form-row"><label>Servidor</label><select class="form-input"><option>CCCam-1</option><option>CCCam-2</option><option selected>MGcamd-1</option><option>Newcamd-1</option></select></div>
+    <div class="form-row"><label>Servidor</label><select class="form-input"><option>CSP-1</option><option>CSP-2</option><option selected>CSP-3</option><option>CSP-5</option></select></div>
     <div class="form-row"><label>Status</label><select class="form-input"><option selected>Ativo</option><option>Bloqueado</option><option>Expirado</option></select></div>
     <button class="login-btn" style="max-width:300px;margin-top:10px" onclick="salvarEdicao(&#39;usuario&#39;,&#39;Usuário&#39;,&#39;Usuário salvo!&#39;)">Salvar</button>
         </div>

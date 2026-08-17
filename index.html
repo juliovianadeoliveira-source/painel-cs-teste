@@ -9,6 +9,13 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <style>
 * { margin:0; padding:0; box-sizing:border-box; }
+/* Noty.js theme override for panel purple theme */
+.noty_bar { border-radius: 8px; }
+.noty_type__success .noty_bar { background: linear-gradient(135deg, #6967CE, #5193c5); }
+.noty_type__error .noty_bar { background: linear-gradient(135deg, #e74c3c, #c0392b); }
+.noty_type__warning .noty_bar { background: linear-gradient(135deg, #f39c12, #e67e22); }
+.noty_type__info .noty_bar { background: linear-gradient(135deg, #3498db, #2980b9); }
+
 body { font-family:'Muli',sans-serif; background:#f5f6fa; }
 
 /* LOGIN */
@@ -99,6 +106,12 @@ body { font-family:'Muli',sans-serif; background:#f5f6fa; }
 .copy-btn { display:inline-block; padding:4px 10px; border-radius:6px; background:#6967CE; color:#fff; font-size:10px; font-weight:600; cursor:pointer; transition:0.2s; }
 .copy-btn:hover { opacity:0.85; transform:translateY(-1px); }
 
+/* Noty.js button overrides (matching real panel) */
+.btn { padding: 6px 16px; margin: 4px; border-radius: 6px; font-size: 13px; font-family: Muli, sans-serif; cursor: pointer; border: none; color: #fff; }
+.btn-success { background: #28a745; }
+.btn-success:hover { background: #218838; }
+.btn-error { background: #dc3545; }
+.btn-error:hover { background: #c82333; }
 /* TOAST */
 .toast { position:fixed; top:60px; right:20px; padding:12px 20px; border-radius:10px; background:linear-gradient(135deg,#6967CE,#2BD4DB); color:#fff; font-size:12px; font-weight:600; z-index:99999; opacity:0; transform:translateX(30px); transition:0.4s; pointer-events:none; }
 .toast.show { opacity:1; transform:translateX(0); }
@@ -155,7 +168,79 @@ body { font-family:'Muli',sans-serif; background:#f5f6fa; }
   .dash-info-row { grid-template-columns:1fr; }
 }
 
+
+/* PAGE CONTROLS */
+.page-controls { display:flex; align-items:center; justify-content:space-between; margin-bottom:12px; flex-wrap:wrap; gap:8px; }
+.page-controls-left { display:flex; align-items:center; gap:8px; }
+.page-controls-right { display:flex; align-items:center; gap:8px; }
+.btn-azul { display:inline-flex; align-items:center; gap:4px; padding:7px 16px; border-radius:6px; background:#2196F3; color:#fff; font-size:11px; font-weight:600; cursor:pointer; transition:0.2s; border:none; }
+.btn-azul:hover { opacity:0.85; }
+.btn-vermelho { display:inline-flex; align-items:center; gap:4px; padding:7px 16px; border-radius:6px; background:#dc3545; color:#fff; font-size:11px; font-weight:600; cursor:pointer; transition:0.2s; border:none; }
+.btn-vermelho:hover { opacity:0.85; }
+.btn-verde { display:inline-flex; align-items:center; gap:4px; padding:8px 20px; border-radius:6px; background:linear-gradient(135deg,#28a745,#48c06e); color:#fff; font-size:12px; font-weight:600; cursor:pointer; transition:0.2s; border:none; }
+.btn-verde:hover { opacity:0.85; }
+.btn-cinza { display:inline-flex; align-items:center; gap:4px; padding:7px 16px; border-radius:6px; background:#6c757d; color:#fff; font-size:11px; font-weight:600; cursor:pointer; transition:0.2s; border:none; }
+.page-select { padding:5px 8px; border:1px solid #ddd; border-radius:4px; font-size:11px; background:#fff; }
+.page-search { padding:6px 10px; border:1px solid #ddd; border-radius:4px; font-size:11px; width:160px; }
+.menu-item.menu-sub { padding-left:40px; font-size:11px; }
+
+/* PAGINATION */
+.pagination { display:flex; align-items:center; justify-content:space-between; margin-top:10px; padding:6px 0; font-size:11px; color:#666; }
+.pagination-info { color:#888; }
+.pagination-btns { display:flex; gap:4px; }
+.pagination-btns span { display:inline-block; padding:4px 10px; border-radius:4px; border:1px solid #ddd; cursor:pointer; font-size:11px; background:#fff; }
+.pagination-btns span.active { background:#2196F3; color:#fff; border-color:#2196F3; }
+.pagination-btns span.disabled { color:#ccc; cursor:default; background:#f9f9f9; }
+
+/* STATUS BADGES */
+.badge-ativo { display:inline-block; padding:2px 8px; border-radius:12px; background:#28a745; color:#fff; font-size:10px; font-weight:600; }
+.badge-desativado { display:inline-block; padding:2px 8px; border-radius:12px; background:#dc3545; color:#fff; font-size:10px; font-weight:600; }
+.badge-bloqueado { display:inline-block; padding:2px 8px; border-radius:12px; background:#f0a030; color:#fff; font-size:10px; font-weight:600; }
+
+/* TABLE ACTION ICONS */
+.tbl-action { display:inline-flex; align-items:center; justify-content:center; width:26px; height:26px; border-radius:4px; cursor:pointer; transition:0.2s; font-size:12px; }
+.tbl-action:hover { opacity:0.8; }
+.tbl-action.info { color:#2196F3; }
+.tbl-action.lock { color:#dc3545; }
+.tbl-action.edit { color:#f0a030; }
+.tbl-action.delete { color:#dc3545; }
+
+/* TEXTAREA */
+.form-textarea { width:100%; min-height:100px; padding:10px; border:1.5px solid #e0e0e0; border-radius:8px; font-size:12px; font-family:'Muli',sans-serif; outline:none; resize:vertical; transition:0.3s; }
+.form-textarea:focus { border-color:#6967CE; box-shadow:0 0 0 3px rgba(105,103,206,0.1); }
+
+/* GALLERY GRID */
+.gallery-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(160px,1fr)); gap:12px; }
+.gallery-item { background:#f8f8ff; border-radius:10px; overflow:hidden; border:1px solid #f0f0f0; cursor:pointer; position:relative; transition:0.2s; }
+.gallery-item:hover { transform:translateY(-2px); box-shadow:0 4px 12px rgba(0,0,0,0.1); }
+.gallery-img { width:100%; height:100px; object-fit:cover; display:flex; align-items:center; justify-content:center; background:linear-gradient(135deg,#6967CE,#2BD4DB); color:#fff; font-size:11px; font-weight:600; }
+.gallery-label { padding:6px 8px; font-size:10px; color:#666; text-align:center; }
+
+/* THEME GALLERY */
+.theme-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(180px,1fr)); gap:14px; }
+.theme-card { background:#fff; border-radius:10px; overflow:hidden; border:2px solid #f0f0f0; cursor:pointer; position:relative; transition:0.2s; }
+.theme-card:hover { border-color:#6967CE; }
+.theme-card.selected { border-color:#6967CE; box-shadow:0 0 0 3px rgba(105,103,206,0.2); }
+.theme-preview { height:100px; position:relative; overflow:hidden; }
+.theme-sidebar-mini { position:absolute; left:0; top:0; bottom:0; width:30%; }
+.theme-body-mini { position:absolute; left:30%; top:0; bottom:0; right:0; }
+.theme-label { padding:8px; font-size:11px; color:#555; text-align:center; font-weight:600; }
+.theme-check { position:absolute; top:6px; right:6px; width:22px; height:22px; border-radius:50%; background:#fff; color:#6967CE; display:flex; align-items:center; justify-content:center; font-size:10px; box-shadow:0 2px 6px rgba(0,0,0,0.15); }
+
+/* NO RECORDS */
+.no-records { text-align:center; padding:20px; color:#999; font-size:12px; }
+
+@media(max-width:768px) {
+  .page-controls { flex-direction:column; align-items:stretch; }
+  .gallery-grid, .theme-grid { grid-template-columns:repeat(2,1fr); }
+}
+
 </style>
+<!-- jQuery (required by real panel) -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<!-- Noty.js (notification library used by real panel) -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.js"></script>
 </head>
 <body>
 
@@ -172,7 +257,8 @@ body { font-family:'Muli',sans-serif; background:#f5f6fa; }
 </div>
 
 <!-- DASHBOARD -->
-<div class="dashboard" id="dashboard-view">
+<div class="page-container" id="dashboard-view">
+<div class="page-content">
     <!-- SIDEBAR -->
     <div class="sidebar" id="sidebar">
         <div class="sidebar-header">
@@ -221,6 +307,7 @@ body { font-family:'Muli',sans-serif; background:#f5f6fa; }
             <div class="menu-label">Opções CSP</div>
             <a onclick="navigateTo('configurar-csp','Configurar CSP')" class="menu-item"><i class="fas fa-cogs"></i><span>Configurar CSP</span></a>
             <a onclick="navigateTo('imagem-perfil','Imagem de Perfil')" class="menu-item"><i class="fas fa-user-circle"></i><span>Imagem de Perfil</span></a>
+            <a onclick="navigateTo('mascara-perfil','M&aacute;scara de Perfil')" class="menu-item"><i class="fas fa-mask"></i><span>M&aacute;scara de Perfil</span></a>
         </div>
         <!-- Ferramentas -->
         <div class="menu-group">
@@ -369,371 +456,678 @@ body { font-family:'Muli',sans-serif; background:#f5f6fa; }
 
         </div>
 
+        
         <div class="section-page" id="sec-administrador" style="display:none">
             <div class="section-title"><i class="fas fa-user-shield"></i> Administrador</div>
-            
-    <div style="margin-bottom:12px">
-        <span class="copy-btn" style="padding:8px 16px;font-size:12px;background:#6967CE" onclick="navigateTo('criar-admin','Criar Administrador')"><i class="fas fa-plus" style="margin-right:5px"></i>Novo Administrador</span>
-    </div>
-    <table class="data-table"><thead><tr><th>ID</th><th>Nome</th><th>Email</th><th>Nível</th><th>Status</th><th>Ações</th></tr></thead><tbody><tr><td>1</td><td>Carlos Admin</td><td>carlos@email.com</td><td>Super Admin</td><td>Ativo</td><td><span class="copy-btn" style="padding:3px 8px;font-size:10px" onclick="navigateTo(&#39;edit-admin-1&#39;,&#39;Editar Admin&#39;)">Editar</span> <span class="copy-btn" style="padding:3px 8px;font-size:10px;background:#dc3545" onclick="if(confirm(&#39;Tem certeza?&#39;))showSave(&#39;Deletado com sucesso!&#39;)">Deletar</span></td></tr><tr><td>2</td><td>Maria Admin</td><td>maria@email.com</td><td>Admin</td><td>Ativo</td><td><span class="copy-btn" style="padding:3px 8px;font-size:10px" onclick="navigateTo(&#39;edit-admin-2&#39;,&#39;Editar Admin&#39;)">Editar</span> <span class="copy-btn" style="padding:3px 8px;font-size:10px;background:#dc3545" onclick="if(confirm(&#39;Tem certeza?&#39;))showSave(&#39;Deletado com sucesso!&#39;)">Deletar</span></td></tr><tr><td>3</td><td>João Admin</td><td>joao@email.com</td><td>Admin</td><td>Inativo</td><td><span class="copy-btn" style="padding:3px 8px;font-size:10px" onclick="navigateTo(&#39;edit-admin-3&#39;,&#39;Editar Admin&#39;)">Editar</span> <span class="copy-btn" style="padding:3px 8px;font-size:10px;background:#dc3545" onclick="if(confirm(&#39;Tem certeza?&#39;))showSave(&#39;Deletado com sucesso!&#39;)">Deletar</span></td></tr></tbody></table>
+            <div class="page-controls">
+                <div class="page-controls-left">
+                    <span class="btn-azul" onclick="navigateTo(&#39;novo-administrador&#39;,&#39;Novo Administrador&#39;)"><i class="fas fa-plus"></i> Adicionar</span>
+                </div>
+                <div class="page-controls-right">
+                    <select class="page-select"><option>10</option><option>25</option><option>50</option></select>
+                    <input class="page-search" placeholder="Pesquisar">
+                </div>
+            </div>
+            <table class="data-table">
+                <thead><tr><th>ID</th><th>Nome</th><th>Login</th><th>Senha</th><th>Status</th><th>Op&ccedil;&otilde;es</th></tr></thead>
+                <tbody>
+                    <tr><td>1</td><td>Admin Principal</td><td>admin</td><td>****</td><td><span class="badge-ativo">Ativo</span></td><td><span class="tbl-action edit" onclick="navigateTo(&#39;edit-admin-1&#39;,&#39;Editar Administrador&#39;)"><i class="fas fa-pen"></i></span> <span class="tbl-action delete" onclick="if(confirm(&#39;Tem certeza?&#39;))showSave(&#39;Deletado com sucesso!&#39;)"><i class="fas fa-trash"></i></span></td></tr>
+                </tbody>
+            </table>
+            <div class="pagination">
+                <div class="pagination-info">Mostrando de 1 at&eacute; 1 de 1 registros</div>
+                <div class="pagination-btns"><span class="disabled">Anterior</span><span class="active">1</span><span class="disabled">Pr&oacute;ximo</span></div>
+            </div>
         </div>
+        
         <div class="section-page" id="sec-revendedor" style="display:none">
             <div class="section-title"><i class="fas fa-store"></i> Revendedor</div>
-            
-    <div style="margin-bottom:12px">
-        <span class="copy-btn" style="padding:8px 16px;font-size:12px;background:#6967CE" onclick="navigateTo('criar-revendedor','Criar Revendedor')"><i class="fas fa-plus" style="margin-right:5px"></i>Novo Revendedor</span>
-    </div>
-    <table class="data-table"><thead><tr><th>ID</th><th>Nome</th><th>Email</th><th>Créditos</th><th>Status</th><th>Ações</th></tr></thead><tbody><tr><td>1</td><td>Pedro Revenda</td><td>pedro@email.com</td><td>150</td><td>Ativo</td><td><span class="copy-btn" style="padding:3px 8px;font-size:10px" onclick="navigateTo(&#39;edit-revenda-1&#39;,&#39;Editar Revendedor&#39;)">Editar</span> <span class="copy-btn" style="padding:3px 8px;font-size:10px;background:#dc3545" onclick="if(confirm(&#39;Tem certeza?&#39;))showSave(&#39;Deletado com sucesso!&#39;)">Deletar</span></td></tr><tr><td>2</td><td>Ana Revenda</td><td>ana@email.com</td><td>80</td><td>Ativo</td><td><span class="copy-btn" style="padding:3px 8px;font-size:10px" onclick="navigateTo(&#39;edit-revenda-2&#39;,&#39;Editar Revendedor&#39;)">Editar</span> <span class="copy-btn" style="padding:3px 8px;font-size:10px;background:#dc3545" onclick="if(confirm(&#39;Tem certeza?&#39;))showSave(&#39;Deletado com sucesso!&#39;)">Deletar</span></td></tr><tr><td>3</td><td>Lucas Revenda</td><td>lucas@email.com</td><td>0</td><td>Pendente</td><td><span class="copy-btn" style="padding:3px 8px;font-size:10px" onclick="navigateTo(&#39;edit-revenda-3&#39;,&#39;Editar Revendedor&#39;)">Editar</span> <span class="copy-btn" style="padding:3px 8px;font-size:10px;background:#dc3545" onclick="if(confirm(&#39;Tem certeza?&#39;))showSave(&#39;Deletado com sucesso!&#39;)">Deletar</span></td></tr></tbody></table>
+            <div class="page-controls">
+                <div class="page-controls-left">
+                    <span class="btn-azul" onclick="navigateTo(&#39;novo-revendedor&#39;,&#39;Novo Revendedor&#39;)"><i class="fas fa-plus"></i> Adicionar</span>
+                </div>
+                <div class="page-controls-right">
+                    <select class="page-select"><option>10</option><option>25</option></select>
+                    <input class="page-search" placeholder="Pesquisar">
+                </div>
+            </div>
+            <table class="data-table">
+                <thead><tr><th>ID</th><th>Nome</th><th>Login</th><th>Cota</th><th>Status</th><th>Op&ccedil;&otilde;es</th></tr></thead>
+                <tbody>
+                    <tr><td>1</td><td>Carlos Revenda</td><td>carlos</td><td>50</td><td><span class="badge-ativo">Ativo</span></td><td><span class="tbl-action edit" onclick="navigateTo(&#39;edit-revendedor-1&#39;,&#39;Editar Revendedor&#39;)"><i class="fas fa-pen"></i></span> <span class="tbl-action delete" onclick="if(confirm(&#39;Tem certeza?&#39;))showSave(&#39;Deletado!&#39;)"><i class="fas fa-trash"></i></span></td></tr>
+                    <tr><td>2</td><td>Ana Revenda</td><td>ana</td><td>30</td><td><span class="badge-ativo">Ativo</span></td><td><span class="tbl-action edit" onclick="navigateTo(&#39;edit-revendedor-2&#39;,&#39;Editar Revendedor&#39;)"><i class="fas fa-pen"></i></span> <span class="tbl-action delete" onclick="if(confirm(&#39;Tem certeza?&#39;))showSave(&#39;Deletado!&#39;)"><i class="fas fa-trash"></i></span></td></tr>
+                </tbody>
+            </table>
+            <div class="pagination">
+                <div class="pagination-info">Mostrando de 1 at&eacute; 2 de 2 registros</div>
+                <div class="pagination-btns"><span class="disabled">Anterior</span><span class="active">1</span><span class="disabled">Pr&oacute;ximo</span></div>
+            </div>
         </div>
+        
         <div class="section-page" id="sec-usuario" style="display:none">
-            <div class="section-title"><i class="fas fa-user"></i> Usuário</div>
-            
-    <div style="margin-bottom:12px">
-        <span class="copy-btn" style="padding:8px 16px;font-size:12px;background:#6967CE" onclick="navigateTo('criar-usuario','Criar Usuário')"><i class="fas fa-plus" style="margin-right:5px"></i>Novo Usuário</span>
-    </div>
-    <table class="data-table"><thead><tr><th>ID</th><th>Nome</th><th>Login</th><th>Servidor</th><th>Status</th><th>Ações</th></tr></thead><tbody><tr><td>1</td><td>Ricardo User</td><td>ricardo</td><td>CSP-1</td><td>Ativo</td><td><span class="copy-btn" style="padding:3px 8px;font-size:10px" onclick="navigateTo(&#39;edit-user-1&#39;,&#39;Editar Usuário&#39;)">Editar</span> <span class="copy-btn" style="padding:3px 8px;font-size:10px;background:#dc3545" onclick="if(confirm(&#39;Tem certeza?&#39;))showSave(&#39;Deletado com sucesso!&#39;)">Deletar</span></td></tr><tr><td>2</td><td>Fernanda User</td><td>fernanda</td><td>CSP-3</td><td>Ativo</td><td><span class="copy-btn" style="padding:3px 8px;font-size:10px" onclick="navigateTo(&#39;edit-user-2&#39;,&#39;Editar Usuário&#39;)">Editar</span> <span class="copy-btn" style="padding:3px 8px;font-size:10px;background:#dc3545" onclick="if(confirm(&#39;Tem certeza?&#39;))showSave(&#39;Deletado com sucesso!&#39;)">Deletar</span></td></tr><tr><td>3</td><td>Bruno User</td><td>bruno</td><td>CSP-5</td><td>Bloqueado</td><td><span class="copy-btn" style="padding:3px 8px;font-size:10px" onclick="navigateTo(&#39;edit-user-3&#39;,&#39;Editar Usuário&#39;)">Editar</span> <span class="copy-btn" style="padding:3px 8px;font-size:10px;background:#dc3545" onclick="if(confirm(&#39;Tem certeza?&#39;))showSave(&#39;Deletado com sucesso!&#39;)">Deletar</span></td></tr><tr><td>4</td><td>Juliana User</td><td>juliana</td><td>CSP-2</td><td>Expirado</td><td><span class="copy-btn" style="padding:3px 8px;font-size:10px" onclick="navigateTo(&#39;edit-user-4&#39;,&#39;Editar Usuário&#39;)">Editar</span> <span class="copy-btn" style="padding:3px 8px;font-size:10px;background:#dc3545" onclick="if(confirm(&#39;Tem certeza?&#39;))showSave(&#39;Deletado com sucesso!&#39;)">Deletar</span></td></tr><tr><td>5</td><td>Marcos User</td><td>marcos</td><td>CSP-1</td><td>Ativo</td><td><span class="copy-btn" style="padding:3px 8px;font-size:10px" onclick="navigateTo(&#39;edit-user-5&#39;,&#39;Editar Usuário&#39;)">Editar</span> <span class="copy-btn" style="padding:3px 8px;font-size:10px;background:#dc3545" onclick="if(confirm(&#39;Tem certeza?&#39;))showSave(&#39;Deletado com sucesso!&#39;)">Deletar</span></td></tr><tr><td>6</td><td>Patricia User</td><td>patricia</td><td>CSP-4</td><td>Ativo</td><td><span class="copy-btn" style="padding:3px 8px;font-size:10px" onclick="navigateTo(&#39;edit-user-6&#39;,&#39;Editar Usuário&#39;)">Editar</span> <span class="copy-btn" style="padding:3px 8px;font-size:10px;background:#dc3545" onclick="if(confirm(&#39;Tem certeza?&#39;))showSave(&#39;Deletado com sucesso!&#39;)">Deletar</span></td></tr></tbody></table>
+            <div class="section-title"><i class="fas fa-user"></i> Usu&aacute;rio</div>
+            <div class="page-controls">
+                <div class="page-controls-left">
+                    <span class="btn-azul" onclick="navigateTo(&#39;novo-usuario&#39;,&#39;Novo Usu&aacute;rio&#39;)"><i class="fas fa-plus"></i> Adicionar</span>
+                </div>
+                <div class="page-controls-right">
+                    <select class="page-select"><option>10</option><option>25</option></select>
+                    <input class="page-search" placeholder="Pesquisar">
+                </div>
+            </div>
+            <table class="data-table">
+                <thead><tr><th>ID</th><th>Nome</th><th>Login</th><th>Servidor</th><th>Status</th><th>Op&ccedil;&otilde;es</th></tr></thead>
+                <tbody>
+                    <tr><td>1</td><td>Ricardo User</td><td>ricardo</td><td>CSP-1</td><td><span class="badge-ativo">Ativo</span></td><td><span class="tbl-action edit" onclick="navigateTo(&#39;edit-user-1&#39;,&#39;Editar Usu&aacute;rio&#39;)"><i class="fas fa-pen"></i></span> <span class="tbl-action delete" onclick="if(confirm(&#39;Tem certeza?&#39;))showSave(&#39;Deletado!&#39;)"><i class="fas fa-trash"></i></span></td></tr>
+                    <tr><td>2</td><td>Fernanda User</td><td>fernanda</td><td>CSP-3</td><td><span class="badge-ativo">Ativo</span></td><td><span class="tbl-action edit" onclick="navigateTo(&#39;edit-user-2&#39;,&#39;Editar Usu&aacute;rio&#39;)"><i class="fas fa-pen"></i></span> <span class="tbl-action delete" onclick="if(confirm(&#39;Tem certeza?&#39;))showSave(&#39;Deletado!&#39;)"><i class="fas fa-trash"></i></span></td></tr>
+                    <tr><td>3</td><td>Bruno User</td><td>bruno</td><td>CSP-5</td><td><span class="badge-bloqueado">Bloqueado</span></td><td><span class="tbl-action lock" onclick="showSave(&#39;Bloqueado!&#39;)"><i class="fas fa-lock"></i></span> <span class="tbl-action edit" onclick="navigateTo(&#39;edit-user-3&#39;,&#39;Editar Usu&aacute;rio&#39;)"><i class="fas fa-pen"></i></span> <span class="tbl-action delete" onclick="if(confirm(&#39;Tem certeza?&#39;))showSave(&#39;Deletado!&#39;)"><i class="fas fa-trash"></i></span></td></tr>
+                    <tr><td>4</td><td>Juliana User</td><td>juliana</td><td>CSP-2</td><td><span class="badge-desativado">Expirado</span></td><td><span class="tbl-action edit" onclick="navigateTo(&#39;edit-user-4&#39;,&#39;Editar Usu&aacute;rio&#39;)"><i class="fas fa-pen"></i></span> <span class="tbl-action delete" onclick="if(confirm(&#39;Tem certeza?&#39;))showSave(&#39;Deletado!&#39;)"><i class="fas fa-trash"></i></span></td></tr>
+                </tbody>
+            </table>
+            <div class="pagination">
+                <div class="pagination-info">Mostrando de 1 at&eacute; 4 de 4 registros</div>
+                <div class="pagination-btns"><span class="disabled">Anterior</span><span class="active">1</span><span class="disabled">Pr&oacute;ximo</span></div>
+            </div>
         </div>
+        
         <div class="section-page" id="sec-teste" style="display:none">
             <div class="section-title"><i class="fas fa-vial"></i> Teste</div>
-            
-    <div class="info-grid">
-        <div class="info-card">
-            <h3><i class="fas fa-vial"></i> Gerar Teste</h3>
-            <div class="form-row"><label>Servidor</label><select class="form-input"><option>CSP-1</option><option>CSP-2</option><option>CSP-3</option><option>CSP-5</option></select></div>
-            <div class="form-row"><label>Duração</label><select class="form-input"><option>24 horas</option><option>48 horas</option><option>72 horas</option></select></div>
-            <button class="login-btn" style="max-width:200px;margin-top:8px" onclick="showSave('Teste gerado com sucesso!')">Gerar Teste</button>
+            <div class="page-controls">
+                <div class="page-controls-left">
+                    <span class="btn-azul" onclick="navigateTo(&#39;novo-teste&#39;,&#39;Gerar Teste&#39;)"><i class="fas fa-plus"></i> Adicionar</span>
+                </div>
+                <div class="page-controls-right">
+                    <select class="page-select"><option>10</option><option>25</option></select>
+                    <input class="page-search" placeholder="Pesquisar">
+                </div>
+            </div>
+            <table class="data-table">
+                <thead><tr><th>ID</th><th>Usu&aacute;rio</th><th>Servidor</th><th>In&iacute;cio</th><th>Expira</th><th>Status</th><th>Op&ccedil;&otilde;es</th></tr></thead>
+                <tbody>
+                    <tr><td>1</td><td>test_user1</td><td>CSP-1</td><td>17/08/2026</td><td>18/08/2026</td><td><span class="badge-ativo">Ativo</span></td><td><span class="tbl-action delete" onclick="showSave(&#39;Teste removido!&#39;)"><i class="fas fa-trash"></i></span></td></tr>
+                </tbody>
+            </table>
+            <div class="pagination">
+                <div class="pagination-info">Mostrando de 1 at&eacute; 1 de 1 registros</div>
+                <div class="pagination-btns"><span class="disabled">Anterior</span><span class="active">1</span><span class="disabled">Pr&oacute;ximo</span></div>
+            </div>
         </div>
-    </div>
-    <h3 style="margin-top:20px;font-size:14px;color:#404666">Testes Ativos</h3>
-    <table class="data-table"><thead><tr><th>ID</th><th>Usuário</th><th>Servidor</th><th>Início</th><th>Expira</th><th>Status</th><th>Ações</th></tr></thead><tbody><tr><td>1</td><td>test_user1</td><td>CSP-1</td><td>17/08/2026</td><td>18/08/2026</td><td>Ativo</td><td><span class="copy-btn" style="padding:3px 8px;font-size:10px;background:#dc3545" onclick="showSave('Teste removido!')">Remover</span></td></tr><tr><td>2</td><td>test_user2</td><td>CSP-3</td><td>17/08/2026</td><td>19/08/2026</td><td>Ativo</td><td><span class="copy-btn" style="padding:3px 8px;font-size:10px;background:#dc3545" onclick="showSave('Teste removido!')">Remover</span></td></tr></tbody></table>
-        </div>
+        
         <div class="section-page" id="sec-status-usuarios" style="display:none">
-            <div class="section-title"><i class="fas fa-signal"></i> Status dos Usuários</div>
-            
-    <div class="widgets-row">
-        <div class="widget-card"><div class="widget-icon green"><i class="fas fa-check-circle"></i></div><div class="widget-number">98</div><div class="widget-label">Online</div></div>
-        <div class="widget-card"><div class="widget-icon orange"><i class="fas fa-clock"></i></div><div class="widget-number">15</div><div class="widget-label">Expirando</div></div>
-        <div class="widget-card"><div class="widget-icon red"><i class="fas fa-times-circle"></i></div><div class="widget-number">7</div><div class="widget-label">Bloqueados</div></div>
-        <div class="widget-card"><div class="widget-icon purple"><i class="fas fa-users"></i></div><div class="widget-number">127</div><div class="widget-label">Total</div></div>
-    </div>
-    <table class="data-table"><thead><tr><th>Usuário</th><th>Servidor</th><th>IP</th><th>Conectado Desde</th><th>Status</th></tr></thead><tbody><tr><td>ricardo</td><td>CSP-1</td><td>192.168.1.100</td><td>17/08 08:00</td><td>Online</td></tr><tr><td>fernanda</td><td>CSP-3</td><td>192.168.1.101</td><td>17/08 07:30</td><td>Online</td></tr><tr><td>bruno</td><td>CSP-5</td><td>192.168.1.102</td><td>17/08 06:00</td><td>Offline</td></tr><tr><td>juliana</td><td>CSP-2</td><td>192.168.1.103</td><td>16/08 22:00</td><td>Expirado</td></tr></tbody></table>
+            <div class="section-title"><i class="fas fa-signal"></i> Status dos Usu&aacute;rios</div>
+            <div class="page-controls">
+                <div class="page-controls-left"></div>
+                <div class="page-controls-right">
+                    <select class="page-select"><option>10</option><option>25</option></select>
+                    <input class="page-search" placeholder="Pesquisar">
+                </div>
+            </div>
+            <table class="data-table">
+                <thead><tr><th>Usu&aacute;rio</th><th>Servidor</th><th>IP</th><th>Conectado Desde</th><th>Status</th></tr></thead>
+                <tbody>
+                    <tr><td>ricardo</td><td>CSP-1</td><td>192.168.1.100</td><td>17/08 08:00</td><td><span class="status-online">Online</span></td></tr>
+                    <tr><td>fernanda</td><td>CSP-3</td><td>192.168.1.101</td><td>17/08 07:30</td><td><span class="status-online">Online</span></td></tr>
+                    <tr><td>bruno</td><td>CSP-5</td><td>192.168.1.102</td><td>17/08 06:00</td><td><span class="status-offline">Offline</span></td></tr>
+                </tbody>
+            </table>
+            <div class="pagination">
+                <div class="pagination-info">Mostrando de 1 at&eacute; 3 de 3 registros</div>
+                <div class="pagination-btns"><span class="disabled">Anterior</span><span class="active">1</span><span class="disabled">Pr&oacute;ximo</span></div>
+            </div>
         </div>
+        
         <div class="section-page" id="sec-relatorio" style="display:none">
-            <div class="section-title"><i class="fas fa-chart-bar"></i> Relatório</div>
-            
-    <div class="info-grid">
-        <div class="info-card">
-            <h3><i class="fas fa-filter"></i> Filtros</h3>
-            <div class="form-row"><label>Período</label><select class="form-input"><option>Hoje</option><option>Últimos 7 dias</option><option>Últimos 30 dias</option><option>Este mês</option></select></div>
-            <div class="form-row"><label>Tipo</label><select class="form-input"><option>Todos</option><option>Vendas</option><option>Cadastros</option><option>Testes</option></select></div>
-            <button class="login-btn" style="max-width:200px;margin-top:8px" onclick="showSave('Relatório gerado!')">Gerar Relatório</button>
+            <div class="section-title"><i class="fas fa-chart-bar"></i> Relat&oacute;rio</div>
+            <div class="page-controls">
+                <div class="page-controls-left"></div>
+                <div class="page-controls-right">
+                    <select class="page-select"><option>10</option><option>25</option></select>
+                    <input class="page-search" placeholder="Pesquisar">
+                </div>
+            </div>
+            <table class="data-table">
+                <thead><tr><th>Data</th><th>Tipo</th><th>Descri&ccedil;&atilde;o</th><th>Valor</th></tr></thead>
+                <tbody>
+                    <tr><td>17/08/2026</td><td>Venda</td><td>Novo usu&aacute;rio CSP-1</td><td>R$ 45,00</td></tr>
+                    <tr><td>16/08/2026</td><td>Venda</td><td>Renova&ccedil;&atilde;o CSP-3</td><td>R$ 35,00</td></tr>
+                    <tr><td>15/08/2026</td><td>Cadastro</td><td>Novo revendedor</td><td>R$ 0,00</td></tr>
+                </tbody>
+            </table>
+            <div class="pagination">
+                <div class="pagination-info">Mostrando de 1 at&eacute; 3 de 3 registros</div>
+                <div class="pagination-btns"><span class="disabled">Anterior</span><span class="active">1</span><span class="disabled">Pr&oacute;ximo</span></div>
+            </div>
         </div>
-    </div>
-    <h3 style="margin-top:20px;font-size:14px;color:#404666">Últimos Relatórios</h3>
-    <table class="data-table"><thead><tr><th>Data</th><th>Tipo</th><th>Descrição</th><th>Valor</th></tr></thead><tbody><tr><td>17/08/2026</td><td>Venda</td><td>Novo usuário CSP-1</td><td>R$ 45,00</td></tr><tr><td>16/08/2026</td><td>Venda</td><td>Renovação CSP-3</td><td>R$ 35,00</td></tr><tr><td>15/08/2026</td><td>Cadastro</td><td>Novo revendedor</td><td>R$ 0,00</td></tr></tbody></table>
-        </div>
+        
         <div class="section-page" id="sec-minhas-vendas" style="display:none">
             <div class="section-title"><i class="fas fa-cash-register"></i> Minhas Vendas</div>
-            
-    <div class="widgets-row">
-        <div class="widget-card"><div class="widget-icon green"><i class="fas fa-dollar-sign"></i></div><div class="widget-number">R$ 4.850</div><div class="widget-label">Total Vendas</div></div>
-        <div class="widget-card"><div class="widget-icon purple"><i class="fas fa-shopping-cart"></i></div><div class="widget-number">62</div><div class="widget-label">Vendas Mês</div></div>
-        <div class="widget-card"><div class="widget-icon orange"><i class="fas fa-clock"></i></div><div class="widget-number">5</div><div class="widget-label">Pendentes</div></div>
-    </div>
-    <table class="data-table"><thead><tr><th>ID</th><th>Comprador</th><th>Plano</th><th>Valor</th><th>Data</th><th>Status</th></tr></thead><tbody><tr><td>V001</td><td>Ricardo</td><td>CSP 30 dias</td><td>R$ 45,00</td><td>17/08/2026</td><td>Pago</td></tr><tr><td>V002</td><td>Fernanda</td><td>CSP 30 dias</td><td>R$ 35,00</td><td>16/08/2026</td><td>Pago</td></tr><tr><td>V003</td><td>Bruno</td><td>CSP 90 dias</td><td>R$ 90,00</td><td>15/08/2026</td><td>Pendente</td></tr><tr><td>V004</td><td>Juliana</td><td>CSP 30 dias</td><td>R$ 45,00</td><td>14/08/2026</td><td>Pago</td></tr></tbody></table>
+            <div class="page-controls">
+                <div class="page-controls-left"></div>
+                <div class="page-controls-right">
+                    <select class="page-select"><option>10</option><option>25</option></select>
+                    <input class="page-search" placeholder="Pesquisar">
+                </div>
+            </div>
+            <table class="data-table">
+                <thead><tr><th>ID</th><th>Comprador</th><th>Plano</th><th>Valor</th><th>Data</th><th>Status</th></tr></thead>
+                <tbody>
+                    <tr><td>V001</td><td>Ricardo</td><td>CSP 30 dias</td><td>R$ 45,00</td><td>17/08/2026</td><td><span class="badge-ativo">Pago</span></td></tr>
+                    <tr><td>V002</td><td>Fernanda</td><td>CSP 30 dias</td><td>R$ 35,00</td><td>16/08/2026</td><td><span class="badge-ativo">Pago</span></td></tr>
+                    <tr><td>V003</td><td>Bruno</td><td>CSP 90 dias</td><td>R$ 90,00</td><td>15/08/2026</td><td><span class="badge-desativado">Pendente</span></td></tr>
+                </tbody>
+            </table>
+            <div class="pagination">
+                <div class="pagination-info">Mostrando de 1 at&eacute; 3 de 3 registros</div>
+                <div class="pagination-btns"><span class="disabled">Anterior</span><span class="active">1</span><span class="disabled">Pr&oacute;ximo</span></div>
+            </div>
         </div>
+        
         <div class="section-page" id="sec-formas-pagamento" style="display:none">
             <div class="section-title"><i class="fas fa-credit-card"></i> Formas de Pagamento</div>
-            
-    <div class="info-grid">
-        <div class="info-card" style="cursor:pointer" onclick="navigateTo('pagseguro','PagSeguro')">
-            <h3><i class="fas fa-credit-card" style="color:#6967CE"></i> PagSeguro</h3>
-            <p>Status: <span style="color:#28a745;font-weight:600">Ativo</span></p>
-            <p>Email: admin@email.com</p>
-            <span class="copy-btn" style="padding:6px 14px;font-size:11px;background:#6967CE;margin-top:8px">Configurar</span>
+            <div class="page-controls">
+                <div class="page-controls-left">
+                    <span class="btn-azul" onclick="navigateTo(&#39;pagseguro&#39;,&#39;PagSeguro&#39;)"><i class="fas fa-plus"></i> Configurar</span>
+                </div>
+                <div class="page-controls-right">
+                    <select class="page-select"><option>10</option></select>
+                    <input class="page-search" placeholder="Pesquisar">
+                </div>
+            </div>
+            <table class="data-table">
+                <thead><tr><th>Forma</th><th>Status</th><th>Op&ccedil;&otilde;es</th></tr></thead>
+                <tbody>
+                    <tr><td>PagSeguro</td><td><span class="badge-ativo">Ativo</span></td><td><span class="tbl-action edit" onclick="navigateTo(&#39;pagseguro&#39;,&#39;PagSeguro&#39;)"><i class="fas fa-pen"></i></span></td></tr>
+                    <tr><td>PayPal</td><td><span class="badge-desativado">Desativado</span></td><td><span class="tbl-action edit" onclick="navigateTo(&#39;paypal&#39;,&#39;PayPal&#39;)"><i class="fas fa-pen"></i></span></td></tr>
+                    <tr><td>MercadoPago</td><td><span class="badge-ativo">Ativo</span></td><td><span class="tbl-action edit" onclick="navigateTo(&#39;mercadopago&#39;,&#39;MercadoPago&#39;)"><i class="fas fa-pen"></i></span></td></tr>
+                </tbody>
+            </table>
+            <div class="pagination">
+                <div class="pagination-info">Mostrando de 1 at&eacute; 3 de 3 registros</div>
+                <div class="pagination-btns"><span class="disabled">Anterior</span><span class="active">1</span><span class="disabled">Pr&oacute;ximo</span></div>
+            </div>
         </div>
-        <div class="info-card" style="cursor:pointer" onclick="navigateTo('paypal','PayPal')">
-            <h3><i class="fab fa-paypal" style="color:#003087"></i> PayPal</h3>
-            <p>Status: <span style="color:#28a745;font-weight:600">Ativo</span></p>
-            <p>Email: admin@paypal.com</p>
-            <span class="copy-btn" style="padding:6px 14px;font-size:11px;background:#6967CE;margin-top:8px">Configurar</span>
-        </div>
-        <div class="info-card" style="cursor:pointer" onclick="navigateTo('mercadopago','MercadoPago')">
-            <h3><i class="fas fa-handshake" style="color:#009ee3"></i> MercadoPago</h3>
-            <p>Status: <span style="color:#dc3545;font-weight:600">Inativo</span></p>
-            <p>Não configurado</p>
-            <span class="copy-btn" style="padding:6px 14px;font-size:11px;background:#6967CE;margin-top:8px">Configurar</span>
-        </div>
-    </div>
-        </div>
+        
         <div class="section-page" id="sec-pagseguro" style="display:none">
             <div class="section-title"><i class="fas fa-credit-card"></i> PagSeguro</div>
-            
-    <div class="form-row"><label>Email PagSeguro</label><input class="form-input" value="admin@email.com"></div>
-    <div class="form-row"><label>Token</label><input class="form-input" value="****1234"></div>
-    <div class="form-row"><label>Ambiente</label><select class="form-input"><option selected>Produção</option><option>Sandbox</option></select></div>
-    <button class="login-btn" style="max-width:300px;margin-top:10px" onclick="salvarEdicao(&#39;formas-pagamento&#39;,&#39;Formas de Pagamento&#39;,&#39;PagSeguro salvo com sucesso!&#39;)">Salvar</button>
+            <div class="form-row"><label>E-mail PagSeguro</label><input class="form-input" type="text" placeholder="email@pagseguro.com"></div>
+            <div class="form-row"><label>Token</label><input class="form-input" type="text" placeholder="Token de acesso"></div>
+            <div class="form-row"><label>Status</label><select class="form-input"><option>Ativo</option><option>Desativado</option></select></div>
+            <div style="margin-top:14px;text-align:right">
+                <span class="btn-verde" onclick="salvarEdicao(&#39;formas-pagamento&#39;,&#39;PagSeguro salvo!&#39;)">Salvar</span>
+            </div>
         </div>
+        
         <div class="section-page" id="sec-paypal" style="display:none">
             <div class="section-title"><i class="fas fa-credit-card"></i> PayPal</div>
-            
-    <div class="form-row"><label>Email PayPal</label><input class="form-input" value="admin@paypal.com"></div>
-    <div class="form-row"><label>Client ID</label><input class="form-input" value="****5678"></div>
-    <div class="form-row"><label>Secret</label><input class="form-input" value="****9012"></div>
-    <div class="form-row"><label>Ambiente</label><select class="form-input"><option selected>Live</option><option>Sandbox</option></select></div>
-    <button class="login-btn" style="max-width:300px;margin-top:10px" onclick="salvarEdicao(&#39;formas-pagamento&#39;,&#39;Formas de Pagamento&#39;,&#39;PayPal salvo com sucesso!&#39;)">Salvar</button>
+            <div class="form-row"><label>E-mail PayPal</label><input class="form-input" type="text" placeholder="email@paypal.com"></div>
+            <div class="form-row"><label>Client ID</label><input class="form-input" type="text" placeholder="Client ID"></div>
+            <div class="form-row"><label>Secret</label><input class="form-input" type="text" placeholder="Secret"></div>
+            <div class="form-row"><label>Status</label><select class="form-input"><option>Ativo</option><option selected>Desativado</option></select></div>
+            <div style="margin-top:14px;text-align:right">
+                <span class="btn-verde" onclick="salvarEdicao(&#39;formas-pagamento&#39;,&#39;PayPal salvo!&#39;)">Salvar</span>
+            </div>
         </div>
+        
         <div class="section-page" id="sec-mercadopago" style="display:none">
             <div class="section-title"><i class="fas fa-credit-card"></i> MercadoPago</div>
-            
-    <div class="form-row"><label>Public Key</label><input class="form-input" value=""></div>
-    <div class="form-row"><label>Access Token</label><input class="form-input" value=""></div>
-    <div class="form-row"><label>Ambiente</label><select class="form-input"><option>Produção</option><option>Sandbox</option></select></div>
-    <button class="login-btn" style="max-width:300px;margin-top:10px" onclick="salvarEdicao(&#39;formas-pagamento&#39;,&#39;Formas de Pagamento&#39;,&#39;MercadoPago salvo com sucesso!&#39;)">Salvar</button>
+            <div class="form-row"><label>Access Token</label><input class="form-input" type="text" placeholder="Access Token"></div>
+            <div class="form-row"><label>Public Key</label><input class="form-input" type="text" placeholder="Public Key"></div>
+            <div class="form-row"><label>Status</label><select class="form-input"><option>Ativo</option><option>Desativado</option></select></div>
+            <div style="margin-top:14px;text-align:right">
+                <span class="btn-verde" onclick="salvarEdicao(&#39;formas-pagamento&#39;,&#39;MercadoPago salvo!&#39;)">Salvar</span>
+            </div>
         </div>
+        
         <div class="section-page" id="sec-atendimento" style="display:none">
             <div class="section-title"><i class="fas fa-headset"></i> Atendimento</div>
-            
-    <div class="info-grid">
-        <div class="info-card" style="cursor:pointer" onclick="navigateTo('whatsapp','WhatsApp')">
-            <h3><i class="fab fa-whatsapp" style="color:#25d366"></i> WhatsApp</h3>
-            <p>Configurar atendimento via WhatsApp</p>
-            <span class="copy-btn" style="padding:6px 14px;font-size:11px;background:#25d366;margin-top:8px">Configurar</span>
+            <div class="page-controls">
+                <div class="page-controls-left">
+                    <span class="btn-azul" onclick="navigateTo(&#39;whatsapp&#39;,&#39;WhatsApp&#39;)"><i class="fab fa-whatsapp"></i> WhatsApp</span>
+                    <span class="btn-azul" onclick="navigateTo(&#39;telegram&#39;,&#39;Telegram&#39;)"><i class="fab fa-telegram"></i> Telegram</span>
+                </div>
+                <div class="page-controls-right">
+                    <select class="page-select"><option>10</option></select>
+                    <input class="page-search" placeholder="Pesquisar">
+                </div>
+            </div>
+            <table class="data-table">
+                <thead><tr><th>Canal</th><th>Contato</th><th>Status</th><th>Op&ccedil;&otilde;es</th></tr></thead>
+                <tbody>
+                    <tr><td><i class="fab fa-whatsapp" style="color:#25D366"></i> WhatsApp</td><td>27997314781</td><td><span class="badge-ativo">Ativo</span></td><td><span class="tbl-action edit" onclick="navigateTo(&#39;whatsapp&#39;,&#39;WhatsApp&#39;)"><i class="fas fa-pen"></i></span></td></tr>
+                    <tr><td><i class="fab fa-telegram" style="color:#0088cc"></i> Telegram</td><td>https://t.me/jsnetiptvcs</td><td><span class="badge-ativo">Ativo</span></td><td><span class="tbl-action edit" onclick="navigateTo(&#39;telegram&#39;,&#39;Telegram&#39;)"><i class="fas fa-pen"></i></span></td></tr>
+                </tbody>
+            </table>
+            <div class="pagination">
+                <div class="pagination-info">Mostrando de 1 at&eacute; 2 de 2 registros</div>
+                <div class="pagination-btns"><span class="disabled">Anterior</span><span class="active">1</span><span class="disabled">Pr&oacute;ximo</span></div>
+            </div>
         </div>
-        <div class="info-card" style="cursor:pointer" onclick="navigateTo('telegram','Telegram')">
-            <h3><i class="fab fa-telegram" style="color:#0088cc"></i> Telegram</h3>
-            <p>Configurar atendimento via Telegram</p>
-            <span class="copy-btn" style="padding:6px 14px;font-size:11px;background:#0088cc;margin-top:8px">Configurar</span>
-        </div>
-    </div>
-        </div>
+        
         <div class="section-page" id="sec-whatsapp" style="display:none">
-            <div class="section-title"><i class="fas fa-headset"></i> WhatsApp</div>
-            
-    <div class="form-row"><label>Número WhatsApp</label><input class="form-input" value="5511999999999"></div>
-    <div class="form-row"><label>Mensagem Automática</label><textarea class="form-input" rows="4">Olá! Como posso ajudar?</textarea></div>
-    <button class="login-btn" style="max-width:300px;margin-top:10px" onclick="salvarEdicao(&#39;atendimento&#39;,&#39;Atendimento&#39;,&#39;WhatsApp salvo com sucesso!&#39;)">Salvar</button>
+            <div class="section-title"><i class="fab fa-whatsapp"></i> WhatsApp</div>
+            <div class="page-controls">
+                <div class="page-controls-left">
+                    <span class="btn-azul" onclick="navigateTo(&#39;config-whatsapp&#39;,&#39;Configurar WhatsApp&#39;)"><i class="fas fa-cog"></i> Configurar</span>
+                </div>
+                <div class="page-controls-right">
+                    <select class="page-select"><option>10</option></select>
+                    <input class="page-search" placeholder="Pesquisar">
+                </div>
+            </div>
+            <table class="data-table">
+                <thead><tr><th>Status</th><th>Conta</th><th>Op&ccedil;&otilde;es</th></tr></thead>
+                <tbody>
+                    <tr><td><span class="badge-ativo">Ativado</span></td><td>27997314781</td><td><span class="tbl-action delete" onclick="if(confirm(&#39;Tem certeza?&#39;))showSave(&#39;WhatsApp removido!&#39;)"><i class="fas fa-trash"></i></span></td></tr>
+                </tbody>
+            </table>
+            <div class="pagination">
+                <div class="pagination-info">Mostrando de 1 at&eacute; 1 de 1 registros</div>
+                <div class="pagination-btns"><span class="disabled">Anterior</span><span class="active">1</span><span class="disabled">Pr&oacute;ximo</span></div>
+            </div>
         </div>
+        
         <div class="section-page" id="sec-telegram" style="display:none">
-            <div class="section-title"><i class="fas fa-headset"></i> Telegram</div>
-            
-    <div class="form-row"><label>Bot Token</label><input class="form-input" value="123456:ABC-DEF"></div>
-    <div class="form-row"><label>Chat ID</label><input class="form-input" value="-1001234567890"></div>
-    <button class="login-btn" style="max-width:300px;margin-top:10px" onclick="salvarEdicao(&#39;atendimento&#39;,&#39;Atendimento&#39;,&#39;Telegram salvo com sucesso!&#39;)">Salvar</button>
+            <div class="section-title"><i class="fab fa-telegram"></i> Telegram</div>
+            <div class="page-controls">
+                <div class="page-controls-left">
+                    <span class="btn-azul" onclick="navigateTo(&#39;config-telegram&#39;,&#39;Configurar Telegram&#39;)"><i class="fas fa-cog"></i> Configurar</span>
+                </div>
+                <div class="page-controls-right">
+                    <select class="page-select"><option>10</option></select>
+                    <input class="page-search" placeholder="Pesquisar">
+                </div>
+            </div>
+            <table class="data-table">
+                <thead><tr><th>Status</th><th>Conta</th><th>Op&ccedil;&otilde;es</th></tr></thead>
+                <tbody>
+                    <tr><td><span class="badge-ativo">Ativado</span></td><td>https://t.me/jsnetiptvcs</td><td><span class="tbl-action delete" onclick="if(confirm(&#39;Tem certeza?&#39;))showSave(&#39;Telegram removido!&#39;)"><i class="fas fa-trash"></i></span></td></tr>
+                </tbody>
+            </table>
+            <div class="pagination">
+                <div class="pagination-info">Mostrando de 1 at&eacute; 1 de 1 registros</div>
+                <div class="pagination-btns"><span class="disabled">Anterior</span><span class="active">1</span><span class="disabled">Pr&oacute;ximo</span></div>
+            </div>
         </div>
+        
         <div class="section-page" id="sec-sms" style="display:none">
-            <div class="section-title"><i class="fas fa-sms"></i> SMS</div>
-            
-    <div class="form-row"><label>Gateway SMS</label><select class="form-input"><option>Twilio</option><option>NetSMS</option><option>Comtele</option></select></div>
-    <div class="form-row"><label>API Key</label><input class="form-input" value="****sms123"></div>
-    <div class="form-row"><label>Número Remetente</label><input class="form-input" value="+5511999999999"></div>
-    <h3 style="margin-top:16px;font-size:13px;color:#404666">Enviar SMS</h3>
-    <div class="form-row"><label>Destinatário</label><input class="form-input" placeholder="Número com DDI"></div>
-    <div class="form-row"><label>Mensagem</label><textarea class="form-input" rows="3" placeholder="Digite a mensagem..."></textarea></div>
-    <button class="login-btn" style="max-width:200px;margin-top:8px" onclick="showSave('SMS enviado com sucesso!')">Enviar SMS</button>
-    <div style="margin-top:20px">
-        <h3 style="font-size:13px;color:#404666">SMS Enviados</h3>
-        <table class="data-table"><thead><tr><th>Data</th><th>Destinatário</th><th>Mensagem</th><th>Status</th></tr></thead><tbody><tr><td>17/08/2026</td><td>+5511987654321</td><td>Sua linha está ativa</td><td>Enviado</td></tr><tr><td>16/08/2026</td><td>+5511912345678</td><td>Linha expirando em 2 dias</td><td>Enviado</td></tr></tbody></table>
-    </div>
+            <div class="section-title"><i class="fas fa-sms"></i> SMS - Modelo</div>
+            <div class="page-controls">
+                <div class="page-controls-left">
+                    <span class="btn-azul" onclick="navigateTo(&#39;novo-sms&#39;,&#39;Novo Modelo SMS&#39;)"><i class="fas fa-plus"></i> Adicionar</span>
+                </div>
+                <div class="page-controls-right">
+                    <select class="page-select"><option>10</option></select>
+                    <input class="page-search" placeholder="Pesquisar">
+                </div>
+            </div>
+            <table class="data-table">
+                <thead><tr><th>Tipo</th><th>Assunto</th><th>Mensagem</th><th>Op&ccedil;&otilde;es</th></tr></thead>
+                <tbody>
+                    <tr><td colspan="4" class="no-records">Nenhum registro encontrado</td></tr>
+                </tbody>
+            </table>
+            <div class="pagination">
+                <div class="pagination-info">Mostrando 0 at&eacute; 0 de 0 registros</div>
+                <div class="pagination-btns"><span class="disabled">Anterior</span><span class="active">1</span><span class="disabled">Pr&oacute;ximo</span></div>
+            </div>
         </div>
+        
         <div class="section-page" id="sec-email" style="display:none">
-            <div class="section-title"><i class="fas fa-envelope"></i> E-mail</div>
-            
-    <div class="form-row"><label>Servidor SMTP</label><input class="form-input" value="smtp.gmail.com"></div>
-    <div class="form-row"><label>Porta</label><input class="form-input" value="587"></div>
-    <div class="form-row"><label>Email</label><input class="form-input" value="admin@email.com"></div>
-    <div class="form-row"><label>Senha</label><input class="form-input" type="password" value="****1234"></div>
-    <button class="login-btn" style="max-width:300px;margin-top:10px" onclick="salvarEdicao(&#39;email&#39;,&#39;Email&#39;,&#39;Email salvo com sucesso!&#39;)">Salvar</button>
-    <div style="margin-top:20px">
-        <h3 style="font-size:13px;color:#404666">Enviar Email</h3>
-        <div class="form-row"><label>Para</label><input class="form-input" placeholder="email@exemplo.com"></div>
-        <div class="form-row"><label>Assunto</label><input class="form-input" placeholder="Assunto do email"></div>
-        <div class="form-row"><label>Mensagem</label><textarea class="form-input" rows="4" placeholder="Corpo do email..."></textarea></div>
-        <button class="login-btn" style="max-width:200px;margin-top:8px" onclick="showSave('Email enviado com sucesso!')">Enviar Email</button>
-    </div>
+            <div class="section-title"><i class="fas fa-envelope"></i> E-mail - Modelo</div>
+            <div class="page-controls">
+                <div class="page-controls-left">
+                    <span class="btn-azul" onclick="navigateTo(&#39;novo-email&#39;,&#39;Novo Modelo E-mail&#39;)"><i class="fas fa-plus"></i> Prefer&ecirc;ncias</span>
+                </div>
+                <div class="page-controls-right">
+                    <select class="page-select"><option>10</option></select>
+                    <input class="page-search" placeholder="Pesquisar">
+                </div>
+            </div>
+            <table class="data-table">
+                <thead><tr><th>Tipo</th><th>Assunto</th><th>Mensagem</th><th>Op&ccedil;&otilde;es</th></tr></thead>
+                <tbody>
+                    <tr><td><span class="badge-ativo">A</span> Prefer&ecirc;ncia</td><td>sfdgg</td><td style="max-width:300px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">Bem-vindo ao painel [MEUNOME] Login: [LGCLIENTE] Senha: [SNCLIENTE]</td><td><span class="tbl-action edit" onclick="navigateTo(&#39;edit-email-1&#39;,&#39;Editar E-mail&#39;)"><i class="fas fa-pen"></i></span> <span class="tbl-action delete" onclick="if(confirm(&#39;Tem certeza?&#39;))showSave(&#39;Modelo removido!&#39;)"><i class="fas fa-trash"></i></span></td></tr>
+                    <tr><td><span class="badge-ativo">A</span> Prefer&ecirc;ncia</td><td>Alerta de Vencimento</td><td style="max-width:300px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">Ol&aacute; [MEUNOME], sua conta vence em [DIASVENC]. Login: [LGCLIENTE]</td><td><span class="tbl-action edit" onclick="navigateTo(&#39;edit-email-2&#39;,&#39;Editar E-mail&#39;)"><i class="fas fa-pen"></i></span> <span class="tbl-action delete" onclick="if(confirm(&#39;Tem certeza?&#39;))showSave(&#39;Modelo removido!&#39;)"><i class="fas fa-trash"></i></span></td></tr>
+                </tbody>
+            </table>
+            <div class="pagination">
+                <div class="pagination-info">Mostrando de 1 at&eacute; 2 de 2 registros</div>
+                <div class="pagination-btns"><span class="disabled">Anterior</span><span class="active">1</span><span class="disabled">Pr&oacute;ximo</span></div>
+            </div>
         </div>
+        
         <div class="section-page" id="sec-redes-sociais" style="display:none">
             <div class="section-title"><i class="fas fa-share-alt"></i> Redes Sociais</div>
-            
-    <div class="info-grid">
-        <div class="info-card">
-            <h3><i class="fab fa-facebook" style="color:#1877f2"></i> Facebook</h3>
-            <div class="form-row"><label>URL</label><input class="form-input" value="https://facebook.com/meupainel"></div>
-            <button class="login-btn" style="max-width:300px;margin-top:10px" onclick="salvarEdicao(&#39;redes-sociais&#39;,&#39;Redes Sociais&#39;,&#39;Facebook salvo!&#39;)">Salvar</button>
+            <div class="page-controls">
+                <div class="page-controls-left">
+                    <span class="btn-azul" onclick="navigateTo(&#39;facebook&#39;,&#39;Facebook&#39;)"><i class="fab fa-facebook"></i> Facebook</span>
+                    <span class="btn-azul" onclick="navigateTo(&#39;instagram&#39;,&#39;Instagram&#39;)"><i class="fab fa-instagram"></i> Instagram</span>
+                    <span class="btn-azul" onclick="navigateTo(&#39;youtube&#39;,&#39;YouTube&#39;)"><i class="fab fa-youtube"></i> YouTube</span>
+                </div>
+                <div class="page-controls-right">
+                    <select class="page-select"><option>10</option></select>
+                    <input class="page-search" placeholder="Pesquisar">
+                </div>
+            </div>
+            <table class="data-table">
+                <thead><tr><th>Rede Social</th><th>Conta</th><th>Status</th><th>Op&ccedil;&otilde;es</th></tr></thead>
+                <tbody>
+                    <tr><td><i class="fab fa-facebook" style="color:#1877F2"></i> Facebook</td><td>-</td><td><span class="badge-desativado">Desativado</span></td><td><span class="tbl-action edit" onclick="navigateTo(&#39;facebook&#39;,&#39;Facebook&#39;)"><i class="fas fa-pen"></i></span></td></tr>
+                    <tr><td><i class="fab fa-instagram" style="color:#E4405F"></i> Instagram</td><td>-</td><td><span class="badge-desativado">Desativado</span></td><td><span class="tbl-action edit" onclick="navigateTo(&#39;instagram&#39;,&#39;Instagram&#39;)"><i class="fas fa-pen"></i></span></td></tr>
+                    <tr><td><i class="fab fa-youtube" style="color:#FF0000"></i> YouTube</td><td>-</td><td><span class="badge-desativado">Desativado</span></td><td><span class="tbl-action edit" onclick="navigateTo(&#39;youtube&#39;,&#39;YouTube&#39;)"><i class="fas fa-pen"></i></span></td></tr>
+                </tbody>
+            </table>
+            <div class="pagination">
+                <div class="pagination-info">Mostrando de 1 at&eacute; 3 de 3 registros</div>
+                <div class="pagination-btns"><span class="disabled">Anterior</span><span class="active">1</span><span class="disabled">Pr&oacute;ximo</span></div>
+            </div>
         </div>
-        <div class="info-card">
-            <h3><i class="fab fa-instagram" style="color:#e4405f"></i> Instagram</h3>
-            <div class="form-row"><label>URL</label><input class="form-input" value="https://instagram.com/meupainel"></div>
-            <button class="login-btn" style="max-width:300px;margin-top:10px" onclick="salvarEdicao(&#39;redes-sociais&#39;,&#39;Redes Sociais&#39;,&#39;Instagram salvo!&#39;)">Salvar</button>
-        </div>
-        <div class="info-card">
-            <h3><i class="fab fa-youtube" style="color:#ff0000"></i> YouTube</h3>
-            <div class="form-row"><label>URL</label><input class="form-input" value="https://youtube.com/@meupainel"></div>
-            <button class="login-btn" style="max-width:300px;margin-top:10px" onclick="salvarEdicao(&#39;redes-sociais&#39;,&#39;Redes Sociais&#39;,&#39;YouTube salvo!&#39;)">Salvar</button>
-        </div>
-    </div>
-        </div>
+        
         <div class="section-page" id="sec-configurar-csp" style="display:none">
-            <div class="section-title"><i class="fas fa-cogs"></i> Configurar CSP</div>
-            
-    <div class="form-row"><label>Nome do Servidor CSP</label><input class="form-input" value="HomerFull CSP"></div>
-    <div class="form-row"><label>Porta CSP</label><input class="form-input" value="16000"></div>
-    <div class="form-row"><label>IP do Servidor</label><input class="form-input" value="192.168.1.1"></div>
-    <div class="form-row"><label>Max Usuários</label><input class="form-input" value="500"></div>
-    <div class="form-row"><label>Max Conexões</label><input class="form-input" value="1000"></div>
-    <div class="form-row"><label>DesKey</label><input class="form-input" value="0102030405060708091011121314"></div>
-    <button class="login-btn" style="max-width:300px;margin-top:10px" onclick="salvarEdicao(&#39;configurar-csp&#39;,&#39;Configurar CSP&#39;,&#39;CSP salvo com sucesso!&#39;)">Salvar</button>
+            <div class="section-title"><i class="fas fa-cogs"></i> Servidor CSP</div>
+            <div class="page-controls">
+                <div class="page-controls-left">
+                    <span class="btn-azul" onclick="navigateTo(&#39;novo-csp&#39;,&#39;Novo Servidor CSP&#39;)"><i class="fas fa-plus"></i> Adicionar</span>
+                    <span class="btn-vermelho" onclick="navigateTo(&#39;configurar-csp-settings&#39;,&#39;Configura&ccedil;&otilde;es CSP&#39;)"><i class="fas fa-cog"></i> Configura&ccedil;&otilde;es</span>
+                </div>
+                <div class="page-controls-right">
+                    <select class="page-select"><option>10</option></select>
+                    <input class="page-search" placeholder="Pesquisar">
+                </div>
+            </div>
+            <table class="data-table">
+                <thead><tr><th>Nome</th><th>IP / URL</th><th>Porta</th><th>Usu&aacute;rio</th><th>Senha</th><th>Protocolo</th><th>Op&ccedil;&otilde;es</th></tr></thead>
+                <tbody>
+                    <tr><td>DEDICADO <span class="badge-ativo">A</span></td><td>w3br.ddns.net</td><td>52945</td><td>58971</td><td>58971</td><td>http</td><td><span class="tbl-action info" onclick="showSave(&#39;Informa&ccedil;&otilde;es do servidor!&#39;)"><i class="fas fa-info-circle"></i></span> <span class="tbl-action lock" onclick="showSave(&#39;Servidor bloqueado!&#39;)"><i class="fas fa-lock"></i></span> <span class="tbl-action edit" onclick="navigateTo(&#39;edit-csp-1&#39;,&#39;Editar Servidor CSP&#39;)"><i class="fas fa-pen"></i></span> <span class="tbl-action delete" onclick="if(confirm(&#39;Tem certeza?&#39;))showSave(&#39;Servidor removido!&#39;)"><i class="fas fa-trash"></i></span></td></tr>
+                </tbody>
+            </table>
+            <div class="pagination">
+                <div class="pagination-info">Mostrando de 1 at&eacute; 1 de 1 registros</div>
+                <div class="pagination-btns"><span class="disabled">Anterior</span><span class="active">1</span><span class="disabled">Pr&oacute;ximo</span></div>
+            </div>
         </div>
+        
         <div class="section-page" id="sec-imagem-perfil" style="display:none">
-            <div class="section-title"><i class="fas fa-user-circle"></i> Imagem de Perfil</div>
-            
-    <div style="text-align:center;margin-bottom:16px">
-        <div style="width:120px;height:120px;border-radius:50%;background:linear-gradient(135deg,#6967CE,#2BD4DB);margin:0 auto 10px;display:flex;align-items:center;justify-content:center;font-size:48px;color:#fff">
-            <i class="fas fa-user"></i>
+            <div class="section-title"><i class="fas fa-user-circle"></i> Perfil</div>
+            <div class="page-controls">
+                <div class="page-controls-left">
+                    <span class="btn-azul" onclick="navigateTo(&#39;novo-perfil&#39;,&#39;Novo Perfil&#39;)"><i class="fas fa-plus"></i> Adicionar</span>
+                </div>
+                <div class="page-controls-right">
+                    <select class="page-select"><option>10</option></select>
+                    <input class="page-search" placeholder="Pesquisar">
+                </div>
+            </div>
+            <table class="data-table">
+                <thead><tr><th>Servidor CSP</th><th>Tipo</th><th>Imagem</th><th>Nome</th><th>Valor no CSP</th><th>URL</th><th>Porta</th><th>Op&ccedil;&otilde;es</th></tr></thead>
+                <tbody>
+                    <tr><td>DEDICADO <span class="badge-ativo">A</span></td><td>Sat&eacute;lite</td><td><i class="fas fa-tv" style="color:#dc3545"></i></td><td>Claro TV</td><td>clarotv</td><td>ATEN&Ccedil;&Atilde;O n&atilde;o passar painel para qualquer pessoa sem indica&ccedil;&atilde;o</td><td>32005</td><td><span class="tbl-action lock" onclick="showSave(&#39;Perfil bloqueado!&#39;)"><i class="fas fa-lock"></i></span> <span class="tbl-action edit" onclick="navigateTo(&#39;edit-perfil-1&#39;,&#39;Editar Perfil&#39;)"><i class="fas fa-pen"></i></span> <span class="tbl-action delete" onclick="if(confirm(&#39;Tem certeza?&#39;))showSave(&#39;Perfil removido!&#39;)"><i class="fas fa-trash"></i></span></td></tr>
+                    <tr><td>DEDICADO <span class="badge-ativo">A</span></td><td>Cabo</td><td><i class="fas fa-tv" style="color:#dc3545"></i></td><td>Net-S&atilde;o Paulo</td><td>clarocabo</td><td>ATEN&Ccedil;&Atilde;O n&atilde;o passar painel para qualquer pessoa sem indica&ccedil;&atilde;o</td><td>37055</td><td><span class="tbl-action lock" onclick="showSave(&#39;Perfil bloqueado!&#39;)"><i class="fas fa-lock"></i></span> <span class="tbl-action edit" onclick="navigateTo(&#39;edit-perfil-2&#39;,&#39;Editar Perfil&#39;)"><i class="fas fa-pen"></i></span> <span class="tbl-action delete" onclick="if(confirm(&#39;Tem certeza?&#39;))showSave(&#39;Perfil removido!&#39;)"><i class="fas fa-trash"></i></span></td></tr>
+                </tbody>
+            </table>
+            <div class="pagination">
+                <div class="pagination-info">Mostrando de 1 at&eacute; 2 de 2 registros</div>
+                <div class="pagination-btns"><span class="disabled">Anterior</span><span class="active">1</span><span class="disabled">Pr&oacute;ximo</span></div>
+            </div>
         </div>
-        <p style="color:#404666;font-size:13px">Imagem atual do perfil</p>
-    </div>
-    <div class="form-row"><label>Escolher Imagem</label><input type="file" class="form-input" accept="image/*"></div>
-    <button class="login-btn" style="max-width:300px;margin-top:10px" onclick="salvarEdicao(&#39;imagem-perfil&#39;,&#39;Imagem de Perfil&#39;,&#39;Imagem atualizada!&#39;)">Salvar</button>
-        </div>
+        
         <div class="section-page" id="sec-importar" style="display:none">
             <div class="section-title"><i class="fas fa-file-import"></i> Importar</div>
-            
-    <div class="form-row"><label>Tipo de Importação</label><select class="form-input"><option>Usuários</option><option>Linhas C</option><option>Linhas MG</option><option>Linhas N</option></select></div>
-    <div class="form-row"><label>Arquivo</label><input type="file" class="form-input" accept=".csv,.txt"></div>
-    <div class="form-row"><label>Servidor Destino</label><select class="form-input"><option>CSP-1</option><option>CSP-2</option><option>CSP-3</option><option>CSP-5</option></select></div>
-    <button class="login-btn" style="max-width:200px;margin-top:8px" onclick="showSave('Importação concluída com sucesso!')">Importar</button>
+            <div class="form-row"><label>Destino</label><select class="form-input"><option>Todos</option><option>Usu&aacute;rios</option><option>Revendedores</option></select></div>
+            <div style="margin-bottom:12px">
+                <label style="font-size:12px;font-weight:600;color:#404666;display:block;margin-bottom:6px">Dados para Importar</label>
+                <textarea class="form-textarea" placeholder="Cole os dados aqui..."></textarea>
+            </div>
+            <div style="text-align:right">
+                <span class="btn-verde" onclick="showSave(&#39;Importado com sucesso!&#39;)">Importar</span>
+            </div>
         </div>
+        
         <div class="section-page" id="sec-exportar" style="display:none">
             <div class="section-title"><i class="fas fa-file-export"></i> Exportar</div>
-            
-    <div class="form-row"><label>Tipo de Exportação</label><select class="form-input"><option>Usuários</option><option>Linhas C</option><option>Linhas MG</option><option>Linhas N</option><option>Relatório Vendas</option></select></div>
-    <div class="form-row"><label>Formato</label><select class="form-input"><option>CSV</option><option>TXT</option><option>Excel</option></select></div>
-    <button class="login-btn" style="max-width:200px;margin-top:8px" onclick="showSave('Exportação concluída com sucesso!')">Exportar</button>
+            <div class="form-row"><label>Destino</label><select class="form-input"><option>Todos</option><option>Usu&aacute;rios</option><option>Revendedores</option></select></div>
+            <div style="margin-bottom:12px">
+                <label style="font-size:12px;font-weight:600;color:#404666;display:block;margin-bottom:6px">Dados para Exportar</label>
+                <textarea class="form-textarea" placeholder="Os dados exportados aparecer&atilde;o aqui..."></textarea>
+            </div>
+            <div style="text-align:right">
+                <span class="btn-verde" onclick="showSave(&#39;Exportado com sucesso!&#39;)">Exportar</span>
+            </div>
         </div>
+        
         <div class="section-page" id="sec-liberar-pc" style="display:none">
             <div class="section-title"><i class="fas fa-desktop"></i> Liberar PC</div>
-            
-    <div class="info-card">
-        <h3><i class="fas fa-desktop"></i> Liberar PC do Usuário</h3>
-        <div class="form-row"><label>Usuário</label><select class="form-input"><option>ricardo</option><option>fernanda</option><option>bruno</option><option>juliana</option></select></div>
-        <div class="form-row"><label>Ou digite o login</label><input class="form-input" placeholder="Login do usuário"></div>
-        <button class="login-btn" style="max-width:200px;margin-top:8px" onclick="showSave('PC liberado com sucesso!')">Liberar PC</button>
-    </div>
+            <div class="form-row"><label>Usu&aacute;rio</label><input class="form-input" type="text" placeholder="Nome de usu&aacute;rio"></div>
+            <div class="form-row"><label>Servidor Destino</label><select class="form-input"><option>CSP-1</option><option>CSP-2</option><option>CSP-3</option><option>CSP-4</option><option>CSP-5</option></select></div>
+            <div style="margin-top:14px;text-align:right">
+                <span class="btn-verde" onclick="showSave(&#39;PC liberado com sucesso!&#39;)">Liberar</span>
+            </div>
         </div>
+        
         <div class="section-page" id="sec-backup-manual" style="display:none">
             <div class="section-title"><i class="fas fa-database"></i> Backup Manual</div>
-            
-    <div class="info-card">
-        <h3><i class="fas fa-database"></i> Backup Manual</h3>
-        <p style="font-size:13px;color:#888;margin-bottom:12px">Cria um backup completo do sistema imediatamente.</p>
-        <div class="widgets-row">
-            <div class="widget-card"><div class="widget-icon green"><i class="fas fa-check-circle"></i></div><div class="widget-number">Último</div><div class="widget-label">17/08/2026 06:00</div></div>
-            <div class="widget-card"><div class="widget-icon purple"><i class="fas fa-hdd"></i></div><div class="widget-number">2.4 GB</div><div class="widget-label">Tamanho Total</div></div>
+            <div class="info-card" style="margin-bottom:12px">
+                <p style="font-size:12px;color:#666">Clique no bot&atilde;o abaixo para gerar um backup manual do sistema.</p>
+            </div>
+            <div style="text-align:right">
+                <span class="btn-verde" onclick="showSave(&#39;Backup realizado com sucesso!&#39;)">Fazer Backup</span>
+            </div>
         </div>
-        <button class="login-btn" style="max-width:250px;margin-top:12px" onclick="showSave('Backup manual realizado com sucesso!')"><i class="fas fa-download" style="margin-right:5px"></i>Executar Backup Agora</button>
-    </div>
-        </div>
+        
         <div class="section-page" id="sec-backup-automatico" style="display:none">
-            <div class="section-title"><i class="fas fa-sync-alt"></i> Backup Automático</div>
-            
-    <div class="info-card">
-        <h3><i class="fas fa-sync-alt"></i> Backup Automático</h3>
-        <div class="form-row"><label>Ativar Backup Automático</label><select class="form-input"><option selected>Sim</option><option>Não</option></select></div>
-        <div class="form-row"><label>Frequência</label><select class="form-input"><option selected>Diário</option><option>Semanal</option><option>Mensal</option></select></div>
-        <div class="form-row"><label>Horário</label><input class="form-input" type="time" value="03:00"></div>
-        <div class="form-row"><label>Manter Backups</label><select class="form-input"><option>7 dias</option><option selected>30 dias</option><option>90 dias</option></select></div>
-        <button class="login-btn" style="max-width:300px;margin-top:10px" onclick="salvarEdicao(&#39;backup-automatico&#39;,&#39;Backup Automático&#39;,&#39;Backup automático salvo!&#39;)">Salvar</button>
-    </div>
+            <div class="section-title"><i class="fas fa-database"></i> Backup Autom&aacute;tico</div>
+            <div class="form-row"><label>Status</label><select class="form-input"><option>Ativo</option><option>Desativado</option></select></div>
+            <div class="form-row"><label>Frequ&ecirc;ncia</label><select class="form-input"><option>Di&aacute;rio</option><option>Semanal</option><option>Mensal</option></select></div>
+            <div class="form-row"><label>Hor&aacute;rio</label><input class="form-input" type="text" value="03:00"></div>
+            <div style="margin-top:14px;text-align:right">
+                <span class="btn-verde" onclick="salvarEdicao(&#39;backup-automatico&#39;,&#39;Backup autom&aacute;tico salvo!&#39;)">Salvar</span>
+            </div>
         </div>
+        
         <div class="section-page" id="sec-aviso-geral" style="display:none">
             <div class="section-title"><i class="fas fa-bullhorn"></i> Aviso Geral</div>
-            
-    <div class="form-row"><label>Título do Aviso</label><input class="form-input" value="Manutenção Programada"></div>
-    <div class="form-row"><label>Mensagem</label><textarea class="form-input" rows="4">Sistema passará por manutenção no dia 20/08 das 02:00 às 06:00.</textarea></div>
-    <div class="form-row"><label>Tipo</label><select class="form-input"><option selected>Aviso</option><option>Alerta</option><option>Informação</option></select></div>
-    <div class="form-row"><label>Ativo</label><select class="form-input"><option selected>Sim</option><option>Não</option></select></div>
-    <button class="login-btn" style="max-width:300px;margin-top:10px" onclick="salvarEdicao(&#39;aviso-geral&#39;,&#39;Aviso Geral&#39;,&#39;Aviso salvo com sucesso!&#39;)">Salvar</button>
+            <div style="margin-bottom:12px">
+                <label style="font-size:12px;font-weight:600;color:#404666;display:block;margin-bottom:6px">Digite o aviso aqui...</label>
+                <textarea class="form-textarea" style="min-height:150px" placeholder="Digite o aviso aqui..."></textarea>
+            </div>
+            <div style="text-align:center">
+                <span class="btn-verde" onclick="showSave(&#39;Aviso salvo com sucesso!&#39;)" style="padding:10px 28px;font-size:13px">SALVAR E CORRIGIR AGORA</span>
+            </div>
         </div>
+        
         <div class="section-page" id="sec-tempo-vencimento" style="display:none">
-            <div class="section-title"><i class="fas fa-hourglass-half"></i> Tempo Vencimento</div>
-            
-    <div class="form-row"><label>Dias para Aviso de Vencimento</label><input class="form-input" type="number" value="5"></div>
-    <div class="form-row"><label>Aviso por SMS</label><select class="form-input"><option selected>Sim</option><option>Não</option></select></div>
-    <div class="form-row"><label>Aviso por Email</label><select class="form-input"><option selected>Sim</option><option>Não</option></select></div>
-    <div class="form-row"><label>Desativar Automático Após Vencimento</label><select class="form-input"><option selected>Sim</option><option>Não</option></select></div>
-    <button class="login-btn" style="max-width:300px;margin-top:10px" onclick="salvarEdicao(&#39;tempo-vencimento&#39;,&#39;Tempo Vencimento&#39;,&#39;Configurações salvas!&#39;)">Salvar</button>
+            <div class="section-title"><i class="fas fa-clock"></i> Tempo Vencimento</div>
+            <div class="page-controls">
+                <div class="page-controls-left">
+                    <span class="btn-azul" onclick="navigateTo(&#39;novo-tempo&#39;,&#39;Novo Tempo&#39;)"><i class="fas fa-plus"></i> Adicionar</span>
+                </div>
+                <div class="page-controls-right">
+                    <select class="page-select"><option>10</option></select>
+                    <input class="page-search" placeholder="Pesquisar">
+                </div>
+            </div>
+            <table class="data-table">
+                <thead><tr><th>Status</th><th>Tempo</th><th>Op&ccedil;&otilde;es</th></tr></thead>
+                <tbody>
+                    <tr><td><span class="badge-ativo">A</span></td><td>1 dia</td><td><span class="tbl-action lock" onclick="showSave(&#39;Bloqueado!&#39;)"><i class="fas fa-lock"></i></span> <span class="tbl-action edit" onclick="navigateTo(&#39;edit-tempo-1&#39;,&#39;Editar Tempo&#39;)"><i class="fas fa-pen"></i></span> <span class="tbl-action delete" onclick="if(confirm(&#39;Tem certeza?&#39;))showSave(&#39;Removido!&#39;)"><i class="fas fa-trash"></i></span></td></tr>
+                    <tr><td><span class="badge-ativo">A</span></td><td>7 dias</td><td><span class="tbl-action lock" onclick="showSave(&#39;Bloqueado!&#39;)"><i class="fas fa-lock"></i></span> <span class="tbl-action edit" onclick="navigateTo(&#39;edit-tempo-2&#39;,&#39;Editar Tempo&#39;)"><i class="fas fa-pen"></i></span> <span class="tbl-action delete" onclick="if(confirm(&#39;Tem certeza?&#39;))showSave(&#39;Removido!&#39;)"><i class="fas fa-trash"></i></span></td></tr>
+                    <tr><td><span class="badge-ativo">A</span></td><td>30 dias</td><td><span class="tbl-action lock" onclick="showSave(&#39;Bloqueado!&#39;)"><i class="fas fa-lock"></i></span> <span class="tbl-action edit" onclick="navigateTo(&#39;edit-tempo-3&#39;,&#39;Editar Tempo&#39;)"><i class="fas fa-pen"></i></span> <span class="tbl-action delete" onclick="if(confirm(&#39;Tem certeza?&#39;))showSave(&#39;Removido!&#39;)"><i class="fas fa-trash"></i></span></td></tr>
+                    <tr><td><span class="badge-ativo">A</span></td><td>90 dias</td><td><span class="tbl-action lock" onclick="showSave(&#39;Bloqueado!&#39;)"><i class="fas fa-lock"></i></span> <span class="tbl-action edit" onclick="navigateTo(&#39;edit-tempo-4&#39;,&#39;Editar Tempo&#39;)"><i class="fas fa-pen"></i></span> <span class="tbl-action delete" onclick="if(confirm(&#39;Tem certeza?&#39;))showSave(&#39;Removido!&#39;)"><i class="fas fa-trash"></i></span></td></tr>
+                </tbody>
+            </table>
+            <div class="pagination">
+                <div class="pagination-info">Mostrando de 1 at&eacute; 4 de 4 registros</div>
+                <div class="pagination-btns"><span class="disabled">Anterior</span><span class="active">1</span><span class="disabled">Pr&oacute;ximo</span></div>
+            </div>
         </div>
+        
         <div class="section-page" id="sec-cupom" style="display:none">
-            <div class="section-title"><i class="fas fa-ticket-alt"></i> Cupom</div>
-            
-    <div style="margin-bottom:12px">
-        <span class="copy-btn" style="padding:8px 16px;font-size:12px;background:#6967CE" onclick="showSave('Novo cupom criado!')"><i class="fas fa-plus" style="margin-right:5px"></i>Novo Cupom</span>
-    </div>
-    <table class="data-table"><thead><tr><th>Código</th><th>Desconto</th><th>Usos</th><th>Validade</th><th>Status</th><th>Ações</th></tr></thead><tbody><tr><td>DESCONTO10</td><td>10%</td><td>0</td><td>31/12/2026</td><td>Ativo</td><td><span class="copy-btn" style="padding:3px 8px;font-size:10px" onclick="navigateTo(&#39;edit-cupom-1&#39;,&#39;Editar Cupom&#39;)">Editar</span> <span class="copy-btn" style="padding:3px 8px;font-size:10px;background:#dc3545" onclick="if(confirm(&#39;Tem certeza?&#39;))showSave(&#39;Deletado com sucesso!&#39;)">Deletar</span></td></tr><tr><td>PROMO20</td><td>20%</td><td>5</td><td>30/09/2026</td><td>Ativo</td><td><span class="copy-btn" style="padding:3px 8px;font-size:10px" onclick="navigateTo(&#39;edit-cupom-1&#39;,&#39;Editar Cupom&#39;)">Editar</span> <span class="copy-btn" style="padding:3px 8px;font-size:10px;background:#dc3545" onclick="if(confirm(&#39;Tem certeza?&#39;))showSave(&#39;Deletado com sucesso!&#39;)">Deletar</span></td></tr><tr><td>VIP50</td><td>50%</td><td>0</td><td>15/09/2026</td><td>Inativo</td><td><span class="copy-btn" style="padding:3px 8px;font-size:10px" onclick="navigateTo(&#39;edit-cupom-1&#39;,&#39;Editar Cupom&#39;)">Editar</span> <span class="copy-btn" style="padding:3px 8px;font-size:10px;background:#dc3545" onclick="if(confirm(&#39;Tem certeza?&#39;))showSave(&#39;Deletado com sucesso!&#39;)">Deletar</span></td></tr></tbody></table>
+            <div class="section-title"><i class="fas fa-tag"></i> Cupom</div>
+            <div class="page-controls">
+                <div class="page-controls-left">
+                    <span class="btn-azul" onclick="navigateTo(&#39;novo-cupom&#39;,&#39;Novo Cupom&#39;)"><i class="fas fa-plus"></i> Adicionar</span>
+                </div>
+                <div class="page-controls-right">
+                    <select class="page-select"><option>10</option></select>
+                    <input class="page-search" placeholder="Pesquisar">
+                </div>
+            </div>
+            <table class="data-table">
+                <thead><tr><th>Status</th><th>Cupom</th><th>Dias</th><th>Perfil</th><th>Gerado Por</th><th>Gerado Em</th><th>Descontado Por</th><th>Descontado Em</th><th>Op&ccedil;&otilde;es</th></tr></thead>
+                <tbody>
+                    <tr><td colspan="9" class="no-records">Nenhum registro encontrado</td></tr>
+                </tbody>
+            </table>
+            <div class="pagination">
+                <div class="pagination-info">Mostrando 0 at&eacute; 0 de 0 registros</div>
+                <div class="pagination-btns"><span class="disabled">Anterior</span><span class="active">1</span><span class="disabled">Pr&oacute;ximo</span></div>
+            </div>
         </div>
+        
         <div class="section-page" id="sec-bitly" style="display:none">
-            <div class="section-title"><i class="fas fa-link"></i> Bit.ly</div>
-            
-    <div class="form-row"><label>API Key Bit.ly</label><input class="form-input" value="****bitly123"></div>
-    <div class="form-row"><label>Token de Acesso</label><input class="form-input" value="****access456"></div>
-    <div class="form-row"><label>Domínio Personalizado</label><input class="form-input" value="bit.ly" placeholder="Seu domínio curto"></div>
-    <button class="login-btn" style="max-width:300px;margin-top:10px" onclick="salvarEdicao(&#39;bitly&#39;,&#39;Bit.ly&#39;,&#39;Bit.ly salvo com sucesso!&#39;)">Salvar</button>
+            <div class="section-title"><i class="fas fa-key"></i> Bit.ly</div>
+            <div class="page-controls">
+                <div class="page-controls-left">
+                    <span class="btn-azul" onclick="navigateTo(&#39;config-bitly&#39;,&#39;Configurar Bit.ly&#39;)"><i class="fas fa-cog"></i> Configurar</span>
+                </div>
+                <div class="page-controls-right">
+                    <select class="page-select"><option>10</option></select>
+                    <input class="page-search" placeholder="Pesquisar">
+                </div>
+            </div>
+            <table class="data-table">
+                <thead><tr><th>Usu&aacute;rio</th><th>API Key</th><th>Op&ccedil;&otilde;es</th></tr></thead>
+                <tbody>
+                    <tr><td colspan="3" class="no-records">Nenhum registro encontrado</td></tr>
+                </tbody>
+            </table>
+            <div class="pagination">
+                <div class="pagination-info">Mostrando 0 at&eacute; 0 de 0 registros</div>
+                <div class="pagination-btns"><span class="disabled">Anterior</span><span class="active">1</span><span class="disabled">Pr&oacute;ximo</span></div>
+            </div>
         </div>
+        
         <div class="section-page" id="sec-temas" style="display:none">
             <div class="section-title"><i class="fas fa-palette"></i> Temas</div>
-            
-    <div class="info-grid">
-        <div class="info-card" style="cursor:pointer;border:2px solid #6967CE">
-            <div style="height:40px;background:linear-gradient(135deg,#6967CE,#2BD4DB);border-radius:8px;margin-bottom:10px"></div>
-            <h3>Tema Padrão</h3>
-            <p style="color:#6967CE;font-weight:600">Ativo</p>
+            <div class="theme-grid">
+                <div class="theme-card" onclick="this.parentElement.querySelectorAll('.theme-card').forEach(c=>c.classList.remove('selected'));this.classList.add('selected');showSave(&#39;Tema aplicado!&#39;)">
+        <div class="theme-preview">
+            <div class="theme-sidebar-mini" style="background:#2c3e50"></div>
+            <div class="theme-body-mini" style="background:#ecf0f1"></div>
         </div>
-        <div class="info-card" style="cursor:pointer">
-            <div style="height:40px;background:linear-gradient(135deg,#1a1a2e,#16213e);border-radius:8px;margin-bottom:10px"></div>
-            <h3>Tema Escuro</h3>
-            <span class="copy-btn" style="padding:4px 10px;font-size:10px;background:#1a1a2e;margin-top:5px" onclick="showSave('Tema escuro ativado!')">Aplicar</span>
+        <div class="theme-label">Tema 1</div>
+        
+    </div><div class="theme-card" onclick="this.parentElement.querySelectorAll('.theme-card').forEach(c=>c.classList.remove('selected'));this.classList.add('selected');showSave(&#39;Tema aplicado!&#39;)">
+        <div class="theme-preview">
+            <div class="theme-sidebar-mini" style="background:#1a1a2e"></div>
+            <div class="theme-body-mini" style="background:#e94560"></div>
         </div>
-        <div class="info-card" style="cursor:pointer">
-            <div style="height:40px;background:linear-gradient(135deg,#0f3460,#e94560);border-radius:8px;margin-bottom:10px"></div>
-            <h3>Tema Vermelho</h3>
-            <span class="copy-btn" style="padding:4px 10px;font-size:10px;background:#e94560;margin-top:5px" onclick="showSave('Tema vermelho ativado!')">Aplicar</span>
+        <div class="theme-label">Tema 2</div>
+        
+    </div><div class="theme-card" onclick="this.parentElement.querySelectorAll('.theme-card').forEach(c=>c.classList.remove('selected'));this.classList.add('selected');showSave(&#39;Tema aplicado!&#39;)">
+        <div class="theme-preview">
+            <div class="theme-sidebar-mini" style="background:#0f3460"></div>
+            <div class="theme-body-mini" style="background:#16213e"></div>
         </div>
+        <div class="theme-label">Tema 3</div>
+        
+    </div><div class="theme-card" onclick="this.parentElement.querySelectorAll('.theme-card').forEach(c=>c.classList.remove('selected'));this.classList.add('selected');showSave(&#39;Tema aplicado!&#39;)">
+        <div class="theme-preview">
+            <div class="theme-sidebar-mini" style="background:#2d132c"></div>
+            <div class="theme-body-mini" style="background:#ee4567"></div>
+        </div>
+        <div class="theme-label">Tema 4</div>
+        
+    </div><div class="theme-card selected" onclick="this.parentElement.querySelectorAll('.theme-card').forEach(c=>c.classList.remove('selected'));this.classList.add('selected');showSave(&#39;Tema aplicado!&#39;)">
+        <div class="theme-preview">
+            <div class="theme-sidebar-mini" style="background:#6967CE"></div>
+            <div class="theme-body-mini" style="background:#2BD4DB"></div>
+        </div>
+        <div class="theme-label">Tema 5</div>
+        <div class="theme-check"><i class="fas fa-check"></i></div>
+    </div><div class="theme-card" onclick="this.parentElement.querySelectorAll('.theme-card').forEach(c=>c.classList.remove('selected'));this.classList.add('selected');showSave(&#39;Tema aplicado!&#39;)">
+        <div class="theme-preview">
+            <div class="theme-sidebar-mini" style="background:#1b1b2f"></div>
+            <div class="theme-body-mini" style="background:#162447"></div>
+        </div>
+        <div class="theme-label">Tema 6</div>
+        
+    </div><div class="theme-card" onclick="this.parentElement.querySelectorAll('.theme-card').forEach(c=>c.classList.remove('selected'));this.classList.add('selected');showSave(&#39;Tema aplicado!&#39;)">
+        <div class="theme-preview">
+            <div class="theme-sidebar-mini" style="background:#0d1b2a"></div>
+            <div class="theme-body-mini" style="background:#1b263b"></div>
+        </div>
+        <div class="theme-label">Tema 7</div>
+        
+    </div><div class="theme-card" onclick="this.parentElement.querySelectorAll('.theme-card').forEach(c=>c.classList.remove('selected'));this.classList.add('selected');showSave(&#39;Tema aplicado!&#39;)">
+        <div class="theme-preview">
+            <div class="theme-sidebar-mini" style="background:#2d2d2d"></div>
+            <div class="theme-body-mini" style="background:#434343"></div>
+        </div>
+        <div class="theme-label">Tema 8</div>
+        
     </div>
+            </div>
         </div>
+        
         <div class="section-page" id="sec-informacoes" style="display:none">
-            <div class="section-title"><i class="fas fa-info-circle"></i> Informações</div>
-            
-    <div class="info-card">
-        <h3><i class="fas fa-info-circle"></i> Informações do Sistema</h3>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px">
-            <p><strong>Versão:</strong> 4.0.0</p>
-            <p><strong>Licença:</strong> Premium</p>
-            <p><strong>Servidor:</strong> Linux x64</p>
-            <p><strong>PHP:</strong> 8.2</p>
-            <p><strong>MySQL:</strong> 8.0</p>
-            <p><strong>Memória:</strong> 8 GB</p>
-            <p><strong>Disco:</strong> 120 GB SSD</p>
-            <p><strong>Uptime:</strong> 45 dias</p>
+            <div class="section-title"><i class="fas fa-info-circle"></i> Informa&ccedil;&otilde;es</div>
+            <div class="page-controls">
+                <div class="page-controls-left">
+                    <span class="btn-azul" onclick="navigateTo(&#39;edit-informacoes-1&#39;,&#39;Editar Informa&ccedil;&otilde;es&#39;)"><i class="fas fa-pen"></i> Editar</span>
+                </div>
+                <div class="page-controls-right">
+                    <select class="page-select"><option>10</option></select>
+                    <input class="page-search" placeholder="Pesquisar">
+                </div>
+            </div>
+            <table class="data-table">
+                <thead><tr><th>Nome</th><th>Slogan</th><th>Op&ccedil;&otilde;es</th></tr></thead>
+                <tbody>
+                    <tr><td>GRUPO W3BR</td><td>Melhor Servidor do Brasil</td><td><span class="tbl-action edit" onclick="navigateTo(&#39;edit-informacoes-1&#39;,&#39;Editar Informa&ccedil;&otilde;es&#39;)"><i class="fas fa-pen"></i></span></td></tr>
+                </tbody>
+            </table>
+            <div class="pagination">
+                <div class="pagination-info">Mostrando de 1 at&eacute; 1 de 1 registros</div>
+                <div class="pagination-btns"><span class="disabled">Anterior</span><span class="active">1</span><span class="disabled">Pr&oacute;ximo</span></div>
+            </div>
         </div>
-    </div>
-        </div>
+        
         <div class="section-page" id="sec-papel-parede" style="display:none">
             <div class="section-title"><i class="fas fa-image"></i> Papel de Parede</div>
-            
-    <div class="info-card">
-        <h3><i class="fas fa-image"></i> Papel de Parede do Painel</h3>
-        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:12px">
-            <div style="height:80px;background:linear-gradient(135deg,#6967CE,#2BD4DB);border-radius:8px;cursor:pointer;border:2px solid #6967CE" onclick="showSave('Papel de parede aplicado!')"></div>
-            <div style="height:80px;background:linear-gradient(135deg,#1a1a2e,#0f3460);border-radius:8px;cursor:pointer" onclick="showSave('Papel de parede aplicado!')"></div>
-            <div style="height:80px;background:linear-gradient(135deg,#232526,#414345);border-radius:8px;cursor:pointer" onclick="showSave('Papel de parede aplicado!')"></div>
-            <div style="height:80px;background:linear-gradient(135deg,#11998e,#38ef7d);border-radius:8px;cursor:pointer" onclick="showSave('Papel de parede aplicado!')"></div>
-            <div style="height:80px;background:linear-gradient(135deg,#fc4a1a,#f7b733);border-radius:8px;cursor:pointer" onclick="showSave('Papel de parede aplicado!')"></div>
-            <div style="height:80px;background:linear-gradient(135deg,#2c3e50,#4ca1af);border-radius:8px;cursor:pointer" onclick="showSave('Papel de parede aplicado!')"></div>
-        </div>
-        <div class="form-row"><label>Ou enviar imagem</label><input type="file" class="form-input" accept="image/*" style="margin-top:12px"></div>
-        <button class="login-btn" style="max-width:300px;margin-top:10px" onclick="salvarEdicao(&#39;papel-parede&#39;,&#39;Papel de Parede&#39;,&#39;Papel de parede salvo!&#39;)">Salvar</button>
+            <div class="gallery-grid">
+                <div class="gallery-item" onclick="showSave(&#39;Papel de parede aplicado!&#39;)">
+        <div class="gallery-img">Papel de Parede 1</div>
+        <div class="gallery-label">Papel de Parede 1</div>
+    </div><div class="gallery-item" onclick="showSave(&#39;Papel de parede aplicado!&#39;)">
+        <div class="gallery-img">Papel de Parede 2</div>
+        <div class="gallery-label">Papel de Parede 2</div>
+    </div><div class="gallery-item" onclick="showSave(&#39;Papel de parede aplicado!&#39;)">
+        <div class="gallery-img">Papel de Parede 3</div>
+        <div class="gallery-label">Papel de Parede 3</div>
+    </div><div class="gallery-item" onclick="showSave(&#39;Papel de parede aplicado!&#39;)">
+        <div class="gallery-img">Papel de Parede 4</div>
+        <div class="gallery-label">Papel de Parede 4</div>
+    </div><div class="gallery-item" onclick="showSave(&#39;Papel de parede aplicado!&#39;)">
+        <div class="gallery-img">Papel de Parede 5</div>
+        <div class="gallery-label">Papel de Parede 5</div>
+    </div><div class="gallery-item" onclick="showSave(&#39;Papel de parede aplicado!&#39;)">
+        <div class="gallery-img">Papel de Parede 6</div>
+        <div class="gallery-label">Papel de Parede 6</div>
+    </div><div class="gallery-item" onclick="showSave(&#39;Papel de parede aplicado!&#39;)">
+        <div class="gallery-img">Papel de Parede 7</div>
+        <div class="gallery-label">Papel de Parede 7</div>
+    </div><div class="gallery-item" onclick="showSave(&#39;Papel de parede aplicado!&#39;)">
+        <div class="gallery-img">Papel de Parede 8</div>
+        <div class="gallery-label">Papel de Parede 8</div>
+    </div><div class="gallery-item" onclick="showSave(&#39;Papel de parede aplicado!&#39;)">
+        <div class="gallery-img">Papel de Parede 9</div>
+        <div class="gallery-label">Papel de Parede 9</div>
+    </div><div class="gallery-item" onclick="showSave(&#39;Papel de parede aplicado!&#39;)">
+        <div class="gallery-img">Papel de Parede 10</div>
+        <div class="gallery-label">Papel de Parede 10</div>
     </div>
+            </div>
         </div>
         <div class="section-page" id="sec-criar-admin" style="display:none">
             <div class="section-title"><i class="fas fa-user-shield"></i> Criar Administrador</div>
@@ -896,7 +1290,70 @@ body { font-family:'Muli',sans-serif; background:#f5f6fa; }
     <div class="form-row"><label>Status</label><select class="form-input"><option selected>Ativo</option><option>Inativo</option></select></div>
     <button class="login-btn" style="max-width:300px;margin-top:10px" onclick="salvarEdicao(&#39;cupom&#39;,&#39;Cupom&#39;,&#39;Cupom salvo!&#39;)">Salvar</button>
         </div>
+        <div class="section-page" id="sec-mascara-perfil" style="display:none">
+            <div class="section-title"><i class="fas fa-mask"></i> M&aacute;scara de Perfil</div>
+            <div class="page-controls">
+                <div class="page-controls-left">
+                    <span class="results-label">Exibir</span>
+                    <select class="per-page-select"><option>10</option><option>25</option><option>50</option><option>100</option></select>
+                    <span class="results-label">por p&aacute;gina</span>
+                </div>
+                <div class="page-controls-right">
+                    <span class="search-label">Pesquisar:</span>
+                    <input class="search-input" placeholder="Pesquisar...">
+                </div>
+            </div>
+            <table class="data-table">
+                <thead><tr><th>M&aacute;scara</th><th>Tipo</th><th>Status</th><th>A&ccedil;&otilde;es</th></tr></thead>
+                <tbody>
+                    <tr><td>CS:{username}</td><td>Padr&atilde;o</td><td><span class="badge-ativo">Ativo</span></td><td><span class="tbl-action info" onclick="navigateTo(&#39;mascara-perfil&#39;,&#39;M&aacute;scara de Perfil&#39;)"><i class="fas fa-info-circle"></i></span><span class="tbl-action lock"><i class="fas fa-lock"></i></span><span class="tbl-action edit" onclick="navigateTo(&#39;mascara-perfil&#39;,&#39;M&aacute;scara de Perfil&#39;)"><i class="fas fa-pen"></i></span><span class="tbl-action trash"><i class="fas fa-trash"></i></span></td></tr>
+                    <tr><td>CSP:{username}</td><td>Sem Prefixo</td><td><span class="badge-ativo">Ativo</span></td><td><span class="tbl-action info" onclick="navigateTo(&#39;mascara-perfil&#39;,&#39;M&aacute;scara de Perfil&#39;)"><i class="fas fa-info-circle"></i></span><span class="tbl-action lock"><i class="fas fa-lock"></i></span><span class="tbl-action edit" onclick="navigateTo(&#39;mascara-perfil&#39;,&#39;M&aacute;scara de Perfil&#39;)"><i class="fas fa-pen"></i></span><span class="tbl-action trash"><i class="fas fa-trash"></i></span></td></tr>
+                    <tr><td>PANEL:{username}</td><td>Personalizado</td><td><span class="badge-desativado">Desativado</span></td><td><span class="tbl-action info" onclick="navigateTo(&#39;mascara-perfil&#39;,&#39;M&aacute;scara de Perfil&#39;)"><i class="fas fa-info-circle"></i></span><span class="tbl-action lock"><i class="fas fa-lock"></i></span><span class="tbl-action edit" onclick="navigateTo(&#39;mascara-perfil&#39;,&#39;M&aacute;scara de Perfil&#39;)"><i class="fas fa-pen"></i></span><span class="tbl-action trash"><i class="fas fa-trash"></i></span></td></tr>
+                </tbody>
+            </table>
+            <div class="pagination">
+                <span>Mostrando 1 a 3 de 3 registros</span>
+                <div class="pagination-btns">
+                    <button class="pag-btn">&laquo;</button>
+                    <button class="pag-btn active">1</button>
+                    <button class="pag-btn">&raquo;</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="section-page" id="sec-facebook" style="display:none">
+            <div class="section-title"><i class="fab fa-facebook"></i> Facebook</div>
+            <div class="form-row"><label>App ID</label><input class="form-input" value="1234567890"></div>
+            <div class="form-row"><label>App Secret</label><input class="form-input" type="password" value="********"></div>
+            <div class="form-row"><label>P&aacute;gina URL</label><input class="form-input" value="https://facebook.com/meupainel"></div>
+            <div class="form-row"><label>Status</label><select class="form-input"><option>Ativo</option><option selected>Inativo</option></select></div>
+            <div class="form-row"><label>Auto Post</label><select class="form-input"><option>Sim</option><option selected>N&atilde;o</option></select></div>
+            <button class="login-btn" style="max-width:300px;margin-top:10px" onclick="salvarEdicao(&#39;facebook&#39;,&#39;Facebook&#39;,&#39;Facebook salvo!&#39;)">Salvar</button>
+        </div>
+
+        <div class="section-page" id="sec-instagram" style="display:none">
+            <div class="section-title"><i class="fab fa-instagram"></i> Instagram</div>
+            <div class="form-row"><label>Client ID</label><input class="form-input" value="9876543210"></div>
+            <div class="form-row"><label>Client Secret</label><input class="form-input" type="password" value="********"></div>
+            <div class="form-row"><label>Perfil URL</label><input class="form-input" value="https://instagram.com/meupainel"></div>
+            <div class="form-row"><label>Status</label><select class="form-input"><option>Ativo</option><option selected>Inativo</option></select></div>
+            <div class="form-row"><label>Auto Post</label><select class="form-input"><option>Sim</option><option selected>N&atilde;o</option></select></div>
+            <button class="login-btn" style="max-width:300px;margin-top:10px" onclick="salvarEdicao(&#39;instagram&#39;,&#39;Instagram&#39;,&#39;Instagram salvo!&#39;)">Salvar</button>
+        </div>
+
+        <div class="section-page" id="sec-youtube" style="display:none">
+            <div class="section-title"><i class="fab fa-youtube"></i> YouTube</div>
+            <div class="form-row"><label>API Key</label><input class="form-input" value="AIzaSyD-xxxxxxxxxxxxxxxx"></div>
+            <div class="form-row"><label>Channel ID</label><input class="form-input" value="UCxxxxxxxxxxxx"></div>
+            <div class="form-row"><label>Canal URL</label><input class="form-input" value="https://youtube.com/@meupainel"></div>
+            <div class="form-row"><label>Status</label><select class="form-input"><option>Ativo</option><option selected>Inativo</option></select></div>
+            <div class="form-row"><label>Auto Post</label><select class="form-input"><option>Sim</option><option selected>N&atilde;o</option></select></div>
+            <button class="login-btn" style="max-width:300px;margin-top:10px" onclick="salvarEdicao(&#39;youtube&#39;,&#39;YouTube&#39;,&#39;YouTube salvo!&#39;)">Salvar</button>
+        </div>
+
+
     </div>
+</div>
 </div>
 
 <!-- TOAST -->
@@ -911,7 +1368,7 @@ function doLogin() {
         document.getElementById('dashboard-view').style.display = 'block';
         navigateTo('inicio','Início');
     } else {
-        alert('Usuário ou senha incorretos!');
+        showSave('Usuário ou senha incorretos!', 'error');
     }
 }
 
@@ -958,11 +1415,30 @@ function sair() {
     document.getElementById('login-view').style.display = 'flex';
 }
 
-function showSave(msg) {
-    var t = document.getElementById('toast');
-    t.textContent = msg;
-    t.classList.add('show');
-    setTimeout(function() { t.classList.remove('show'); }, 2500);
+function showSave(msg, type) {
+    // Using Noty.js like the real PHP panel
+    var nType = type || 'success';
+    var nTheme = 'sunset';
+    new Noty({
+        text: msg,
+        type: nType,
+        theme: nTheme,
+        layout: 'topCenter',
+        timeout: 3000,
+        progressBar: true,
+        animation: {
+            open: 'noty_effects_open',
+            close: 'noty_effects_close'
+        },
+        buttons: [
+            Noty.button('OK', 'btn btn-success', function(btn) {
+                btn.click();
+            }, {id: 'btn-ok', 'data-status': 'ok'}),
+            Noty.button('Fechar', 'btn btn-error', function(btn) {
+                btn.close();
+            })
+        ]
+    }).show();
 }
 
 function salvarEdicao(backId, backTitle, msg) {
@@ -971,16 +1447,53 @@ function salvarEdicao(backId, backTitle, msg) {
 }
 
 function copyLine(el) {
-    var text = el.parentElement.previousElementSibling.textContent;
-    navigator.clipboard.writeText(text).then(function() {
+    var inp = document.getElementById(el);
+    if (inp) {
+        inp.select();
+        document.execCommand('copy');
         showSave('Copiado com sucesso!');
-    });
+    }
 }
 
 // Enter key login
 document.addEventListener('keydown', function(e) {
     if (e.key === 'Enter' && document.getElementById('login-view').style.display !== 'none') doLogin();
 });
+
+// Simulate circular notification check (like real panel's setInterval jQuery AJAX)
+// Real panel: setInterval(function(){ $.get("circular.php", ...) }, 5000)
+var notifCheckInterval = null;
+function startNotifCheck() {
+    notifCheckInterval = setInterval(function() {
+        // Simulate checking for new notifications
+        // In real panel this would be an AJAX call to circular.php
+    }, 5000);
+}
+function stopNotifCheck() {
+    if (notifCheckInterval) clearInterval(notifCheckInterval);
+}
+
+// Start notification check after login
+var origDoLogin = doLogin;
+doLogin = function() {
+    var u = document.getElementById('login-user').value;
+    var p = document.getElementById('login-pass').value;
+    if (u === 'admin' && p === 'admin123') {
+        document.getElementById('login-view').style.display = 'none';
+        document.getElementById('dashboard-view').style.display = 'block';
+        navigateTo('inicio','Início');
+        startNotifCheck();
+    } else {
+        showSave('Usuário ou senha incorretos!', 'error');
+    }
+};
+
+var origSair = sair;
+sair = function() {
+    stopNotifCheck();
+    document.getElementById('dashboard-view').style.display = 'none';
+    document.getElementById('login-view').style.display = 'flex';
+};
 </script>
 </body>
 </html>

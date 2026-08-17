@@ -45,7 +45,7 @@ img{max-width:100%}
 .sidebar.collapsed .xn-logo span,.sidebar.collapsed .xn-profile .profile-data,.sidebar.collapsed .xn-menu-items .menu-text,.sidebar.collapsed .xn-menu-items .submenu,.sidebar.collapsed .xn-menu-items .arrow{display:none}
 .sidebar.collapsed .xn-menu-items>li>a{text-align:center;padding:12px 0}
 .sidebar.collapsed .xn-menu-items>li>a .menu-icon{margin:0;font-size:18px}
-.page-content{margin-left:250px;width:calc(100% - 250px);min-height:100vh;transition:margin-left 0.3s,width 0.3s}
+.page-content{margin-left:250px;width:calc(100% - 250px);min-height:100vh;transition:margin-left 0.3s,width 0.3s;display:none}.page-content.active{display:block}
 .sidebar.collapsed~.page-content{margin-left:60px;width:calc(100% - 60px)}
 .xn-logo{background:#E34724;padding:18px 20px;text-align:center;color:#fff;font-size:18px;font-weight:700;letter-spacing:3px}
 .xn-profile{padding:20px 15px;text-align:center;border-bottom:1px solid #333}
@@ -407,12 +407,12 @@ body.theme-night-head-light .form-control{background:#0d1117;border-color:#30363
 <body class="hold-transition skin-blue sidebar-mini theme-default">
 
 <!-- LOGIN SCREEN -->
-<div id="login-page" class="login-container">
+<div id="login-page" class="login-container" data-role="login-screen">
   <div class="login-box">
     <div class="login-logo">
       <div>PAINEL W3BR 3.0</div>
     </div>
-    <div class="login-body">
+    <form id="login-form" class="login-body" onsubmit="doLogin();return false;">
       <div class="form-group">
         <label>Usuário</label>
         <input type="text" id="login-user" class="form-control" placeholder="Digite seu usuário" value="admin">
@@ -425,8 +425,8 @@ body.theme-night-head-light .form-control{background:#0d1117;border-color:#30363
         <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTIwIiBoZWlnaHQ9IjQwIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxyZWN0IHdpZHRoPSIxMjAiIGhlaWdodD0iNDAiIGZpbGw9IiNlZWUiLz48dGV4dCB4PSIxMCIgeT0iMjgiIGZvbnQtc2l6ZT0iMjAiIGZpbGw9IiM2NjYiIGZvbnQtZmFtaWx5PSJtb25vc3BhY2UiPkE3ejlrPC90ZXh0PjxsaW5lIHgxPSIwIiB5MT0iNSIgeDI9IjEyMCIgeTI9IjM1IiBzdHJva2U9IiNjY2MiIHN0cm9rZS13aWR0aD0iMSIvPjwvc3ZnPg==" alt="Captcha">
         <input type="text" id="login-captcha" class="form-control" placeholder="Captcha" style="width:120px;margin-top:8px">
       </div>
-      <button class="btn-login" id="btn-login">Entrar</button>
-    </div>
+      <button type="submit" class="btn-login" id="btn-login" onclick="doLogin();">Entrar</button>
+    </form>
     <div class="login-footer">
       &copy; 2025 Painel W3BR 3.0 | Todos os direitos reservados<br>
       <a href="#"><i class="fa fa-whatsapp"></i> Suporte WhatsApp</a>
@@ -455,88 +455,101 @@ body.theme-night-head-light .form-control{background:#0d1117;border-color:#30363
     </div>
   </div>
   <ul class="xn-menu-items">
-    <li class="active" data-page="home"><a><span class="menu-icon fa fa-home"></span><span class="menu-text">Seja Bem-Vindo</span></a></li>
+    <li class="active" data-page="home"><a data-page="home" href="#home"><span class="menu-icon fa fa-home"></span><span class="menu-text">Seja Bem-Vindo</span></a></li>
     <li class="has-sub"><a><span class="menu-icon fa fa-users"></span><span class="menu-text">Gerenciador de Grupo</span><span class="arrow fa fa-chevron-right"></span></a>
       <ul class="submenu">
-        <li data-page="grupo-todos"><a><span class="menu-icon fa fa-globe"></span><span class="menu-text">Todos</span></a></li>
-        <li data-page="grupo-admin"><a><span class="menu-icon fa fa-user-secret"></span><span class="menu-text">Administrador</span></a></li>
-        <li data-page="grupo-revenda"><a><span class="menu-icon fa fa-user-plus"></span><span class="menu-text">Revendedor</span></a></li>
-        <li data-page="grupo-user"><a><span class="menu-icon fa fa-user"></span><span class="menu-text">Usuário</span></a></li>
-        <li data-page="grupo-teste"><a><span class="menu-icon fa fa-clock-o"></span><span class="menu-text">Teste</span></a></li>
+        <li data-page="grupo/clientes"><a data-page="grupo/clientes" href="#grupo/clientes"><span class="menu-icon fa fa-globe"></span><span class="menu-text">Todos</span></a></li>
+        <li data-page="grupo/clientes"><a data-page="grupo/admin" href="#grupo/admin"><span class="menu-icon fa fa-user-secret"></span><span class="menu-text">Administrador</span></a></li>
+        <li data-page="grupo/revendas"><a data-page="grupo/revendas" href="#grupo/revendas"><span class="menu-icon fa fa-user-plus"></span><span class="menu-text">Revendedor</span></a></li>
+        <li data-page="grupo/clientes"><a data-page="grupo/usuarios" href="#grupo/usuarios"><span class="menu-icon fa fa-user"></span><span class="menu-text">Usuário</span></a></li>
+        <li data-page="grupo/testes"><a data-page="grupo/testes" href="#grupo/testes"><span class="menu-icon fa fa-clock-o"></span><span class="menu-text">Teste</span></a></li>
+      <li data-page="grupo/subrevendas"><a data-page="grupo/subrevendas" href="#grupo/subrevendas"><span class="menu-icon fa fa-users"></span><span class="menu-text">Sub Revendas</span></a></li>
+      <li data-page="grupo/vouchers"><a data-page="grupo/vouchers" href="#grupo/vouchers"><span class="menu-icon fa fa-ticket"></span><span class="menu-text">Vouchers</span></a></li>
       </ul>
     </li>
     <li class="has-sub"><a><span class="menu-icon fa fa-signal"></span><span class="menu-text">Status</span><span class="arrow fa fa-chevron-right"></span></a>
       <ul class="submenu">
-        <li data-page="status-online"><a><span class="menu-icon fa fa-check-circle"></span><span class="menu-text">Online</span></a></li>
-        <li data-page="status-offline"><a><span class="menu-icon fa fa-times-circle"></span><span class="menu-text">Desconectado</span></a></li>
-        <li data-page="status-falhado"><a><span class="menu-icon fa fa-exclamation-circle"></span><span class="menu-text">Falhado</span></a></li>
-        <li data-page="status-logs"><a><span class="menu-icon fa fa-list-alt"></span><span class="menu-text">Logs</span></a></li>
-        <li data-page="status-reshare"><a><span class="menu-icon fa fa-share-alt"></span><span class="menu-text">Reshare</span></a></li>
+        <li data-page="status/online"><a data-page="status/online" href="#status/online"><span class="menu-icon fa fa-check-circle"></span><span class="menu-text">Online</span></a></li>
+        <li data-page="status/online"><a data-page="status/desconectados" href="#status/desconectados"><span class="menu-icon fa fa-times-circle"></span><span class="menu-text">Desconectado</span></a></li>
+        <li data-page="status/online"><a data-page="status/falhados" href="#status/falhados"><span class="menu-icon fa fa-exclamation-circle"></span><span class="menu-text">Falhado</span></a></li>
+        <li data-page="status/log"><a data-page="status/log" href="#status/log"><span class="menu-icon fa fa-list-alt"></span><span class="menu-text">Logs</span></a></li>
+      <li data-page="status/clientes"><a data-page="status/clientes" href="#status/clientes"><span class="menu-icon fa fa-users"></span><span class="menu-text">Clientes</span></a></li>
+      <li data-page="status/servidores"><a data-page="status/servidores" href="#status/servidores"><span class="menu-icon fa fa-server"></span><span class="menu-text">Servidores</span></a></li>
+        <li data-page="status/revendas"><a data-page="status/revendas" href="#status/revendas"><span class="menu-icon fa fa-share-alt"></span><span class="menu-text">Reshare</span></a></li>
       </ul>
     </li>
-    <li data-page="relatorio"><a><span class="menu-icon fa fa-bar-chart"></span><span class="menu-text">Relatório</span></a></li>
+    <li data-page="relatorio"><a data-page="relatorio" href="#relatorio"><span class="menu-icon fa fa-bar-chart"></span><span class="menu-text">Relatório</span></a></li>
     <li class="has-sub"><a><span class="menu-icon fa fa-money"></span><span class="menu-text">Pagamentos</span><span class="arrow fa fa-chevron-right"></span></a>
       <ul class="submenu">
-        <li data-page="vendas"><a><span class="menu-icon fa fa-shopping-cart"></span><span class="menu-text">Vendas</span></a></li>
+        <li data-page="vendas"><a data-page="vendas" href="#vendas"><span class="menu-icon fa fa-shopping-cart"></span><span class="menu-text">Vendas</span></a></li>
         <li class="menu-header">Formas de Pagamento</li>
-        <li data-page="pag-pagseguro"><a><span class="menu-icon fa fa-credit-card"></span><span class="menu-text">PagSeguro</span></a></li>
-        <li data-page="pag-paypal"><a><span class="menu-icon fa fa-paypal"></span><span class="menu-text">PayPal</span></a></li>
-        <li data-page="pag-mercadopago"><a><span class="menu-icon fa fa-dollar"></span><span class="menu-text">MercadoPago</span></a></li>
-        <li data-page="pag-contabancaria"><a><span class="menu-icon fa fa-university"></span><span class="menu-text">Conta Bancária</span></a></li>
+        <li data-page="pagseguro"><a data-page="pagseguro" href="#pagseguro"><span class="menu-icon fa fa-credit-card"></span><span class="menu-text">PagSeguro</span></a></li>
+        <li data-page="pagamento"><a data-page="pagamento" href="#pagamento"><span class="menu-icon fa fa-paypal"></span><span class="menu-text">PayPal</span></a></li>
+        <li data-page="pagamento"><a data-page="pagamento" href="#pagamento"><span class="menu-icon fa fa-dollar"></span><span class="menu-text">MercadoPago</span></a></li>
+        <li data-page="pagamento"><a data-page="pagamento" href="#pagamento"><span class="menu-icon fa fa-university"></span><span class="menu-text">Conta Bancária</span></a></li>
       </ul>
     </li>
     <li class="has-sub"><a><span class="menu-icon fa fa-life-ring"></span><span class="menu-text">Suporte</span><span class="arrow fa fa-chevron-right"></span></a>
       <ul class="submenu">
-        <li data-page="suporte-caixa"><a><span class="menu-icon fa fa-inbox"></span><span class="menu-text">Caixa de Entrada</span></a></li>
-        <li data-page="suporte-enviados"><a><span class="menu-icon fa fa-paper-plane"></span><span class="menu-text">Enviados</span></a></li>
-        <li data-page="suporte-lixeira"><a><span class="menu-icon fa fa-trash"></span><span class="menu-text">Lixeira</span></a></li>
+        <li data-page="suporte/tickets"><a data-page="suporte/tickets" href="#suporte/tickets"><span class="menu-icon fa fa-inbox"></span><span class="menu-text">Caixa de Entrada</span></a></li>
+      <li data-page="suporte/faq"><a data-page="suporte/faq" href="#suporte/faq"><span class="menu-icon fa fa-question-circle"></span><span class="menu-text">FAQ</span></a></li>
+      <li data-page="suporte/base"><a data-page="suporte/base" href="#suporte/base"><span class="menu-icon fa fa-book"></span><span class="menu-text">Base de Conhecimento</span></a></li>
+        <li data-page="suporte/tickets"><a data-page="suporte/tickets" href="#suporte/tickets"><span class="menu-icon fa fa-paper-plane"></span><span class="menu-text">Enviados</span></a></li>
+        <li data-page="suporte/tickets"><a data-page="suporte/tickets" href="#suporte/tickets"><span class="menu-icon fa fa-trash"></span><span class="menu-text">Lixeira</span></a></li>
       </ul>
     </li>
     <li class="has-sub"><a><span class="menu-icon fa fa-envelope"></span><span class="menu-text">Mensagens</span><span class="arrow fa fa-chevron-right"></span></a>
       <ul class="submenu">
-        <li data-page="msg-sms"><a><span class="menu-icon fa fa-comment"></span><span class="menu-text">SMS Modelo</span></a></li>
-        <li data-page="msg-email"><a><span class="menu-icon fa fa-at"></span><span class="menu-text">Email Modelo</span></a></li>
+        <li data-page="mensagem/enviar"><a data-page="mensagem/enviar" href="#mensagem/enviar"><span class="menu-icon fa fa-comment"></span><span class="menu-text">SMS Modelo</span></a></li>
+      <li data-page="mensagem/caixa"><a data-page="mensagem/caixa" href="#mensagem/caixa"><span class="menu-icon fa fa-inbox"></span><span class="menu-text">Caixa de Entrada</span></a></li>
+        <li data-page="mensagem/enviar"><a data-page="mensagem/enviar" href="#mensagem/enviar"><span class="menu-icon fa fa-at"></span><span class="menu-text">Email Modelo</span></a></li>
       </ul>
     </li>
     <li class="has-sub"><a><span class="menu-icon fa fa-share-alt-square"></span><span class="menu-text">Redes Sociais</span><span class="arrow fa fa-chevron-right"></span></a>
       <ul class="submenu">
-        <li data-page="redes-whatsapp"><a><span class="menu-icon fa fa-whatsapp"></span><span class="menu-text">WhatsApp</span></a></li>
-        <li data-page="redes-telegram"><a><span class="menu-icon fa fa-telegram"></span><span class="menu-text">Telegram</span></a></li>
-        <li data-page="redes-facebook"><a><span class="menu-icon fa fa-facebook"></span><span class="menu-text">Facebook</span></a></li>
+        <li data-page="redes/whatsapp"><a data-page="redes/whatsapp" href="#redes/whatsapp"><span class="menu-icon fa fa-whatsapp"></span><span class="menu-text">WhatsApp</span></a></li>
+      <li data-page="redes/instagram"><a data-page="redes/instagram" href="#redes/instagram"><span class="menu-icon fa fa-instagram"></span><span class="menu-text">Instagram</span></a></li>
+        <li data-page="redes/whatsapp"><a data-page="redes/whatsapp" href="#redes/whatsapp"><span class="menu-icon fa fa-telegram"></span><span class="menu-text">Telegram</span></a></li>
+        <li data-page="redes/facebook"><a data-page="redes/facebook" href="#redes/facebook"><span class="menu-icon fa fa-facebook"></span><span class="menu-text">Facebook</span></a></li>
       </ul>
     </li>
     <li class="has-sub"><a><span class="menu-icon fa fa-server"></span><span class="menu-text">Opções CSP</span><span class="arrow fa fa-chevron-right"></span></a>
       <ul class="submenu">
-        <li data-page="csp-servidor"><a><span class="menu-icon fa fa-hdd-o"></span><span class="menu-text">Servidor CSP</span></a></li>
-        <li data-page="csp-perfil"><a><span class="menu-icon fa fa-id-card-o"></span><span class="menu-text">Perfil</span></a></li>
-        <li data-page="csp-imagem"><a><span class="menu-icon fa fa-image"></span><span class="menu-text">Imagem de Perfil</span></a></li>
+        <li data-page="csp/conexoes"><a data-page="csp/conexoes" href="#csp/conexoes"><span class="menu-icon fa fa-hdd-o"></span><span class="menu-text">Servidor CSP</span></a></li>
+        <li data-page="csp/perfil"><a data-page="csp/perfil" href="#csp/perfil"><span class="menu-icon fa fa-id-card-o"></span><span class="menu-text">Perfil</span></a></li>
+        <li data-page="csp/config"><a data-page="csp/config" href="#csp/config"><span class="menu-icon fa fa-image"></span><span class="menu-text">Imagem de Perfil</span></a></li>
       </ul>
     </li>
     <li class="has-sub"><a><span class="menu-icon fa fa-wrench"></span><span class="menu-text">Ferramentas</span><span class="arrow fa fa-chevron-right"></span></a>
       <ul class="submenu">
-        <li data-page="ferr-importar"><a><span class="menu-icon fa fa-upload"></span><span class="menu-text">Importar</span></a></li>
-        <li data-page="ferr-exportar"><a><span class="menu-icon fa fa-download"></span><span class="menu-text">Exportar</span></a></li>
-        <li data-page="ferr-liberar"><a><span class="menu-icon fa fa-unlock"></span><span class="menu-text">Liberar PC</span></a></li>
-        <li data-page="ferr-backup"><a><span class="menu-icon fa fa-database"></span><span class="menu-text">Backup Manual</span></a></li>
-        <li data-page="ferr-backupauto"><a><span class="menu-icon fa fa-clock-o"></span><span class="menu-text">Backup Automático</span></a></li>
+        <li data-page="ferramentas/importar"><a data-page="ferramentas/importar" href="#ferramentas/importar"><span class="menu-icon fa fa-upload"></span><span class="menu-text">Importar</span></a></li>
+        <li data-page="ferramentas/exportar"><a data-page="ferramentas/exportar" href="#ferramentas/exportar"><span class="menu-icon fa fa-download"></span><span class="menu-text">Exportar</span></a></li>
+        <li data-page="ferramentas/cache"><a data-page="ferramentas/cache" href="#ferramentas/cache"><span class="menu-icon fa fa-unlock"></span><span class="menu-text">Liberar PC</span></a></li>
+      <li data-page="ferramentas/logs"><a data-page="ferramentas/logs" href="#ferramentas/logs"><span class="menu-icon fa fa-file-text-o"></span><span class="menu-text">Logs do Sistema</span></a></li>
+        <li data-page="ferramentas/backup"><a data-page="ferramentas/backup" href="#ferramentas/backup"><span class="menu-icon fa fa-database"></span><span class="menu-text">Backup Manual</span></a></li>
+        <li data-page="ferramentas/backup"><a data-page="ferramentas/backup" href="#ferramentas/backup"><span class="menu-icon fa fa-clock-o"></span><span class="menu-text">Backup Automático</span></a></li>
       </ul>
     </li>
     <li class="has-sub"><a><span class="menu-icon fa fa-cog"></span><span class="menu-text">Opções</span><span class="arrow fa fa-chevron-right"></span></a>
       <ul class="submenu">
-        <li data-page="opcoes-aviso"><a><span class="menu-icon fa fa-bullhorn"></span><span class="menu-text">Aviso Geral</span></a></li>
-        <li data-page="opcoes-vencimento"><a><span class="menu-icon fa fa-calendar"></span><span class="menu-text">Tempo Vencimento</span></a></li>
-        <li data-page="opcoes-cupom"><a><span class="menu-icon fa fa-tag"></span><span class="menu-text">Cupom</span></a></li>
-        <li data-page="opcoes-bitly"><a><span class="menu-icon fa fa-link"></span><span class="menu-text">Bitly</span></a></li>
+        <li data-page="opcoes/notificacoes"><a data-page="opcoes/notificacoes" href="#opcoes/notificacoes"><span class="menu-icon fa fa-bullhorn"></span><span class="menu-text">Aviso Geral</span></a></li>
+      <li data-page="opcoes/senha"><a data-page="opcoes/senha" href="#opcoes/senha"><span class="menu-icon fa fa-key"></span><span class="menu-text">Alterar Senha</span></a></li>
+      <li data-page="opcoes/email"><a data-page="opcoes/email" href="#opcoes/email"><span class="menu-icon fa fa-envelope-o"></span><span class="menu-text">Alterar Email</span></a></li>
+        <li data-page="opcoes/notificacoes"><a data-page="opcoes/notificacoes" href="#opcoes/notificacoes"><span class="menu-icon fa fa-calendar"></span><span class="menu-text">Tempo Vencimento</span></a></li>
+        <li data-page="cupom"><a data-page="cupom" href="#cupom"><span class="menu-icon fa fa-tag"></span><span class="menu-text">Cupom</span></a></li>
+        <li data-page="opcoes/dados"><a data-page="opcoes/dados" href="#opcoes/dados"><span class="menu-icon fa fa-link"></span><span class="menu-text">Bitly</span></a></li>
       </ul>
     </li>
     <li class="has-sub"><a><span class="menu-icon fa fa-desktop"></span><span class="menu-text">Sistema</span><span class="arrow fa fa-chevron-right"></span></a>
       <ul class="submenu">
-        <li data-page="sistema-temas"><a><span class="menu-icon fa fa-paint-brush"></span><span class="menu-text">Temas</span></a></li>
-        <li data-page="sistema-info"><a><span class="menu-icon fa fa-info-circle"></span><span class="menu-text">Informações</span></a></li>
-        <li data-page="sistema-papel"><a><span class="menu-icon fa fa-picture-o"></span><span class="menu-text">Papel de Parede</span></a></li>
+        <li data-page="sistema/config"><a data-page="sistema/config" href="#sistema/config"><span class="menu-icon fa fa-paint-brush"></span><span class="menu-text">Temas</span></a></li>
+      <li data-page="sistema/planos"><a data-page="sistema/planos" href="#sistema/planos"><span class="menu-icon fa fa-list-alt"></span><span class="menu-text">Planos</span></a></li>
+      <li data-page="sistema/servidores"><a data-page="sistema/servidores" href="#sistema/servidores"><span class="menu-icon fa fa-server"></span><span class="menu-text">Servidores</span></a></li>
+        <li data-page="sistema/config"><a data-page="sistema/config" href="#sistema/config"><span class="menu-icon fa fa-info-circle"></span><span class="menu-text">Informações</span></a></li>
+        <li data-page="sistema/config"><a data-page="sistema/config" href="#sistema/config"><span class="menu-icon fa fa-picture-o"></span><span class="menu-text">Papel de Parede</span></a></li>
       </ul>
     </li>
-    <li data-page="painel-w3br"><a><span class="menu-icon fa fa-star"></span><span class="menu-text">Painel W3BR</span></a></li>
+    <li data-page="painel-w3br"><a data-page="painel-w3br" href="#painel-w3br"><span class="menu-icon fa fa-star"></span><span class="menu-text">Painel W3BR</span></a></li>
   </ul>
 </aside>
 
@@ -736,7 +749,7 @@ body.theme-night-head-light .form-control{background:#0d1117;border-color:#30363
 <div class="row"><div class="col-sm-5">Mostrando 1 a 10 de 25 registros</div><div class="col-sm-7"><ul class="pagination pagination-sm"><li class="prev disabled"><a href="#">&laquo;</a></li><li class="active"><a href="#">1</a></li><li><a href="#">2</a></li><li><a href="#">3</a></li><li class="next"><a href="#">&raquo;</a></li></ul></div></div>
 </div></div></div></div>
 
-<div class="page-content active" id="page-home" data-page="home">
+<div class="page-content" id="page-home" data-page="home">
 <div class="row">
   <div class="col-md-3 col-sm-6">
     <div class="info-box bg-red">
@@ -1033,7 +1046,122 @@ body.theme-night-head-light .form-control{background:#0d1117;border-color:#30363
 <div class="panel-heading"><h3 class="panel-title"><i class="fa fa-shopping-cart"></i> Vendas</h3></div>
 <div class="panel-body">
 <form class="form-inline filter-form" style="margin-bottom:15px;"><div class="form-group" style="margin-right:10px;"><label>Servidor:</label><select class="form-control input-sm"><option>Todos</option><option>CS1</option><option>CS2</option></select></div><div class="form-group" style="margin-right:10px;"><label>Plano:</label><select class="form-control input-sm"><option>Todos</option><option>1 mes - R$30</option><option>3 meses - R$70</option><option>6 meses - R$120</option><option>12 meses - R$200</option></select></div><div class="form-group" style="margin-right:10px;"><label>De:</label><input type="date" class="form-control input-sm" value="2025-08-01"></div><div class="form-group" style="margin-right:10px;"><label>Ate:</label><input type="date" class="form-control input-sm" value="2025-08-17"></div><button type="button" class="btn btn-sm btn-success"><i class="fa fa-search"></i> Exibir</button></form>
-<div class="table-responsive"><table class="table table-bordered table-striped"><thead><tr><th>ID</th><th>Cliente</th><th>Plano</th><th>Valor</th><th>Forma</th><th>Status</th><th>Data</th></tr></thead><tbody><tr><td>V001</td><td>cliente01</td><td>12 meses</td><td>R$ 200,00</td><td>PagSeguro</td><td><span class="label label-success">Confirmado</span></td><td>17/08/2025</td></tr><tr><td>V002</td><td>cliente02</td><td>6 meses</td><td>R$ 120,00</td><td>PIX</td><td><span class="label label-success">Confirmado</span></td><td>17/08/2025</td></tr><tr><td>V003</td><td>cliente03</td><td>3 meses</td><td>R$ 70,00</td><td>Deposito</td><td><span class="label label-warning">Pendente</span></td><td>16/08/2025</td></tr><tr><td>V004</td><td>cliente04</td><td>1 mes</td><td>R$ 30,00</td><td>PagSeguro</td><td><span class="label label-danger">Cancelado</span></td><td>15/08/2025</td></tr></tbody></table></div></div></div></div>
+<div class="table-responsive"><table class="table table-bordered table-striped"><thead><tr><th>ID</th><th>Cliente</th><th>Plano</th><th>Valor</th><th>Forma</th><th>Status</th><th>Data</th></tr></thead><tbody><tr><td>V001</td><td>cliente01</td><td>12 meses</td><td>R$ 200,00</td><td>PagSeguro</td><td><span class="label label-success">Confirmado</span></td><td>17/08/2025</td></tr><tr><td>V002</td><td>cliente02</td><td>6 meses</td><td>R$ 120,00</td><td>PIX</td><td><span class="label label-success">Confirmado</span></td><td>17/08/2025</td></tr><tr><td>V003</td><td>cliente03</td><td>3 meses</td><td>R$ 70,00</td><td>Deposito</td><td><span class="label label-warning">Pendente</span></td><td>16/08/2025</td></tr><tr><td>V004</td><td>cliente04</td><td>1 mes</td><td>R$ 30,00</td><td>PagSeguro</td><td><span class="label label-danger">Cancelado</span></td><td>15/08/2025</td></tr></tbody></table></div></div>
+
+  <div class="page-content" id="page-grupo-admin" data-page="grupo-admin">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title"><i class="fa fa-user-secret"></i> Administradores</h3>
+        <div class="panel-controls">
+          <div class="btn-group"><button class="btn btn-sm btn-primary" onclick="showNoty(&#39;Novo administrador adicionado!&#39;,&#39;success&#39;)"><i class="fa fa-plus"></i> Novo</button></div>
+          <div class="btn-group"><button class="btn btn-sm btn-default"><i class="fa fa-refresh"></i></button></div>
+        </div>
+      </div>
+      <div class="panel-body">
+        <div class="table-controls">
+          <div class="search-box"><input type="text" class="form-control input-sm" placeholder="Buscar administrador..."></div>
+          <select class="form-control input-sm per-page"><option>10</option><option>25</option><option>50</option><option>100</option></select>
+        </div>
+        <div class="table-responsive">
+          <table class="table table-striped table-hover">
+            <thead><tr><th><input type="checkbox"></th><th>ID</th><th>Usuário</th><th>Nome</th><th>Email</th><th>Status</th><th>Ações</th></tr></thead>
+            <tbody>
+              <tr><td><input type="checkbox"></td><td>1</td><td>admin</td><td>Administrador Master</td><td>admin@w3br.com</td><td><span class="badge badge-success">Ativo</span></td><td class="actions"><a class="act-info" title="Info"><i class="fa fa-info-circle"></i></a> <a class="act-lock" title="Bloquear"><i class="fa fa-lock"></i></a> <a class="act-edit" title="Editar"><i class="fa fa-edit"></i></a> <a class="act-del" title="Excluir"><i class="fa fa-trash"></i></a></td></tr>
+              <tr><td><input type="checkbox"></td><td>2</td><td>admin2</td><td>Admin Suporte</td><td>suporte@w3br.com</td><td><span class="badge badge-success">Ativo</span></td><td class="actions"><a class="act-info" title="Info"><i class="fa fa-info-circle"></i></a> <a class="act-lock" title="Bloquear"><i class="fa fa-lock"></i></a> <a class="act-edit" title="Editar"><i class="fa fa-edit"></i></a> <a class="act-del" title="Excluir"><i class="fa fa-trash"></i></a></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="pagination-wrapper"><ul class="pagination pagination-sm"><li class="disabled"><a>&laquo;</a></li><li class="active"><a>1</a></li><li><a>2</a></li><li><a>&raquo;</a></li></ul><span class="pagination-info">Mostrando 1-2 de 2 registros</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="page-content" id="page-grupo-usuarios" data-page="grupo-usuarios">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title"><i class="fa fa-user"></i> Usuários</h3>
+        <div class="panel-controls">
+          <div class="btn-group"><button class="btn btn-sm btn-primary" onclick="showNoty(&#39;Novo usuário adicionado!&#39;,&#39;success&#39;)"><i class="fa fa-plus"></i> Novo</button></div>
+          <div class="btn-group"><button class="btn btn-sm btn-default"><i class="fa fa-refresh"></i></button></div>
+        </div>
+      </div>
+      <div class="panel-body">
+        <div class="table-controls">
+          <div class="search-box"><input type="text" class="form-control input-sm" placeholder="Buscar usuário..."></div>
+          <select class="form-control input-sm per-page"><option>10</option><option>25</option><option>50</option><option>100</option></select>
+        </div>
+        <div class="table-responsive">
+          <table class="table table-striped table-hover">
+            <thead><tr><th><input type="checkbox"></th><th>ID</th><th>Usuário</th><th>Nome</th><th>Plano</th><th>Status</th><th>Vencimento</th><th>Ações</th></tr></thead>
+            <tbody>
+              <tr><td><input type="checkbox"></td><td>100</td><td>joaosilva</td><td>João Silva</td><td>Gold 30d</td><td><span class="badge badge-success">Ativo</span></td><td>15/09/2025</td><td class="actions"><a class="act-info" title="Info"><i class="fa fa-info-circle"></i></a> <a class="act-lock" title="Bloquear"><i class="fa fa-lock"></i></a> <a class="act-edit" title="Editar"><i class="fa fa-edit"></i></a> <a class="act-del" title="Excluir"><i class="fa fa-trash"></i></a></td></tr>
+              <tr><td><input type="checkbox"></td><td>101</td><td>mariasouza</td><td>Maria Souza</td><td>Silver 30d</td><td><span class="badge badge-success">Ativo</span></td><td>20/09/2025</td><td class="actions"><a class="act-info" title="Info"><i class="fa fa-info-circle"></i></a> <a class="act-lock" title="Bloquear"><i class="fa fa-lock"></i></a> <a class="act-edit" title="Editar"><i class="fa fa-edit"></i></a> <a class="act-del" title="Excluir"><i class="fa fa-trash"></i></a></td></tr>
+              <tr><td><input type="checkbox"></td><td>102</td><td>carlos123</td><td>Carlos Mendes</td><td>Bronze 15d</td><td><span class="badge badge-danger">Desativado</span></td><td>01/08/2025</td><td class="actions"><a class="act-info" title="Info"><i class="fa fa-info-circle"></i></a> <a class="act-lock" title="Bloquear"><i class="fa fa-lock"></i></a> <a class="act-edit" title="Editar"><i class="fa fa-edit"></i></a> <a class="act-del" title="Excluir"><i class="fa fa-trash"></i></a></td></tr>
+              <tr><td><input type="checkbox"></td><td>103</td><td>anaoliveira</td><td>Ana Oliveira</td><td>Gold 30d</td><td><span class="badge badge-success">Ativo</span></td><td>30/09/2025</td><td class="actions"><a class="act-info" title="Info"><i class="fa fa-info-circle"></i></a> <a class="act-lock" title="Bloquear"><i class="fa fa-lock"></i></a> <a class="act-edit" title="Editar"><i class="fa fa-edit"></i></a> <a class="act-del" title="Excluir"><i class="fa fa-trash"></i></a></td></tr>
+              <tr><td><input type="checkbox"></td><td>104</td><td>pedroalmeida</td><td>Pedro Almeida</td><td>Silver 30d</td><td><span class="badge badge-success">Ativo</span></td><td>10/09/2025</td><td class="actions"><a class="act-info" title="Info"><i class="fa fa-info-circle"></i></a> <a class="act-lock" title="Bloquear"><i class="fa fa-lock"></i></a> <a class="act-edit" title="Editar"><i class="fa fa-edit"></i></a> <a class="act-del" title="Excluir"><i class="fa fa-trash"></i></a></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="pagination-wrapper"><ul class="pagination pagination-sm"><li class="disabled"><a>&laquo;</a></li><li class="active"><a>1</a></li><li><a>2</a></li><li><a>3</a></li><li><a>&raquo;</a></li></ul><span class="pagination-info">Mostrando 1-5 de 15 registros</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="page-content" id="page-status-desconectados" data-page="status-desconectados">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title"><i class="fa fa-times-circle"></i> Clientes Desconectados</h3>
+        <div class="panel-controls">
+          <div class="btn-group"><button class="btn btn-sm btn-danger" onclick="showNoty(&#39;Clientes desconectados recarregados&#39;,&#39;info&#39;)"><i class="fa fa-refresh"></i> Atualizar</button></div>
+        </div>
+      </div>
+      <div class="panel-body">
+        <div class="table-controls">
+          <div class="search-box"><input type="text" class="form-control input-sm" placeholder="Buscar..."></div>
+          <select class="form-control input-sm per-page"><option>10</option><option>25</option><option>50</option></select>
+        </div>
+        <div class="table-responsive">
+          <table class="table table-striped table-hover">
+            <thead><tr><th><input type="checkbox"></th><th>ID</th><th>Usuário</th><th>Servidor</th><th>Último Acesso</th><th>Ações</th></tr></thead>
+            <tbody>
+              <tr><td><input type="checkbox"></td><td>102</td><td>carlos123</td><td>Servidor 1</td><td>10/08/2025 14:30</td><td class="actions"><a class="act-info" title="Info"><i class="fa fa-info-circle"></i></a> <a class="act-edit" title="Editar"><i class="fa fa-edit"></i></a></td></tr>
+              <tr><td><input type="checkbox"></td><td>108</td><td>fernandalima</td><td>Servidor 2</td><td>09/08/2025 22:15</td><td class="actions"><a class="act-info" title="Info"><i class="fa fa-info-circle"></i></a> <a class="act-edit" title="Editar"><i class="fa fa-edit"></i></a></td></tr>
+              <tr><td><input type="checkbox"></td><td>115</td><td>ricardosantos</td><td>Servidor 1</td><td>08/08/2025 09:45</td><td class="actions"><a class="act-info" title="Info"><i class="fa fa-info-circle"></i></a> <a class="act-edit" title="Editar"><i class="fa fa-edit"></i></a></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="pagination-wrapper"><ul class="pagination pagination-sm"><li class="disabled"><a>&laquo;</a></li><li class="active"><a>1</a></li><li><a>&raquo;</a></li></ul><span class="pagination-info">Mostrando 1-3 de 3 registros</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="page-content" id="page-status-falhados" data-page="status-falhados">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title"><i class="fa fa-exclamation-circle"></i> Conexões Falhadas</h3>
+        <div class="panel-controls">
+          <div class="btn-group"><button class="btn btn-sm btn-warning" onclick="showNoty(&#39;Conexões falhadas recarregadas&#39;,&#39;warning&#39;)"><i class="fa fa-refresh"></i> Atualizar</button></div>
+        </div>
+      </div>
+      <div class="panel-body">
+        <div class="table-controls">
+          <div class="search-box"><input type="text" class="form-control input-sm" placeholder="Buscar..."></div>
+          <select class="form-control input-sm per-page"><option>10</option><option>25</option><option>50</option></select>
+        </div>
+        <div class="table-responsive">
+          <table class="table table-striped table-hover">
+            <thead><tr><th><input type="checkbox"></th><th>ID</th><th>Usuário</th><th>Servidor</th><th>Erro</th><th>Data/Hora</th><th>Ações</th></tr></thead>
+            <tbody>
+              <tr><td><input type="checkbox"></td><td>102</td><td>carlos123</td><td>Servidor 1</td><td>Timeout</td><td>10/08/2025 14:32</td><td class="actions"><a class="act-info" title="Info"><i class="fa fa-info-circle"></i></a> <a class="act-edit" title="Editar"><i class="fa fa-edit"></i></a></td></tr>
+              <tr><td><input type="checkbox"></td><td>120</td><td>luizrocha</td><td>Servidor 3</td><td>Auth Failed</td><td>10/08/2025 11:20</td><td class="actions"><a class="act-info" title="Info"><i class="fa fa-info-circle"></i></a> <a class="act-edit" title="Editar"><i class="fa fa-edit"></i></a></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="pagination-wrapper"><ul class="pagination pagination-sm"><li class="disabled"><a>&laquo;</a></li><li class="active"><a>1</a></li><li><a>&raquo;</a></li></ul><span class="pagination-info">Mostrando 1-2 de 2 registros</span></div>
+      </div>
+    </div>
+  </div>
+</div></div>
 
 
 </section>
@@ -1055,17 +1183,18 @@ body.theme-night-head-light .form-control{background:#0d1117;border-color:#30363
 
   /* ====== LOGIN ====== */
   function showLogin(){
-    document.getElementById('login-screen').style.display='flex';
+    document.getElementById('login-page').style.display='flex';
     document.getElementById('app-wrapper').style.display='none';
   }
   function hideLogin(){
-    document.getElementById('login-screen').style.display='none';
+    document.getElementById('login-page').style.display='none';
     document.getElementById('app-wrapper').style.display='block';
   }
   window.doLogin = function(){
     var u=document.getElementById('login-user').value;
     var p=document.getElementById('login-pass').value;
     if(u==='admin' && p==='admin123'){
+      localStorage.setItem('logged','1');
       hideLogin();
       if(!location.hash || location.hash==='#') location.hash='#home';
       navigate();
@@ -1075,13 +1204,14 @@ body.theme-night-head-light .form-control{background:#0d1117;border-color:#30363
     }
   };
   window.doLogout = function(){
+    localStorage.removeItem('logged');
     showLogin();
     document.getElementById('login-user').value='';
     document.getElementById('login-pass').value='';
     location.hash='';
     showNoty('Voce saiu do sistema.','info');
   };
-  document.getElementById('login-form')&&document.getElementById('login-form').addEventListener('submit',function(e){e.preventDefault();doLogin();});
+  /* login-form submit handled by onsubmit+onclick */
   if(localStorage.getItem('logged')==='1') hideLogin();
 
   /* ====== NOTY NOTIFICATIONS ====== */
@@ -1100,65 +1230,75 @@ body.theme-night-head-light .form-control{background:#0d1117;border-color:#30363
 
   /* ====== HASH ROUTING (simulate $_GET['p']) ====== */
   var pageMap = {
-    'home':'page_home',
-    'grupo/clientes':'page_grupo_clientes',
-    'grupo/revendas':'page_grupo_revendas',
-    'grupo/subrevendas':'page_grupo_subrevendas',
-    'grupo/vouchers':'page_grupo_vouchers',
-    'grupo/testes':'page_grupo_testes',
-    'status/clientes':'page_status_clientes',
-    'status/revendas':'page_status_revendas',
-    'status/servidores':'page_status_servidores',
-    'status/online':'page_status_online',
-    'status/log':'page_status_log',
-    'relatorio':'page_relatorio',
-    'vendas':'page_vendas',
-    'pagamento':'page_pagamento',
-    'cupom':'page_cupom',
-    'pagseguro':'page_pagseguro',
-    'suporte/tickets':'page_suporte_tickets',
-    'suporte/faq':'page_suporte_faq',
-    'suporte/base':'page_suporte_base',
-    'mensagem/enviar':'page_mensagem_enviar',
-    'mensagem/caixa':'page_mensagem_caixa',
-    'redes/facebook':'page_redes_facebook',
-    'redes/instagram':'page_redes_instagram',
-    'redes/whatsapp':'page_redes_whatsapp',
-    'csp/config':'page_csp_config',
-    'csp/perfil':'page_csp_perfil',
-    'csp/conexoes':'page_csp_conexoes',
-    'ferramentas/importar':'page_ferramentas_importar',
-    'ferramentas/exportar':'page_ferramentas_exportar',
-    'ferramentas/backup':'page_ferramentas_backup',
-    'ferramentas/cache':'page_ferramentas_cache',
-    'ferramentas/logs':'page_ferramentas_logs',
-    'opcoes/dados':'page_opcoes_dados',
-    'opcoes/senha':'page_opcoes_senha',
-    'opcoes/email':'page_opcoes_email',
-    'opcoes/notificacoes':'page_opcoes_notificacoes',
-    'sistema/config':'page_sistema_config',
-    'sistema/planos':'page_sistema_planos',
-    'sistema/servidores':'page_sistema_servidores',
-    'painel-w3br':'page_painel_w3br'
+    'home':'page-home',
+    'grupo/clientes':'page-grupo-clientes',
+    'grupo/revendas':'page-grupo-revendas',
+    'grupo/subrevendas':'page-grupo-subrevendas',
+    'grupo/vouchers':'page-grupo-vouchers',
+    'grupo/testes':'page-grupo-testes',
+    'status/clientes':'page-status-clientes',
+    'status/revendas':'page-status-revendas',
+    'status/servidores':'page-status-servidores',
+    'status/online':'page-status-online',
+    'status/log':'page-status-log',
+    'relatorio':'page-relatorio',
+    'vendas':'page-vendas',
+    'pagamento':'page-pagamento',
+    'cupom':'page-cupom',
+    'pagseguro':'page-pagseguro',
+    'suporte/tickets':'page-suporte-tickets',
+    'suporte/faq':'page-suporte-faq',
+    'suporte/base':'page-suporte-base',
+    'mensagem/enviar':'page-mensagem-enviar',
+    'mensagem/caixa':'page-mensagem-caixa',
+    'redes/facebook':'page-redes-facebook',
+    'redes/instagram':'page-redes-instagram',
+    'redes/whatsapp':'page-redes-whatsapp',
+    'csp/config':'page-csp-config',
+    'csp/perfil':'page-csp-perfil',
+    'csp/conexoes':'page-csp-conexoes',
+    'ferramentas/importar':'page-ferramentas-importar',
+    'ferramentas/exportar':'page-ferramentas-exportar',
+    'ferramentas/backup':'page-ferramentas-backup',
+    'ferramentas/cache':'page-ferramentas-cache',
+    'ferramentas/logs':'page-ferramentas-logs',
+    'opcoes/dados':'page-opcoes-dados',
+    'opcoes/senha':'page-opcoes-senha',
+    'opcoes/email':'page-opcoes-email',
+    'opcoes/notificacoes':'page-opcoes-notificacoes',
+    'sistema/config':'page-sistema-config',
+    'sistema/planos':'page-sistema-planos',
+    'sistema/servidores':'page-sistema-servidores',
+    'painel-w3br':'page-painel-w3br',
+    'grupo/admin':'page-grupo-admin',
+    'grupo/usuarios':'page-grupo-usuarios',
+    'status/desconectados':'page-status-desconectados',
+    'status/falhados':'page-status-falhados'
   };
 
   function navigate(){
     var hash = (location.hash||'#home').replace('#','');
-    var target = pageMap[hash]||'page_home';
+    var target = pageMap[hash]||'page-home';
     var pages = document.querySelectorAll('.page-content');
-    pages.forEach(function(p){p.style.display='none';});
+    pages.forEach(function(p){p.style.display='none';p.classList.remove('active');});
     var el=document.getElementById(target);
-    if(el) el.style.display='block';
+    if(el){el.style.display='block';el.classList.add('active');}
     updateSidebarActive(hash);
     updateBreadcrumb(hash);
   }
 
   function updateSidebarActive(hash){
-    var links = document.querySelectorAll('#sidebar a[data-page]');
-    links.forEach(function(a){
-      a.parentElement.classList.remove('active');
-      if(a.getAttribute('data-page')===hash) a.parentElement.classList.add('active');
+    var items = document.querySelectorAll('#sidebar li[data-page]');
+    items.forEach(function(li){
+      li.classList.remove('active');
+      if(li.getAttribute('data-page')===hash) li.classList.add('active');
     });
+    /* Also close other submenus and open the relevant one */
+    var activeLi = document.querySelector('#sidebar li[data-page="'+hash+'"]');
+    if(activeLi){
+      var sub = activeLi.closest('.submenu');
+      if(sub) sub.style.display='block';
+    }
     // expand parent submenu
     var links2 = document.querySelectorAll('#sidebar .submenu');
     links2.forEach(function(ul){
@@ -1211,6 +1351,10 @@ body.theme-night-head-light .form-control{background:#0d1117;border-color:#30363
         });
         sub.style.display = sub.style.display==='block'?'none':'block';
         this.classList.toggle('open');
+      } else if(this.getAttribute('data-page')){
+        /* Navigation link: update hash to trigger navigate() */
+        e.preventDefault();
+        location.hash = this.getAttribute('data-page');
       }
     });
   });
